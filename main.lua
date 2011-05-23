@@ -2,10 +2,7 @@ function love.load()
 	love.graphics.setBackgroundColor(104, 136, 248)
 	love.graphics.setMode(1300, 650, false, true, 0)
 	
-	require "Entity.lua"
-	
-	-- local s = String:new('hello')
-	-- s:print()
+	require("Entity.lua")
 
 	world = love.physics.newWorld(-650, -650, 650, 650)
 	world:setGravity(0, 15)
@@ -17,45 +14,18 @@ function love.load()
 	entities = {} -- table for every body and shape(s)
 	removals = {} -- entities to be removed after the world updates
 	
-	-- e = Entity:new(love.physics.newBody(world, 100, 100, 0, 0))
-	-- print(e.body:getMass())
-	-- e:add(love.physics.newCircleShape(e.body, 0, 0, 20))
-	-- print(e.body:getMass())
-	
-	local entity = {}
-	entity.body = love.physics.newBody(world, 650/2, 650/2, 0, 0)
-	table.insert(entity, love.physics.newCircleShape(entity.body, 0, 0, 20))
-	table.insert(entity, love.physics.newRectangleShape(entity.body, 50, 0, 25, 25, 0))
-	table.insert(entity, love.physics.newRectangleShape(entity.body, -50, 0, 25, 25, 0))
+	local entity = Entity.new(love.physics.newBody(world, 650/2, 650/2, 0, 0))
+	entity:add(love.physics.newCircleShape(entity.body, 0, 0, 20))
 	entity.body:setMassFromShapes()
 	table.insert(entities, entity)
 	
-	entity = {}
-	entity.body = love.physics.newBody(world, 650/2, 650, 0, 0)
-	table.insert(entity, love.physics.newRectangleShape(entity.body, 0, -25, 650, 50, math.rad(20)))
-	table.insert(entity, love.physics.newRectangleShape(entity.body, 0, 0, 650, 50, 0))
-	table.insert(entity, love.physics.newRectangleShape(entity.body, 350, -25, 650, 50, math.rad(-30)))
+	entity = Entity.new(love.physics.newBody(world, 650/2, 650, 0, 0))
+	entity:add(love.physics.newRectangleShape(entity.body, 0, 0, 650, 50, 0))
 	table.insert(entities, entity)
 	
-	entity = {}
-	entity.body = love.physics.newBody(world, 650, 650/2, 0, 0)
-	table.insert(entity, love.physics.newCircleShape(entity.body, 0, 0, 20))
-	entity.body:setMassFromShapes()
-	table.insert(entities, entity)
-	
-	entity = {}
-	entity.body = love.physics.newBody(world, 800, 650/2, 0, 0)
-	table.insert(entity, love.physics.newCircleShape(entity.body, 0, 0, 20))
-	entity.body:setMassFromShapes()
-	table.insert(entities, entity)
-	
-	entity = {}
-	entity.body = love.physics.newBody(world, 50, 650/2, 0, 0)
-	table.insert(entity, love.physics.newCircleShape(entity.body, 0, 0, 20))
-	entity.body:setMassFromShapes()
-	table.insert(entities, entity)
-	
-	setShapeData()
+	for i, entity in ipairs(entities) do
+		entity:setData(i)
+	end
 end
 
 function love.update(dt)
@@ -68,12 +38,14 @@ function love.update(dt)
 	removals = {}
 	
 	if delta >= 0.1 then
-		entity = {}
-		entity.body = love.physics.newBody(world, math.random(50, 800), 650/2 - math.random(0,100), 0, 0)
-		table.insert(entity, love.physics.newCircleShape(entity.body, 0, 0, 3))
+		local entity = Entity.new(love.physics.newBody(world, math.random(50, 800), 650/2 - math.random(0,100), 0, 0))
+		entity:add(love.physics.newCircleShape(entity.body, 0, 0, 3))
 		entity.body:setMassFromShapes()
 		table.insert(entities, entity)
-		setShapeData()
+		
+		for i, entity in ipairs(entities) do
+			entity:setData(i)
+		end
 		
 		delta = 0
 	end
@@ -82,11 +54,10 @@ end
 function love.draw()
 	love.graphics.setColor(255, 0, 0)
 	for _,entity in ipairs(entities) do
-		for _,shape in ipairs(entity) do
-			draw_shape("line", shape)
-		end
+		entity:draw()
 	end
 	
+	love.graphics.setColor(255,255,255)
 	love.graphics.print("FPS: ".. love.timer.getFPS(),25,25)
 end
 
@@ -135,7 +106,9 @@ function add(a, b, coll)
 		table.remove(entities, x)
 		table.insert(removals, entityB)
 		
-		setShapeData()
+		for i, entity in ipairs(entities) do
+			entity:setData(i)
+		end
 	end
 end
 
