@@ -2,8 +2,10 @@ function love.load()
 	love.graphics.setBackgroundColor(104, 136, 248)
 	love.graphics.setMode(1300, 650, false, true, 0)
 	
+	
 	require "Entity.lua"
 	require "Base.lua"
+	require "Unit.lua"
 
 	world = love.physics.newWorld(-650, -650, 650, 650)
 	world:setGravity(0, 15)
@@ -15,22 +17,31 @@ function love.load()
 	entities = {} -- table for every body and shape(s)
 	removals = {} -- entities to be removed after the world updates
 	
-	local entity = Entity(love.physics.newBody(world, 650/2, 650/2, 0, 0), "red")
-	entity:add("circle", 0, 0, 20)
-	entity.body:setMassFromShapes()
-	table.insert(entities, entity)
-	
-	entity = Entity(love.physics.newBody(world, 650/2, 650, 0, 0))
+	local entity = Entity(love.physics.newBody(world, 650/2, 650, 0, 0))
 	entity:add("rectangle", 0, 0, 650, 50, 0)
 	table.insert(entities, entity)
 	
 	entity = Base(love.physics.newBody(world, 650/3, 650 - 50, 0, 0), "blue")
 	table.insert(entities, entity)
 	
+	entity = Base(love.physics.newBody(world, 650/2, 650 - 50, 0, 0), "red")
+	table.insert(entities, entity)
+	
+	entity = Unit(love.physics.newBody(world, 650/2, 650/2, 0, 0), "red")
+	entity:add("circle", 0, 0, 15)
+	entity.body:setMassFromShapes()
+	table.insert(entities, entity)
+	
 	-- gotta set the userData for the shapes as their tables indices
 	for i, entity in ipairs(entities) do
 		entity:setData(i)
 	end		
+	
+	for i, entity in ipairs(entities) do
+		for j, shape in ipairs(entity.shapes) do
+			print (entity.class, shape:getData()())
+		end
+	end
 end
 
 function love.update(dt)
@@ -49,18 +60,18 @@ function love.update(dt)
 	end	
 	
 	-- spawns random objects. for testing
-	if delta >= 0.1 then
-		local entity = Entity(love.physics.newBody(world, math.random(50, 800), 650/2 - math.random(0,100), 0, 0), "blue")
-		entity:add("circle", 0, 0, 3)
-		entity.body:setMassFromShapes()
-		table.insert(entities, entity)
+	-- if delta >= 0.1 then
+		-- local entity = Entity(love.physics.newBody(world, math.random(50, 800), 650/2 - math.random(0,100), 0, 0), "blue")
+		-- entity:add("circle", 0, 0, 3)
+		-- entity.body:setMassFromShapes()
+		-- table.insert(entities, entity)
 		
-		for i, entity in ipairs(entities) do
-			entity:setData(i)
-		end
+		-- for i, entity in ipairs(entities) do
+			-- entity:setData(i)
+		-- end
 		
-		delta = 0
-	end
+		-- delta = 0
+	-- end
 end
 
 function love.draw()

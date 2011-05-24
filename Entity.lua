@@ -1,9 +1,9 @@
 require 'middleclass.init'
 Entity = class('Entity')
 
-function Entity:initialize(b, t)
+function Entity:initialize(b)
 	self.body = b
-	self.team = t
+	self.team = "white"
 	self.shapes = {}
 end
 
@@ -24,7 +24,7 @@ function Entity:add(shapeType, ...)
 	table.insert(self.shapes, shape)
 end
 
-function Entity:update(dt) end
+function Entity:update(dt)end
 
 function Entity:draw()
 	if self.team == "red" then
