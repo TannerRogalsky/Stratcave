@@ -1,5 +1,7 @@
-require 'middleclass.init'
 Unit = class("Unit", Entity)
+Unit.CATEGORY = 15
+Unit.MAX_VELX = 35
+Unit.MAX_VELY = 50
 
 function Unit:initialize(body, team)
 	Entity.initialize(self, body, team)
@@ -12,5 +14,21 @@ function Unit:initialize(body, team)
 end
 
 function Unit:update(dt)
-	self.body:applyForce(self.force, 0, 0, 0)
+	self.body:applyForce(self.force, 0, self.body:getPosition())
+	
+	local velX, velY = self.body:getLinearVelocity()
+	if velX > Unit.MAX_VELX then
+		velX = Unit.MAX_VELX
+	elseif velX < -Unit.MAX_VELX then
+		velX = -Unit.MAX_VELX
+	elseif velY > Unit.MAX_VELY then
+		velY = Unit.MAX_VELY
+	elseif velY < -Unit.MAX_VELY then
+		velY = -Unit.MAX_VELY
+	end
+	self.body:setLinearVelocity(velX, velY)
+end
+
+function Unit:reverse()
+	self.force = -self.force
 end
