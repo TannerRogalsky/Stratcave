@@ -27,7 +27,7 @@ function love.load()
 	entity = Base(love.physics.newBody(world, 650/2, 650 - 50, 0, 0), "red")
 	table.insert(entities, entity)
 	
-	entity = Unit(love.physics.newBody(world, 650/2, 650/2, 0, 0), "red")
+	entity = Unit(love.physics.newBody(world, 650/2, 650/2, 0, 0), "red", "test")
 	entity:add("circle", 0, 0, 15)
 	entity.body:setMassFromShapes()
 	table.insert(entities, entity)
@@ -39,7 +39,7 @@ function love.load()
 	
 	for i, entity in ipairs(entities) do
 		for j, shape in ipairs(entity.shapes) do
-			print (entity.class, shape:getData()())
+			print (entity.class, shape:getData()(), entity.body:isStatic())
 		end
 	end
 end
@@ -61,7 +61,7 @@ function love.update(dt)
 	
 	-- spawns random objects. for testing
 	-- if delta >= 0.1 then
-		-- local entity = Entity(love.physics.newBody(world, math.random(50, 800), 650/2 - math.random(0,100), 0, 0), "blue")
+		-- local entity = Unit(love.physics.newBody(world, math.random(50, 650), 650/2 - math.random(0,100), 0, 0), "blue")
 		-- entity:add("circle", 0, 0, 3)
 		-- entity.body:setMassFromShapes()
 		-- table.insert(entities, entity)
@@ -107,27 +107,27 @@ function add(a, b, coll)
 	local entityA, entityB = entities[i], entities[x]
 		
 	-- just a bit to test removing bodies. seems to work
-	if not entityA.body:isStatic() and not entityB.body:isStatic() then
-		if i < x then 
-			x = x - 1 
-		end
+	-- if not entityA.body:isStatic() and not entityB.body:isStatic() then
+		-- if i < x then 
+			-- x = x - 1 
+		-- end
 	
-		for _, shape in ipairs(entityA.shapes) do
-			shape:setMask(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
-		end
-		table.remove(entities, i)
-		table.insert(removals, entityA)
+		-- for _, shape in ipairs(entityA.shapes) do
+			-- shape:setMask(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+		-- end
+		-- table.remove(entities, i)
+		-- table.insert(removals, entityA)
 		
-		for _, shape in ipairs(entityB.shapes) do
-			shape:setMask(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
-		end
-		table.remove(entities, x)
-		table.insert(removals, entityB)
+		-- for _, shape in ipairs(entityB.shapes) do
+			-- shape:setMask(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+		-- end
+		-- table.remove(entities, x)
+		-- table.insert(removals, entityB)
 		
-		for i, entity in ipairs(entities) do
-			entity:setData(i)
-		end
-	end
+		-- for i, entity in ipairs(entities) do
+			-- entity:setData(i)
+		-- end
+	-- end
 end
 
 -- called a collision continues

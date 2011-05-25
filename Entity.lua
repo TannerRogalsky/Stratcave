@@ -1,9 +1,9 @@
 require 'middleclass.init'
 Entity = class('Entity')
 
-function Entity:initialize(b)
-	self.body = b
-	self.team = "white"
+function Entity:initialize(body, team)
+	self.body = body
+	self.team = team or "white"
 	self.shapes = {}
 end
 
