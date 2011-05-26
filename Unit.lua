@@ -6,6 +6,8 @@ Unit.MAX_VELY = 50
 
 function Unit:initialize(body, team)
 	Entity.initialize(self, body, team)
+	self.body:setFixedRotation(true)
+	self.health = 2
 	if self.team == "red" then
 		self.force = 1
 	elseif self.team == "blue" then

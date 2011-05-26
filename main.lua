@@ -1,3 +1,4 @@
+-- called on program start
 function love.load()
 	love.graphics.setBackgroundColor(104, 136, 248)
 	love.graphics.setMode(1300, 650, false, true, 0)
@@ -53,8 +54,19 @@ function love.load()
 			-- print (entity.class, print (instanceOf(Base, entity)))
 		end
 	end
+	
+	-- local t = {"a", "b", "c", "d"}
+	-- for i,v in ipairs(t) do
+		-- if v == "c" then
+			-- table.remove(t, i)
+		-- end
+	-- end
+	-- for i,v in ipairs(t) do
+		-- print (i,v)
+	-- end
 end
 
+-- called for updates
 function love.update(dt)
 	delta = delta + dt
 	world:update(dt)
@@ -71,21 +83,26 @@ function love.update(dt)
 	end	
 	
 	-- spawns random objects. for testing
-	if delta >= 3 then		
-		-- for i, entity in ipairs(entities) do
-			-- if instanceOf(Base, entity) then
-				-- table.insert (entities, entity:spawn(world))
-			-- end
-		-- end
+	if delta >= 1 then		
+		for i, entity in ipairs(entities) do
+			if instanceOf(Base, entity) then
+				local e = entity:spawn(world)
+				if entity.team == "red" then
+					e.health = 1
+				end
+				table.insert (entities, e)
+			end
+		end
 		
-		-- for i, entity in ipairs(entities) do
-			-- entity:setData(i)
-		-- end
+		for i, entity in ipairs(entities) do
+			entity:setData(i)
+		end
 		
 		delta = 0
 	end
 end
 
+-- called for rendering
 function love.draw()
 	for _,entity in ipairs(entities) do
 		entity:draw()
@@ -95,6 +112,7 @@ function love.draw()
 	love.graphics.print("FPS: ".. love.timer.getFPS(),25,25)
 end
 
+-- called on mouse down
 function love.mousepressed(x, y, button)
 	if button == 'l' then
 		for _, entity in ipairs(entities) do
@@ -113,36 +131,43 @@ function love.mousepressed(x, y, button)
 	end
 end
 
+function setBodyForRemoval(entity)
+	for _, shape in ipairs(entity.shapes) do
+		shape:setMask(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+	end
+	table.remove(entities, entity.shapes[1]:getData()())
+	table.insert(removals, entityA)
+	
+	for i, entity in ipairs(entities) do
+		entity:setData(i)
+	end
+end
+
 -- called when a collision first occurs
 function add(a, b, collision)
 	-- gets the indices of the two objects colliding
 	local i,j = a()
 	local x,y = b()
-	print(collision:getPosition())
+	-- print(i,j,x,y)
 	
 	-- gets the actual objects
 	local entityA, entityB = entities[i], entities[x]
-		
+	if entityA == nil or entityB == nil then
+		return
+	end
 	-- just a bit to test removing bodies. seems to work
 	if not entityA.team ~= entityB.team and entityA.team ~= "white" and entityB.team ~= "white" then
 		if i < x then 
 			x = x - 1 
 		end
-	
-		for _, shape in ipairs(entityA.shapes) do
-			shape:setMask(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
-		end
-		table.remove(entities, i)
-		table.insert(removals, entityA)
 		
-		for _, shape in ipairs(entityB.shapes) do
-			shape:setMask(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+		entityA.health = entityA.health - 1
+		entityB.health = entityB.health - 1
+		if entityA.health == 0 then
+			setBodyForRemoval(entityA)
 		end
-		table.remove(entities, x)
-		table.insert(removals, entityB)
-		
-		for i, entity in ipairs(entities) do
-			entity:setData(i)
+		if entityB.health == 0 then
+			setBodyForRemoval(entityB)
 		end
 	elseif instanceOf(Unit, entityA) and entityB.body:isStatic() or instanceOf(Unit, entityB) and entityA.body:isStatic() then
 		-- makes sure entityA is the Unit. for simplicitie's sake
@@ -150,15 +175,26 @@ function add(a, b, collision)
 			local temp = entityA
 			entityA = entityB
 			entityB = temp
+			
+			local temp = j
+			j = y
+			y = temp
 		end
 		
-		local height, bottom, top = entityA:getHeight()
-		local colX, colY = collision:getPosition()
-		-- not perfect but separates the object into quarters and if a collision occurs
-		-- on the inner two quarters, it behaves like it's run into something and reverses
-		if colY < bottom - height / 4 and colY > top + height / 4 then
+		if entityA:getAngleTo(collision:getPosition()) > 135 and entityA:getAngleTo(collision:getPosition()) < 225 or
+			entityA:getAngleTo(collision:getPosition()) > 315 or entityA:getAngleTo(collision:getPosition()) < 45 then
 			entityA:reverse()
 		end
+		
+		-- local colX, colY = collision:getPosition()
+		-- not perfect but separates the object into quarters and if a collision occurs
+		-- on the inner two quarters, it behaves like it's run into something and reverses
+		-- if entityA.shapes[j]:getType() == "circle" then
+			-- local px, py = entityA.shapes[j]:getWorldCenter()
+			-- if colY < py + entityA.shapes[j]:getRadius() / 2 and colY > py - entityA.shapes[j]:getRadius() / 2 then
+				-- entityA:reverse()
+			-- end
+		-- end
 	end
 end
 

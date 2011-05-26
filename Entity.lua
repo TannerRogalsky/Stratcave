@@ -52,6 +52,11 @@ function Entity:draw()
 	
 	for _,shape in ipairs(self.shapes) do
 		draw_shape("line", shape)
+		if instanceOf(Base, self) then
+			local height, bottom, top = self:getHeight()
+			love.graphics.setColor(255,255,255)
+			love.graphics.print(self.resources,self.body:getX(),top - 15)
+		end
 	end
 end
 
@@ -66,7 +71,7 @@ function Entity:setData(index)
 	end
 end
 
--- return heigh, bottom of shape, top of shape
+-- return height, bottom of shape, top of shape
 function Entity:getHeight()
 	local low, high = 10000, -10000
 	for _,shape in ipairs(self.shapes) do
@@ -85,6 +90,11 @@ function Entity:getHeight()
 		end
 	end
 	return low - high, low, high
+end
+
+function Entity:getAngleTo(toX, toY)
+	local fromX, fromY = self.body:getPosition()
+	return math.deg(math.atan2(toY - fromY, fromX - toX))
 end
 
 function draw_shape(mode, shape)
