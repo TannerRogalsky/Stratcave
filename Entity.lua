@@ -6,8 +6,12 @@ function Entity:initialize(body, team)
 	self.shapes = {}
 end
 
+-- convenience function for adding shapes
+-- it's almost necessary, really, for how much it does
+-- creates the shape, attaches it to the body
+-- sets the collision category and bitmasks based on team and class
 function Entity:add(shapeType, ...)
-	local shape = nil
+	local shape
 	if shapeType == "circle" then
 		shape = love.physics.newCircleShape(self.body, ...)
 	elseif shapeType == "rectangle" then
@@ -15,6 +19,23 @@ function Entity:add(shapeType, ...)
 	elseif shapeType == polygon then
 		shape = love.physics.newPolygonShape(self.body, ...)
 	end
+	
+	if instanceOf(Base, self) then
+		if self.team == "red" then
+			shape:setCategory(Base.CATEGORYA)
+		elseif self.team == "blue" then
+			shape:setCategory(Base.CATEGORYB)
+		end
+	elseif instanceOf(Unit, self) then
+		if self.team == "red" then
+			shape:setCategory(Unit.CATEGORYA)
+			shape:setMask(Unit.CATEGORYA, Base.CATEGORYA)
+		elseif self.team == "blue" then
+			shape:setCategory(Unit.CATEGORYB)
+			shape:setMask(Unit.CATEGORYB, Base.CATEGORYB)
+		end
+	end
+	
 	table.insert(self.shapes, shape)
 end
 
@@ -34,6 +55,11 @@ function Entity:draw()
 	end
 end
 
+-- Just sets table indices so that they can be referenced in collisions
+-- Should be called every time a shape is removed
+-- Doesn't necessarily need to be called when a single shape is added because it would
+-- be more efficient to just use table.getn(entities) and setData manually
+-- In practise, however, this seems very safe and reasonable fast.
 function Entity:setData(index)
 	for i,shape in ipairs(self.shapes) do
 		shape:setData(function() return index, i end)

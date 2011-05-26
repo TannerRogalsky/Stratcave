@@ -1,11 +1,11 @@
 Unit = class("Unit", Entity)
-Unit.CATEGORY = 15
+Unit.CATEGORYA = 13
+Unit.CATEGORYB = 14
 Unit.MAX_VELX = 35
 Unit.MAX_VELY = 50
 
 function Unit:initialize(body, team)
 	Entity.initialize(self, body, team)
-	
 	if self.team == "red" then
 		self.force = 1
 	elseif self.team == "blue" then

@@ -29,8 +29,16 @@ function love.load()
 	entity:add("rectangle", 0, 0, 50, 150, 0)
 	table.insert(entities, entity)
 	
-	-- entity = Base(love.physics.newBody(world, 650 + 300 - 25, 450 - 75 + 12.5, 0, 0), "blue")
+	-- entity = Entity(love.physics.newBody(world, 650 + 85, 610, 0, 0))
+	-- entity:add("rectangle", 0, 0, 150, 50, math.rad(-30))
 	-- table.insert(entities, entity)
+	
+	entity = Entity(love.physics.newBody(world, -25, 550, 0, 0))
+	entity:add("rectangle", 0, 0, 50, 150, 0)
+	table.insert(entities, entity)
+	
+	entity = Base(love.physics.newBody(world, 650 + 300 - 25, 450 - 75 + 12.5, 0, 0), "blue")
+	table.insert(entities, entity)
 	
 	entity = Base(love.physics.newBody(world, 25, 650 - 75 + 12.5, 0, 0), "red")
 	table.insert(entities, entity)
@@ -64,22 +72,21 @@ function love.update(dt)
 	
 	-- spawns random objects. for testing
 	if delta >= 3 then		
-		for i, entity in ipairs(entities) do
-			if instanceOf(Base, entity) then
-				table.insert (entities, entity:spawn(world))
-			end
-		end
+		-- for i, entity in ipairs(entities) do
+			-- if instanceOf(Base, entity) then
+				-- table.insert (entities, entity:spawn(world))
+			-- end
+		-- end
 		
-		for i, entity in ipairs(entities) do
-			entity:setData(i)
-		end
+		-- for i, entity in ipairs(entities) do
+			-- entity:setData(i)
+		-- end
 		
 		delta = 0
 	end
 end
 
 function love.draw()
-	love.graphics.setColor(255, 0, 0)
 	for _,entity in ipairs(entities) do
 		entity:draw()
 	end
@@ -88,17 +95,22 @@ function love.draw()
 	love.graphics.print("FPS: ".. love.timer.getFPS(),25,25)
 end
 
--- Just sets table indices so that they can be referenced in collisions
--- Should be called every time a shape is removed
--- Doesn't necessarily need to be called when a single shape is added because it would
--- be more efficient to just use table.getn(entities) and setData manually
--- In practise, however, this seems very safe and reasonable fast.
-function setShapeData()
-	-- for x,entity in ipairs(entities) do
-		-- for y,shape in ipairs(entity) do
-			-- shape:setData(function() return x, y end)
-		-- end
-	-- end
+function love.mousepressed(x, y, button)
+	if button == 'l' then
+		for _, entity in ipairs(entities) do
+			if instanceOf(Base, entity) then
+				for _,shape in ipairs(entity.shapes) do
+					if shape:testPoint(x,y) then
+						table.insert (entities, entity:spawn(world))
+					end
+				end
+			end
+		end
+		
+		for i, entity in ipairs(entities) do
+			entity:setData(i)
+		end
+	end
 end
 
 -- called when a collision first occurs
@@ -106,6 +118,7 @@ function add(a, b, collision)
 	-- gets the indices of the two objects colliding
 	local i,j = a()
 	local x,y = b()
+	print(collision:getPosition())
 	
 	-- gets the actual objects
 	local entityA, entityB = entities[i], entities[x]
@@ -141,6 +154,8 @@ function add(a, b, collision)
 		
 		local height, bottom, top = entityA:getHeight()
 		local colX, colY = collision:getPosition()
+		-- not perfect but separates the object into quarters and if a collision occurs
+		-- on the inner two quarters, it behaves like it's run into something and reverses
 		if colY < bottom - height / 4 and colY > top + height / 4 then
 			entityA:reverse()
 		end
