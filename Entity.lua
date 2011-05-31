@@ -11,29 +11,25 @@ end
 -- creates the shape, attaches it to the body
 -- sets the collision category and bitmasks based on team and class
 function Entity:add(shapeType, ...)
-	local shape
-	if shapeType == "circle" then
-		shape = love.physics.newCircleShape(self.body, ...)
-	elseif shapeType == "rectangle" then
-		shape = love.physics.newRectangleShape(self.body, ...)
-	elseif shapeType == polygon then
-		shape = love.physics.newPolygonShape(self.body, ...)
-	end
+	local adders = {
+		circle = love.physics.newCircleShape,
+		rectangle = love.physics.newRectangleShape,
+		polygon = love.physics.newPolygonShape
+	}
+	
+	local categories = {
+		red = "CATEGORYA",
+		blue = "CATEGORYB"
+	}
+	
+	local shape = adders[shapeType](self.body, ...)
 	
 	if instanceOf(Base, self) then
-		if self.team == "red" then
-			shape:setCategory(Base.CATEGORYA)
-		elseif self.team == "blue" then
-			shape:setCategory(Base.CATEGORYB)
-		end
+		shape:setCategory(Base[categories[self.team]])
+		
 	elseif instanceOf(Unit, self) then
-		if self.team == "red" then
-			shape:setCategory(Unit.CATEGORYA)
-			shape:setMask(Unit.CATEGORYA, Base.CATEGORYA)
-		elseif self.team == "blue" then
-			shape:setCategory(Unit.CATEGORYB)
-			shape:setMask(Unit.CATEGORYB, Base.CATEGORYB)
-		end
+		shape:setCategory(Unit[categories[self.team]])
+		shape:setMask(Unit[categories[self.team]], Base[categories[self.team]])
 	end
 	
 	table.insert(self.shapes, shape)
