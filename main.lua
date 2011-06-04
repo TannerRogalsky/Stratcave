@@ -1,12 +1,15 @@
 -- called on program start
 function love.load()
 	love.graphics.setBackgroundColor(104, 136, 248)
-	love.graphics.setMode(1300, 650, false, true, 0)
 	
 	require 'middleclass.init'
 	require "Entity.lua"
 	require "Base.lua"
 	require "Unit.lua"
+	
+	bg = love.graphics.newImage("images/bg1.png")
+	bg:setWrap("repeat", "repeat")
+	quad = love.graphics.newQuad(0, 0, love.graphics.getWidth(), love.graphics.getHeight(), bg:getWidth(), bg:getHeight())
 
 	world = love.physics.newWorld(-650, -650, 1300, 650)
 	world:setGravity(0, 15)
@@ -54,16 +57,6 @@ function love.load()
 			-- print (entity.class, print (instanceOf(Base, entity)))
 		end
 	end
-	
-	-- local t = {"a", "b", "c", "d"}
-	-- for i,v in ipairs(t) do
-		-- if v == "c" then
-			-- table.remove(t, i)
-		-- end
-	-- end
-	-- for i,v in ipairs(t) do
-		-- print (i,v)
-	-- end
 end
 
 -- called for updates
@@ -86,11 +79,10 @@ function love.update(dt)
 	if delta >= 1 then		
 		for i, entity in ipairs(entities) do
 			if instanceOf(Base, entity) then
-				local e = entity:spawn(world)
-				if entity.team == "red" then
-					e.health = 1
+				if entity.team == "red" then					
+					local e = entity:spawn(world)
+					table.insert (entities, e)
 				end
-				table.insert (entities, e)
 			end
 		end
 		
@@ -104,6 +96,8 @@ end
 
 -- called for rendering
 function love.draw()
+	love.graphics.drawq(bg, quad, 0, 0, 0, 1, 1, 0, 0)
+
 	for _,entity in ipairs(entities) do
 		entity:draw()
 	end
@@ -160,6 +154,11 @@ function add(a, b, collision)
 	-- gets the actual objects
 	local entityA, entityB = entities[i], entities[x]
 	
+	-- exits the collision if the objects no longer exist
+	if entityA == nil or entityB == nil then
+		return
+	end
+	
 	-- just a bit to test removing bodies. seems to work
 	if not entityA.team ~= entityB.team and entityA.team ~= "white" and entityB.team ~= "white" then
 		if i < x then 
@@ -190,16 +189,6 @@ function add(a, b, collision)
 			entityA:getAngleTo(collision:getPosition()) > 315 or entityA:getAngleTo(collision:getPosition()) < 45 then
 			entityA:reverse()
 		end
-		
-		-- local colX, colY = collision:getPosition()
-		-- not perfect but separates the object into quarters and if a collision occurs
-		-- on the inner two quarters, it behaves like it's run into something and reverses
-		-- if entityA.shapes[j]:getType() == "circle" then
-			-- local px, py = entityA.shapes[j]:getWorldCenter()
-			-- if colY < py + entityA.shapes[j]:getRadius() / 2 and colY > py - entityA.shapes[j]:getRadius() / 2 then
-				-- entityA:reverse()
-			-- end
-		-- end
 	end
 	
 	prevcolx, prevcoly = colx, coly
@@ -207,7 +196,20 @@ end
 
 -- called a collision continues
 function persist(a, b, collision)
-    
+    local i,j = a()
+	local x,y = b()
+	
+	-- gets the actual objects
+	local entityA, entityB = entities[i], entities[x]
+	
+	-- exits the collision if the objects no longer exist
+	if entityA == nil or entityB == nil then
+		return
+	end
+	
+	if not entityA.team ~= entityB.team and entityA.team ~= "white" and entityB.team ~= "white" then
+		print(i,j,x,y)
+	end
 end
 
 -- called when a collision stops

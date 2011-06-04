@@ -38,15 +38,16 @@ end
 function Entity:update(dt)end
 
 function Entity:draw()
-	if self.team == "red" then
-		love.graphics.setColor(255,0,0)
-	elseif self.team == "blue" then
-		love.graphics.setColor(0,0,255)
-	else
-		love.graphics.setColor(255,255,255)
-	end
+	local colors = {
+		red = {255,0,0},
+		blue = {0,0,255},
+		white = {255,255,255}
+	}
 	
-	for _,shape in ipairs(self.shapes) do
+	for _,shape in ipairs(self.shapes) do	
+		love.graphics.setColor(unpack(colors[self.team]))
+		draw_shape("fill", shape)
+		love.graphics.setColor(0,0,0)
 		draw_shape("line", shape)
 		if instanceOf(Base, self) then
 			local height, bottom, top = self:getHeight()
@@ -69,7 +70,7 @@ end
 
 -- return height, bottom of shape, top of shape
 function Entity:getHeight()
-	local low, high = 10000, -10000
+	local low, high = math.huge, -math.huge
 	for _,shape in ipairs(self.shapes) do
 		local x1, y1, x2, y2, x3, y3, x4, y4 = shape:getBoundingBox()
 		if y1 < low then
@@ -88,6 +89,28 @@ function Entity:getHeight()
 	return low - high, low, high
 end
 
+-- return width, leftmost point of shape, rightmost
+function Entity:getWidth()
+	local left, right = math.huge, -math.huge
+	for _,shape in ipairs(self.shapes) do
+		local x1, y1, x2, y2, x3, y3, x4, y4 = shape:getBoundingBox()
+		if y1 < left then
+			left = y1
+		end
+		if y4 < left then
+			left = y4
+		end
+		if y2 > right then
+			right = y2
+		end
+		if y3 > right then
+			right = y3
+		end
+	end
+	return left - right, left, right
+end
+
+-- returns the angle from the horizontal axis with 0 degrees pointing left
 function Entity:getAngleTo(toX, toY)
 	local fromX, fromY = self.body:getPosition()
 	return math.deg(math.atan2(toY - fromY, fromX - toX))
