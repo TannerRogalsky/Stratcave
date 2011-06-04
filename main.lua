@@ -145,6 +145,13 @@ end
 
 -- called when a collision first occurs
 function add(a, b, collision)
+	-- deals with the issue of single bodies producing multiple collisions at once
+	-- as that tends to break everything horribly
+	local colx, coly = collision:getPosition()
+	if prevcolx == colx or prevcoly == coly then
+		return
+	end
+
 	-- gets the indices of the two objects colliding
 	local i,j = a()
 	local x,y = b()
@@ -152,9 +159,7 @@ function add(a, b, collision)
 	
 	-- gets the actual objects
 	local entityA, entityB = entities[i], entities[x]
-	if entityA == nil or entityB == nil then
-		return
-	end
+	
 	-- just a bit to test removing bodies. seems to work
 	if not entityA.team ~= entityB.team and entityA.team ~= "white" and entityB.team ~= "white" then
 		if i < x then 
@@ -196,6 +201,8 @@ function add(a, b, collision)
 			-- end
 		-- end
 	end
+	
+	prevcolx, prevcoly = colx, coly
 end
 
 -- called a collision continues
