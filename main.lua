@@ -2,7 +2,7 @@
 function love.load()
 	love.graphics.setBackgroundColor(104, 136, 248)
 	
-	require 'middleclass.init'
+	require 'middleclass'
 	require "Entity.lua"
 	require "Base.lua"
 	require "Unit.lua"
