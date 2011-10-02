@@ -5,7 +5,7 @@ function love.load()
 
   particles = {}
   for _ = 1,10,1 do
-    table.insert(particles, Particle:new(math.random(100)+300,math.random(100)+300))
+    table.insert(particles, Particle:new(math.random(100 - major.radius) + 300 + major.radius, math.random(100) + 300 + major.radius))
   end
   for _, particle in ipairs(particles) do
     major:addParticle(particle)

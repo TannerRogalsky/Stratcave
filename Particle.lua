@@ -7,7 +7,7 @@ function Particle:initialize(x, y, radius)
   self.radius = radius or 2
   self.delta = {x = 0, y = 0}
   self.z = 1
-  self.angle = 0
+  self.angle = math.random(360)
 end
 
 function Particle:update(dt)
