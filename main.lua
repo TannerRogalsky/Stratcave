@@ -1,11 +1,12 @@
 function love.load()
   dofile('requirements.lua')
 
-  major = Node:new(300,300,50)
+  major = Node:new(300,300,25)
 
   particles = {}
-  table.insert(particles, Particle:new(310,400,10))
-  table.insert(particles, Particle:new(400,310,10))
+  for _ = 1,10,1 do
+    table.insert(particles, Particle:new(math.random(100)+300,math.random(100)+300))
+  end
   for _, particle in ipairs(particles) do
     major:addParticle(particle)
   end
@@ -19,13 +20,13 @@ end
 
 function love.draw()
   for _, particle in ipairs(particles) do
-    if particle.deltax < 0 then
+    if particle.z == -1 then
       particle:draw()
     end
   end
   major:draw()
   for _, particle in ipairs(particles) do
-    if particle.deltax >= 0 then
+    if particle.z == 1 then
       particle:draw()
     end
   end
