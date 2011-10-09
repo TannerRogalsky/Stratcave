@@ -12,9 +12,6 @@ end
 
 function Particle:update(dt)
   self.angle = self.angle + dt
-  if self.angle > 360 then
-    self.angle = self.angle - 360
-  end
 
   self.orbitalCenter = self.parent or {x = 0, y = 0}
 
