@@ -4,14 +4,21 @@ function Node:initialize(x, y, radius)
   self.x = x
   self.y = y
   self.radius = radius
-  self.sphereOfInfluence = self.radius * 4
+  self.sphereOfInfluence = self.radius * 2
   self.particles = {}
 end
 
 function Node:addParticle(particle)
   if instanceOf(Particle, particle) then
     table.insert(self.particles, particle)
+    particle.indexInParent = #self.particles
     particle.parent = self
+  end
+end
+
+function Node:removeParticle(particleToRemove)
+  if particleToRemove.indexInParent then
+    table.remove(self.particles, particleToRemove.indexInParent)
   end
 end
 
