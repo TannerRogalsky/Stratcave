@@ -27,13 +27,13 @@ function love.mousereleased(x, y, button)
 end
 
 function love.keypressed(key, unicode)
-  if key == 'q' then
+  if key == 'q' or key == 'escape' then
     os.exit(1)
   end
 end
 
 function love.keyreleased(key, unicode)
-  -- print(key, unicode)
+  print(key, unicode)
 end
 
 function love.draw()
