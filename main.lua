@@ -19,14 +19,28 @@ function love.update(dt)
 end
 
 function love.mousepressed(x, y, button)
-
+  down = {x = x, y = y}
 end
 
 function love.mousereleased(x, y, button)
+  translate = {x = down.x - x, y = down.y - y}
+end
 
+function love.keypressed(key, unicode)
+  if key == 'q' then
+    os.exit(1)
+  end
+end
+
+function love.keyreleased(key, unicode)
+  -- print(key, unicode)
 end
 
 function love.draw()
+  g.scale(scale or 1)
+  translate = translate or {x = 0, y = 0}
+  g.translate(translate.x, translate.y)
+
   for _, particle in ipairs(particles) do
     if particle.z == -1 then
       particle:draw()
