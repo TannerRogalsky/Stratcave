@@ -8,8 +8,8 @@ function love.load()
 
   table.insert(nodes, Node:new(300,300,50))
   table.insert(nodes, Node:new(600,300,50))
-  generateParticles(nodes[1], 10)
-  generateParticles(nodes[2], 10)
+  generateParticles(nodes[1], 1)
+  -- generateParticles(nodes[2], 10)
   -- generateParticles(nil, 10)
 end
 

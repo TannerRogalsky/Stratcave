@@ -19,7 +19,7 @@ function Particle:update(dt)
 
   if self.parent then
     -- ellipse equation
-    local x, y = self.parent.x + math.cos(self.angle) * (self.original.x - self.parent.x), self.parent.y + math.sin(self.angle) * (self.original.y - self.parent.y)
+    local x, y = self.parent.x + math.cos(self.angle) * (self.original.x - self.parent.x), self.parent.y + math.sin(self.angle * 0.9) * (self.original.y - self.parent.y)
 
     -- are we at the far end of our ellipse? if so, adjust z-index
     if (self.original.x > self.original.y and self.x - x > 0 and self.delta.x < 0) or 
