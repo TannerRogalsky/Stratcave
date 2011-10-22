@@ -6,5 +6,6 @@ function pointInCircle(circle, point) return (point.x-circle.x)^2 + (point.y - c
 
 -- Put any game-wide requirements in here
 require 'middleclass'
+require 'Entity'
 require 'Particle'
 require 'Node'

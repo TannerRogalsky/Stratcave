@@ -1,6 +1,7 @@
-Node = class('Node')
+Node = class('Node', Entity)
 
 function Node:initialize(x, y, radius)
+  Entity.initialize(self)
   self.x = x
   self.y = y
   self.radius = radius

@@ -1,6 +1,7 @@
-Particle = class('Particle')
+Particle = class('Particle', Entity)
 
 function Particle:initialize(x, y, parent, radius)
+  Entity.initialize(self)
   self.x = x or 0
   self.y = y or 0
   self.original = {x = self.x, y = self.y}
