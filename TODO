@@ -1,0 +1,8 @@
+- Be able to specify movement for particles
+- Flocking behaviour for parent-less particles
+- Particle colllisions
+- Better z-index drawing (let's be clever about this, yeah?)
+- Play against very basic AI
+- Statefullness
+- Improved graphics
+- Multiplayer
