@@ -37,7 +37,8 @@ end
 
 function Particle:draw()
   g.setColor(255,0,0)
-  g.circle("fill", self.x, self.y, self.radius, 50)
+  g.point(self.x, self.y)
+  -- g.circle("fill", self.x, self.y, self.radius, 50)
   -- g.setColor(255,255,255)
   -- g.circle("line", self.x, self.y, self.radius, 50)
 end
