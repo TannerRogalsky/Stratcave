@@ -1,0 +1,6 @@
+[submodule "middleclass"]
+	path = middleclass
+	url = https://github.com/kikito/middleclass.git
+[submodule "middleclass-extras"]
+	path = middleclass-extras
+	url = https://github.com/kikito/middleclass-extras.git
