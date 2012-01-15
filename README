@@ -1,0 +1,10 @@
+Base
+  > Level
+    - Screen
+  > Character
+    > Player
+    > Non-Player
+  > Item
+
+- = uses
+> = subclasses
