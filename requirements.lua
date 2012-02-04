@@ -11,3 +11,5 @@ function generateID() globalID = globalID + 1 return globalID end
 -- Put any game-wide requirements in here
 require 'middleclass'
 require 'base.lua'
+require 'character.lua'
+require 'level.lua'
