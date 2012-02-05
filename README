@@ -6,6 +6,7 @@ Base
     > Player
     > Non-Player
   > Item
+  > Game
 
 - = uses
 > = subclasses
@@ -14,6 +15,8 @@ Base
 #### Base ####
 Base class for all other classes. Probably just provides update and render methods to override.
 
+#### Game ####
+Has levels and states and whatnot. Could also be thought of as the World class.
 
 #### Level ####
 An object encompassing all the concepts of a traditional level: has multiples screens that the player passes through, acts as a vessel for the visualization of all the game objects. Probably convenient to define it via JSON.
