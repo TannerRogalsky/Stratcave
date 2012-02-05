@@ -1,6 +1,21 @@
 dofile('requirements.lua')
 
 function love.load()
+  local lfs = love.filesystem
+  levels = lfs.enumerate("levels")
+  for i,v in ipairs(levels) do
+    level = love.filesystem.read("levels/"..v)
+    print(level)
+    for k,v in pairs(json.decode(level)) do
+      if k == "layout" then
+        for i,v in ipairs(v) do
+          print(i,unpack(v))
+        end
+      else
+        print(k,v)
+      end
+    end
+  end
 end
 
 function love.update(dt)

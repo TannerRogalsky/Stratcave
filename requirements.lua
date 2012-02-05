@@ -13,3 +13,4 @@ require 'middleclass'
 require 'base.lua'
 require 'character.lua'
 require 'level.lua'
+json = require('json')
