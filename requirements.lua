@@ -12,6 +12,7 @@ function generateID() globalID = globalID + 1 return globalID end
 require 'middleclass'
 Stateful = require 'lib/stateful'
 json = require('json')
+skiplist = require "lib/skiplist"
 
 require 'base.lua'
 require 'game.lua'
