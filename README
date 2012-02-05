@@ -1,6 +1,7 @@
 Base
   > Level
-    - Screen
+    - Screen < Base
+      - Layer < Base
   > Character
     > Player
     > Non-Player
@@ -8,3 +9,29 @@ Base
 
 - = uses
 > = subclasses
+
+
+#### Base ####
+Base class for all other classes. Probably just provides update and render methods to override.
+
+
+#### Level ####
+An object encompassing all the concepts of a traditional level: has multiples screens that the player passes through, acts as a vessel for the visualization of all the game objects. Probably convenient to define it via JSON.
+
+#### Screen ####
+Belongs to a level. Contains many layers. Should a pretty simple class but if we want to do custom scripting on a per screen basis, this is where we want to do it.
+
+#### Layer ####
+Each screen will have at least one of these. They should define the background, the terrain and the foreground. They should support transparency and parallaxing because that shit looks cool.
+
+#### Character ####
+Superclass for all character type objects.
+
+#### Player Character ####
+Character directly controllable by the player.
+
+#### Non-Player Character ####
+May not even be neccesary. All of the functionality may exist within the Character superclass.
+
+#### Item ####
+Will exist within a layer but ownership will be transfered to the Player. Will need to be able to modify attributes on the Player as well as probably some custom scripting.
