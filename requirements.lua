@@ -10,7 +10,7 @@ function generateID() globalID = globalID + 1 return globalID end
 
 -- Put any game-wide requirements in here
 require 'middleclass'
-Stateful = require 'stateful'
+Stateful = require 'lib/stateful'
 json = require('json')
 
 require 'base.lua'
