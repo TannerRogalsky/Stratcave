@@ -15,4 +15,5 @@ require 'character.lua'
 require 'level.lua'
 require 'screen.lua'
 require 'layer.lua'
+Stateful = require 'stateful'
 json = require('json')
