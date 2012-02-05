@@ -9,3 +9,7 @@ end
 
 function Base:render()
 end
+
+function Base:__tostring()
+  return "Instance of ".. self.class.name .." with ID ".. self.id
+end
