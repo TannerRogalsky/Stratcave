@@ -1,8 +1,15 @@
 Layer = class('Layer', Base)
 
-function Layer:initialize(dimensions)
+function Layer:initialize(jsonInTableForm)
   Base.initialize(self)
-  self.dimensions = dimensions or {width = g.getWidth(), height = g.getHeight()}
+
+  -- dump the json data into the new object
+  for k,v in pairs(jsonInTableForm) do
+    self[k] = v
+  end
+
+  -- finalize some values with some defaults
+  self.dimensions = self.dimensions or {width = self.width or g.getWidth(), height = self.height or g.getHeight()}
 end
 
 function Layer:update(dt)

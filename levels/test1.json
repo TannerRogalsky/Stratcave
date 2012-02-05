@@ -5,5 +5,17 @@
     [0, 0, 1, 1]
   ],
   "width": 5,
-  "height": 2
+  "height": 2,
+  "screens": [
+    {
+      "layers": [
+        {
+          "z": -1,
+          "image": "images/bg1.jpg"
+        }
+      ]
+    }
+  ],
+  "player": {
+  }
 }

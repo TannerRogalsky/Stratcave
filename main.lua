@@ -5,6 +5,12 @@ function love.load()
   level = Game.loadLevel("test1")
   -- debug.debug()
   print(level)
+
+  print(#level.screens)
+  print(unpack(level.screens))
+
+  print(#level.screens[1].layers)
+  print(unpack(level.screens[1].layers))
 end
 
 function love.update(dt)

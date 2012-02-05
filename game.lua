@@ -26,14 +26,7 @@ function Game.loadLevel(levelName)
     -- read in the json and parse it
     local raw = love.filesystem.read(filePath)
     local levelData = json.decode(raw)
-    local level = Level:new()
-
-    -- dump all attributes into the blank level
-    for k,v in pairs(levelData) do
-      level[k] = v
-    end
-
-    return level
+    return Level:new(levelData)
   else
     return nil
   end

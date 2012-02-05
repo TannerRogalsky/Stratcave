@@ -1,8 +1,25 @@
 Level = class('Level', Base)
 
-function Level:initialize(dimensions)
+function Level:initialize(jsonInTableForm)
   Base.initialize(self)
-  self.dimensions = dimensions or {width = g.getWidth(), height = g.getHeight()}
+
+  -- dump all attributes into the blank level
+  for k,v in pairs(jsonInTableForm) do
+
+    if k == "screens" then
+      self.screens = {}
+
+      -- for each entry in the screen list
+      for _,screenTable in ipairs(v) do
+        -- make a new screen from the data and put it into level.screens
+        table.insert(self.screens, Screen:new(screenTable))
+      end
+    else
+      self[k] = v
+    end
+  end
+
+  -- initialize default value after this line
 end
 
 function Level:update(dt)
