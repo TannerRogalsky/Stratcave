@@ -24,6 +24,10 @@ An object encompassing all the concepts of a traditional level: has multiples sc
 #### Screen ####
 Belongs to a level. Contains many layers. Should a pretty simple class but if we want to do custom scripting on a per screen basis, this is where we want to do it.
 
+Screen should ultimately implement a skiplist for drawing to speed up z-indexing.
+
+The layer at z-index 0 should be reserved for the player and physics objects. Unless separating the physics and the visual will cause problems. Might have to think of another solution to this.
+
 #### Layer ####
 Each screen will have at least one of these. They should define the background, the terrain and the foreground. They should support transparency and parallaxing because that shit looks cool.
 
