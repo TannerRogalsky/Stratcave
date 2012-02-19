@@ -6,11 +6,11 @@ function Screen:initialize(jsonInTableForm)
   -- dump the json data into the new object
   for k,v in pairs(jsonInTableForm) do
     if k == "layers" then
-      self.layers = {}
+      self.layers = skiplist.new(#v)
       -- for each entry in the screen list
       for _,layerTable in ipairs(v) do
         -- make a new screen from the data and put it into level.screens
-        table.insert(self.layers, Layer:new(layerTable))
+        self.layers:insert(Layer:new(layerTable))
       end
     else
       self[k] = v
@@ -25,7 +25,7 @@ function Screen:update(dt)
 end
 
 function Screen:render()
-  for i,layer in ipairs(self.layers) do
+  for i,layer in self.layers:ipairs() do
     layer:render()
   end
 end

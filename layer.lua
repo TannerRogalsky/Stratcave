@@ -22,3 +22,14 @@ function Layer:render()
     g.draw(self.image)
   end
 end
+
+function Layer:__lt(other)
+  if self.z < other.z then return true
+  elseif self.z == other.z and self.id < other.id then return true
+  else return false
+  end
+end
+
+function Layer:__le(other)
+  return self < other
+end

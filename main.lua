@@ -9,8 +9,9 @@ function love.load()
   print(#level.screens)
   print(unpack(level.screens))
 
-  print(#level.screens[1].layers)
-  print(unpack(level.screens[1].layers))
+  for i,layer in level.screens[1].layers:ipairs() do
+    print(layer, "z: "..layer.z)
+  end
 end
 
 function love.update(dt)
