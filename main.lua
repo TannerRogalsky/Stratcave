@@ -32,4 +32,5 @@ function love.keyreleased(key, unicode)
 end
 
 function love.draw()
+  level:render()
 end

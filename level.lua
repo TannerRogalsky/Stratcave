@@ -26,4 +26,7 @@ function Level:update(dt)
 end
 
 function Level:render()
+  for i,screen in ipairs(self.screens) do
+    screen:render()
+  end
 end

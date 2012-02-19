@@ -25,4 +25,7 @@ function Screen:update(dt)
 end
 
 function Screen:render()
+  for i,layer in ipairs(self.layers) do
+    layer:render()
+  end
 end
