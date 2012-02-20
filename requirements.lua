@@ -19,6 +19,7 @@ HC = require 'HardonCollider'
 
 require 'base.lua'
 require 'game.lua'
+require 'lib/camera.lua'
 require 'character.lua'
 require 'level.lua'
 require 'screen.lua'

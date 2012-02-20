@@ -2,6 +2,7 @@ dofile('requirements.lua')
 
 function love.load()
   game = Game:new()
+  camera = Camera:new()
 
   level = Game.load_level("test1")
   game.currentLevel = level
@@ -45,15 +46,21 @@ function love.keypressed(key, unicode)
   if key == 'q' or key == 'escape' then
     os.exit(1)
   end
+
+  ball.velocity.y = ball.velocity.x - 100
 end
 
 function love.keyreleased(key, unicode)
 end
 
 function love.draw()
+  camera:set()
+
   game:render()
 
   -- leave this in for debugging (draws the collider's hash grid)
   g.setColor(255, 0, 0)
   game.Collider._hash:draw('line', true, true)
+
+  camera:unset()
 end
