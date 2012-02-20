@@ -14,11 +14,11 @@ function Game:render()
   self.currentLevel:render()
 end
 
-function Game:loadLevels()
+function Game:load_levels()
   self.levels = {}
   local levelNames = love.filesystem.enumerate("levels")
   for _,name in ipairs(levelNames) do
-    table.insert(levels, Game.loadLevel(name))
+    table.insert(levels, Game.load_level(name))
   end
 end
 
@@ -26,16 +26,16 @@ end
 -- i.e. the direction and magnitude shape_one has to be moved so that the collision will be resolved.
 -- Note that if one of the shapes is a point shape, the translation vector will be invalid.
 function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
-
+  print("start", shape_one, shape_two)
 end
 
 function on_stop_collide(dt, shape_one, shape_two)
-
+  print("stop", shape_one, shape_two)
 end
 
 -- ### Class Methods ###
 
-function Game.loadLevel(levelName)
+function Game.load_level(levelName)
   filePath = "levels/".. levelName .. ".json"
   if love.filesystem.isFile(filePath) then
     -- read in the json and parse it
