@@ -55,7 +55,9 @@ function Layer:add_physics_object(objectType, ...)
 
   -- dump some stuff into the physics object that I'll probably need later
   object.id = generateID()
+  object.velocity = {x = 0, y = 0}
   object.update = function(self, dt) end
+  object.applyGravity = function(self, dt) self.velocity.y = self.velocity.y + (GRAVITY * dt) end
   table.insert(self.objects, object)
   return object
 end

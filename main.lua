@@ -9,10 +9,16 @@ function love.load()
   local layer = level.screens[1].layers[3]
   local object = layer:add_physics_object("circle", 200, 300, 10)
 
-  object.velocity = {x = 0, y = 100}
   object.update = function(self, dt)
+    self:applyGravity(dt)
     self:move(self.velocity.x * dt, self.velocity.y * dt)
   end
+
+  ball = object
+
+  object = layer:add_physics_object("rectangle", 0, 475, 600, 10)
+  object.static = true
+  game.Collider:setPassive(object)
 
   -- debug.debug()
   -- print(level)
