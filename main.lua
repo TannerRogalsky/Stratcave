@@ -3,8 +3,17 @@ dofile('requirements.lua')
 function love.load()
   game = Game:new()
 
-  level = Game.loadLevel("test1")
+  level = Game.load_level("test1")
   game.currentLevel = level
+
+  local layer = level.screens[1].layers[3]
+  local object = layer:add_physics_object("circle", 200, 300, 10)
+
+  object.velocity = {x = 0, y = 100}
+  object.update = function(self, dt)
+    self:move(self.velocity.x * dt, self.velocity.y * dt)
+  end
+
   -- debug.debug()
   -- print(level)
 
@@ -36,7 +45,6 @@ function love.keyreleased(key, unicode)
 end
 
 function love.draw()
-  g.setColor(255,255,255)
   game:render()
 
   -- leave this in for debugging (draws the collider's hash grid)

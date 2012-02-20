@@ -10,17 +10,54 @@ function Layer:initialize(jsonInTableForm)
 
   -- finalize some values with some defaults
   self.dimensions = self.dimensions or {width = self.width or g.getWidth(), height = self.height or g.getHeight()}
-
+  self.z = self.z or 0
   if self.image then self.image = g.newImage(self.image) end
+  self.objects = {}
 end
 
 function Layer:update(dt)
+  for i,object in ipairs(self.objects) do
+    object:update(dt)
+  end
 end
 
 function Layer:render()
   if self.image then
+    g.setColor(255,255,255)
     g.draw(self.image)
   end
+
+  -- for debugging, we probably shouldn't be drawing the actualy physics object on screen
+  for i,object in ipairs(self.objects) do
+    g.setColor(0,0,255)
+    object:draw("fill")
+  end
+end
+
+function Layer:add_physics_object(objectType, ...)
+  assert(self.z == 0, "You can only put physics objects on the zeroth layer.")
+  assert(objectType == "circle" or objectType == "rectangle" or objectType == "polygon" or objectType == "point",
+    objectType.. " is not a recognized object type.")
+
+  local object = nil
+
+  if objectType == "circle" then
+    object = game.Collider:addCircle(...)
+  elseif objectType == "rectangle" then
+    object = game.Collider:addRectangle(...)
+  elseif objectType == "polygon" then
+    object = game.Collider:addPolygon(...)
+  elseif objectType == "point" then
+    object = game.Collider:addPoint(...)
+  end
+
+  if object == nil then return object end
+
+  -- dump some stuff into the physics object that I'll probably need later
+  object.id = generateID()
+  object.update = function(self, dt) end
+  table.insert(self.objects, object)
+  return object
 end
 
 function Layer:__lt(other)
