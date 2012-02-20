@@ -22,6 +22,9 @@ function Screen:initialize(jsonInTableForm)
 end
 
 function Screen:update(dt)
+  for i,layer in self.layers:ipairs() do
+    layer:update(dt)
+  end
 end
 
 function Screen:render()

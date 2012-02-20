@@ -23,6 +23,9 @@ function Level:initialize(jsonInTableForm)
 end
 
 function Level:update(dt)
+  for i,screen in ipairs(self.screens) do
+    screen:update(dt)
+  end
 end
 
 function Level:render()
