@@ -25,6 +25,7 @@ function Screen:update(dt)
 end
 
 function Screen:render()
+  -- this will iterate over the skiplist with layers with lower z-indexs going first
   for i,layer in self.layers:ipairs() do
     layer:render()
   end

@@ -2,19 +2,22 @@ dofile('requirements.lua')
 
 function love.load()
   game = Game:new()
+
   level = Game.loadLevel("test1")
+  game.currentLevel = level
   -- debug.debug()
-  print(level)
+  -- print(level)
 
-  print(#level.screens)
-  print(unpack(level.screens))
+  -- print(#level.screens)
+  -- print(unpack(level.screens))
 
-  for i,layer in level.screens[1].layers:ipairs() do
-    print(layer, "z: "..layer.z)
-  end
+  -- for i,layer in level.screens[1].layers:ipairs() do
+  --   print(layer, "z: "..layer.z)
+  -- end
 end
 
 function love.update(dt)
+  game:update(dt)
 end
 
 function love.mousepressed(x, y, button)
@@ -33,5 +36,10 @@ function love.keyreleased(key, unicode)
 end
 
 function love.draw()
-  level:render()
+  g.setColor(255,255,255)
+  game:render()
+
+  -- leave this in for debugging (draws the collider's hash grid)
+  g.setColor(255, 0, 0)
+  game.Collider._hash:draw('line', true, true)
 end
