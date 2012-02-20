@@ -13,6 +13,7 @@ require 'middleclass'
 Stateful = require 'lib/stateful'
 json = require('json')
 skiplist = require "lib/skiplist"
+HC = require 'HardonCollider'
 
 require 'base.lua'
 require 'game.lua'
