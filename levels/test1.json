@@ -12,7 +12,10 @@
       "y": 0,
       "layers": [
         {
-          "z": 1,
+          "z": -2,
+          "image": "images/bg1.jpg"
+        }, {
+          "z": 0,
           "image": "images/bg1.jpg"
         }, {
           "z": -1,
