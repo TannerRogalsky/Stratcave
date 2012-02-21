@@ -20,16 +20,24 @@ function Level:initialize(jsonInTableForm)
   end
 
   -- initialize default value after this line
+  if type(self.starting_screen_index) == "table" then
+    self.starting_screen_index.x = self.starting_screen_index.x or 0
+    self.starting_screen_index.y = self.starting_screen_index.y or 0
+  else
+    self.starting_screen_index = {x = 0, y = 0}
+  end
+
+  for i,screen in ipairs(self.screens) do
+    if screen.x == self.starting_screen_index.x and screen.y == self.starting_screen_index.y then
+      self.current_screen = screen
+    end
+  end
 end
 
 function Level:update(dt)
-  for i,screen in ipairs(self.screens) do
-    screen:update(dt)
-  end
+  self.current_screen:update(dt)
 end
 
 function Level:render()
-  for i,screen in ipairs(self.screens) do
-    screen:render()
-  end
+  self.current_screen:render()
 end
