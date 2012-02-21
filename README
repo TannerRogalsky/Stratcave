@@ -7,6 +7,7 @@ Base
     > Non-Player
   > Item
   > Game
+  > Camera
 
 - = uses
 > = subclasses
@@ -17,6 +18,9 @@ Base class for all other classes. Probably just provides update and render metho
 
 #### Game ####
 Has levels and states and whatnot. Could also be thought of as the World class.
+
+#### Camera ####
+Does what it sounds like it does. Mostly just a helper for now. Nothing complicated as all the rendering is handled by the objects themselves.
 
 #### Level ####
 An object encompassing all the concepts of a traditional level: has multiples screens that the player passes through, acts as a vessel for the visualization of all the game objects. Probably convenient to define it via JSON.
