@@ -7,7 +7,7 @@ function love.load()
   level = Game.load_level("test1")
   game.currentLevel = level
 
-  local layer = level.screens[1].layers[3]
+  local layer = level.screens[1].physicsLayer
   local object = layer:add_physics_object("circle", 200, 300, 10)
 
   object.update = function(self, dt)
