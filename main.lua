@@ -12,6 +12,7 @@ function love.load()
 
   object.update = function(self, dt)
     self:applyGravity(dt)
+    self.velocity.y = math.clamp(-200, self.velocity.y, 200)
     self:move(self.velocity.x * dt, self.velocity.y * dt)
   end
 
@@ -45,9 +46,13 @@ end
 function love.keypressed(key, unicode)
   if key == 'q' or key == 'escape' then
     os.exit(1)
+  elseif key == 'up' then
+    ball.velocity.y = ball.velocity.x - 100
+  elseif key == 'right' then
+    ball.velocity.x = ball.velocity.x + 20
+  elseif key == 'left' then
+    ball.velocity.x = ball.velocity.x - 20
   end
-
-  ball.velocity.y = ball.velocity.x - 100
 end
 
 function love.keyreleased(key, unicode)
