@@ -4,6 +4,10 @@
     [1, 0, 0, 1],
     [1, 1, 1, 1]
   ],
+  "starting_screen_index": {
+    "x": 0,
+    "y": 0
+  },
   "width": 5,
   "height": 2,
   "screens": [
@@ -15,11 +19,10 @@
           "z": -2,
           "image": "images/bg1.jpg"
         }, {
-          "z": 0,
-          "image": "images/bg1.jpg"
+          "z": 0
         }, {
           "z": -1,
-          "image": "images/bg1.jpg"
+          "image": "images/bg2.png"
         }
       ]
     }
