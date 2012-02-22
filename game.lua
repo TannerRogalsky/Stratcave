@@ -7,11 +7,11 @@ end
 
 function Game:update(dt)
   self.Collider:update(dt)
-  self.currentLevel:update(dt)
+  self.current_level:update(dt)
 end
 
 function Game:render()
-  self.currentLevel:render()
+  self.current_level:render()
 end
 
 function Game:load_levels()
@@ -27,7 +27,7 @@ end
 -- Note that if one of the shapes is a point shape, the translation vector will be invalid.
 function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
   shape_one:move(mtv_x, mtv_y)
-  print("start", shape_one, shape_two)
+  print("start", shape_one, shape_two, shape_one.velocity.y, unpack(shape_one.velocity))
 end
 
 function on_stop_collide(dt, shape_one, shape_two)
