@@ -19,14 +19,11 @@ function Level:initialize(jsonInTableForm)
     end
   end
 
-  -- initialize default value after this line
-  if type(self.starting_screen_index) == "table" then
-    self.starting_screen_index.x = self.starting_screen_index.x or 0
-    self.starting_screen_index.y = self.starting_screen_index.y or 0
-  else
-    self.starting_screen_index = {x = 0, y = 0}
-  end
+  -- assertions
+  assert(type(self.starting_screen_index) == "table" and type(self.starting_screen_index.x) == "number"
+    and type(self.starting_screen_index.y) == "number", "You need to specify a starting screen for each level")
 
+  -- initialize default value after this line
   for i,screen in ipairs(self.screens) do
     if screen.x == self.starting_screen_index.x and screen.y == self.starting_screen_index.y then
       self.current_screen = screen
