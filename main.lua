@@ -5,9 +5,11 @@ function love.load()
   camera = Camera:new()
 
   level = Game.load_level("test1")
-  game.currentLevel = level
+  game.current_level = level
+  -- ternary hack (player ? new(player) : new({}))
+  game.current_level.current_screen.physics_layer.player = game.current_level.player and Character:new(game.current_level.player) or Character:new({})
 
-  local layer = level.screens[1].physicsLayer
+  local layer = level.screens[1].physics_layer
   local object = layer:add_physics_object("circle", 200, 300, 10)
 
   object.update = function(self, dt)

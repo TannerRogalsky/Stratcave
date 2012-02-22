@@ -9,7 +9,7 @@ function Character:initialize(jsonInTableForm)
   end
 
   -- finalize some values with some defaults
-  game.current_level.current_screen.physics_layer:add_physics_object("rectangle", 300, 400, 50, 100)
+  game.current_level.current_screen.physics_layer:add_physics_object("rectangle", 300, 400, 50, 50)
 end
 
 function Character:update(dt)
