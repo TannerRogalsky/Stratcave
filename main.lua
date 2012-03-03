@@ -6,19 +6,11 @@ function love.load()
 
   level = Game.load_level("test1")
   game.current_level = level
+
   -- ternary hack (player ? new(player) : new({}))
-  game.current_level.current_screen.physics_layer.player = game.current_level.player and Character:new(game.current_level.player) or Character:new({})
+  game.player = game.current_level.player and Character:new(game.current_level.player) or Character:new({})
 
   local layer = level.screens[1].physics_layer
-  local object = layer:add_physics_object("circle", 200, 300, 10)
-
-  object.update = function(self, dt)
-    self:applyGravity(dt)
-    self.velocity.y = math.clamp(-200, self.velocity.y, 200)
-    self:move(self.velocity.x * dt, self.velocity.y * dt)
-  end
-
-  ball = object
 
   object = layer:add_physics_object("rectangle", 0, 475, 600, 10)
   object.static = true
@@ -49,11 +41,11 @@ function love.keypressed(key, unicode)
   if key == 'q' or key == 'escape' then
     os.exit(1)
   elseif key == 'up' then
-    ball.velocity.y = ball.velocity.x - 100
+    game.player.physics_body.velocity.y = game.player.physics_body.velocity.x - 100
   elseif key == 'right' then
-    ball.velocity.x = ball.velocity.x + 20
+    game.player.physics_body.velocity.x = game.player.physics_body.velocity.x + 20
   elseif key == 'left' then
-    ball.velocity.x = ball.velocity.x - 20
+    game.player.physics_body.velocity.x = game.player.physics_body.velocity.x - 20
   end
 end
 

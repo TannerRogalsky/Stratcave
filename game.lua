@@ -7,10 +7,12 @@ end
 
 function Game:update(dt)
   self.Collider:update(dt)
+  self.player:update(dt)
   self.current_level:update(dt)
 end
 
 function Game:render()
+  self.player:render()
   self.current_level:render()
 end
 
@@ -26,7 +28,12 @@ end
 -- i.e. the direction and magnitude shape_one has to be moved so that the collision will be resolved.
 -- Note that if one of the shapes is a point shape, the translation vector will be invalid.
 function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
-  shape_one:move(mtv_x, mtv_y)
+  if shape_one.static then
+    shape_two:move(mtv_x, mtv_y)
+  elseif shape_two.static then
+    shape_one:move(mtv_x, mtv_y)
+  end
+
   print("start", shape_one, shape_two, shape_one.velocity.y, unpack(shape_one.velocity))
 end
 
