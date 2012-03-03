@@ -35,6 +35,10 @@ The layer at z-index 0 should be reserved for the player and physics objects. Un
 #### Layer ####
 Each screen will have at least one of these. They should define the background, the terrain and the foreground. They should support transparency and parallaxing because that shit looks cool.
 
+The actual layer renderings should be comprise not of a single image but of references (quads) to image sections. Ideally, we could reference more than one image per layer. We may want to define a class just for that as it looks like it might add unnecessary complexity to the Layer class.
+
+In the level data, the object would need to define a file and references to coordinates in that file as well as the coordinates that this object belongs on the layer.
+
 #### Character ####
 Superclass for all character type objects.
 
