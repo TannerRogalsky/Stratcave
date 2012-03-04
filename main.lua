@@ -26,10 +26,6 @@ function love.keypressed(key, unicode)
     os.exit(1)
   elseif key == 'up' then
     game.player.physics_body.velocity.y = game.player.physics_body.velocity.x - 100
-  elseif key == 'right' then
-    game.player.physics_body.velocity.x = game.player.physics_body.velocity.x + 20
-  elseif key == 'left' then
-    game.player.physics_body.velocity.x = game.player.physics_body.velocity.x - 20
   end
 end
 

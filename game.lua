@@ -6,9 +6,16 @@ function Game:initialize()
 end
 
 function Game:update(dt)
-  self.Collider:update(dt)
+  if love.keyboard.isDown('right') then
+    game.player.physics_body.velocity.x = 200
+  elseif love.keyboard.isDown('left') then
+    game.player.physics_body.velocity.x = -200
+  else
+    game.player.physics_body.velocity.x = 0
+  end
   self.player:update(dt)
   self.current_level:update(dt)
+  self.Collider:update(dt)
 end
 
 function Game:render()
@@ -34,11 +41,11 @@ function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
     shape_one:move(mtv_x, mtv_y)
   end
 
-  print("start", shape_one, shape_two, shape_one.velocity.y, unpack(shape_one.velocity))
+  -- print("start", shape_one, shape_two, shape_one.velocity.y, unpack(shape_one.velocity))
 end
 
 function on_stop_collide(dt, shape_one, shape_two)
-  print("stop", shape_one, shape_two)
+  -- print("stop", shape_one, shape_two)
 end
 
 -- ### Class Methods ###

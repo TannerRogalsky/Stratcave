@@ -48,6 +48,11 @@
               "type": "rectangle",
               "attributes": [0, 475, 600, 10],
               "static": true
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 0, 20, 500],
+              "static": true
             }
           ]
         }, {
