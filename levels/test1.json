@@ -42,7 +42,14 @@
             }
           ]
         }, {
-          "z": 0
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [0, 475, 600, 10],
+              "static": true
+            }
+          ]
         }, {
           "z": 1,
           "image": "images/bg2.png"

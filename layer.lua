@@ -5,14 +5,29 @@ function Layer:initialize(jsonInTableForm)
 
   -- dump the json data into the new object
   for k,v in pairs(jsonInTableForm) do
-    self[k] = v
+    if k == "objects" then
+      self.objects = {}
+      self.z = 0
+
+      for _,json_object in ipairs(v) do
+        local object = self:add_physics_object(json_object.type, unpack(json_object.attributes))
+        json_object.type, json_object.attributes = nil, nil
+        for key, value in pairs(json_object) do
+          object[key] = value
+        end
+
+        if object.static then game.Collider:setPassive(object) end
+      end
+    else
+      self[k] = v
+    end
   end
 
   -- finalize some values with some defaults
   self.dimensions = self.dimensions or {width = self.width or g.getWidth(), height = self.height or g.getHeight()}
   self.z = self.z or 0
   if self.image then self.image = g.newImage(self.image) end
-  self.objects = {}
+  self.objects = self.objects or {}
 end
 
 function Layer:update(dt)

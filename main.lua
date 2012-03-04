@@ -9,22 +9,6 @@ function love.load()
 
   -- ternary hack (player ? new(player) : new({}))
   game.player = game.current_level.player and Character:new(game.current_level.player) or Character:new({})
-
-  local layer = level.screens[1].physics_layer
-
-  object = layer:add_physics_object("rectangle", 0, 475, 600, 10)
-  object.static = true
-  game.Collider:setPassive(object)
-
-  -- debug.debug()
-  -- print(level)
-
-  -- print(#level.screens)
-  -- print(unpack(level.screens))
-
-  -- for i,layer in level.screens[1].layers:ipairs() do
-  --   print(layer, "z: "..layer.z)
-  -- end
 end
 
 function love.update(dt)
