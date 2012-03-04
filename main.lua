@@ -24,7 +24,7 @@ end
 function love.keypressed(key, unicode)
   if key == 'q' or key == 'escape' then
     os.exit(1)
-  elseif key == 'up' then
+  elseif key == 'up' and game.player.on_ground then
     game.player.physics_body.velocity.y = game.player.physics_body.velocity.x - 100
   end
 end

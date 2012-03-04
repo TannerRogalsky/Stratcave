@@ -41,10 +41,18 @@ function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
     shape_one:move(mtv_x, mtv_y)
   end
 
+  if shape_one == game.player.physics_body or shape_two == game.player.physics_body then
+    game.player.on_ground = true
+  end
+
+
   -- print("start", shape_one, shape_two, shape_one.velocity.y, unpack(shape_one.velocity))
 end
 
 function on_stop_collide(dt, shape_one, shape_two)
+  if shape_one == game.player.physics_body or shape_two == game.player.physics_body then
+    game.player.on_ground = false
+  end
   -- print("stop", shape_one, shape_two)
 end
 
