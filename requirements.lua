@@ -12,11 +12,11 @@ globalID = 0
 function generateID() globalID = globalID + 1 return globalID end
 
 -- Put any game-wide requirements in here
-require 'middleclass'
+require 'lib/middleclass'
 Stateful = require 'lib/stateful'
 json = require('json')
 skiplist = require "lib/skiplist"
-HC = require 'HardonCollider'
+HC = require 'lib/HardonCollider'
 
 require 'base.lua'
 require 'game.lua'
