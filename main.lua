@@ -8,7 +8,7 @@ function love.load()
   game.current_level = level
 
   -- ternary hack (player ? new(player) : new({}))
-  game.player = game.current_level.player and Character:new(game.current_level.player) or Character:new({})
+  game.player = game.current_level.player and PlayerCharacter:new(game.current_level.player) or PlayerCharacter:new({})
 end
 
 function love.update(dt)

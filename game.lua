@@ -6,13 +6,6 @@ function Game:initialize()
 end
 
 function Game:update(dt)
-  if love.keyboard.isDown('right') then
-    game.player.physics_body.velocity.x = 200
-  elseif love.keyboard.isDown('left') then
-    game.player.physics_body.velocity.x = -200
-  else
-    game.player.physics_body.velocity.x = 0
-  end
   self.player:update(dt)
   self.current_level:update(dt)
   self.Collider:update(dt)
