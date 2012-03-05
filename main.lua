@@ -13,6 +13,8 @@ end
 
 function love.update(dt)
   print(game.player.physics_body:stringify())
+  local x,y = game.player.physics_body:center()
+  camera:setPosition((x - g.getWidth() / 2) / 32, (y - g.getHeight() / 2) / 32)
   game:update(dt)
 end
 
@@ -26,7 +28,7 @@ function love.keypressed(key, unicode)
   if key == 'q' or key == 'escape' then
     os.exit(1)
   elseif key == 'up' and game.player.on_ground then
-    game.player.physics_body.velocity.y = -200
+    game.player.physics_body.velocity.y = -400
   end
 end
 

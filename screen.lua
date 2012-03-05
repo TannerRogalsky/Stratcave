@@ -38,8 +38,13 @@ function Screen:update(dt)
 end
 
 function Screen:render()
+  local bx, by = camera.x, camera.y
   -- this will iterate over the skiplist with layers with lower z-indexs going first
   for i,layer in self.layers:ipairs() do
+    camera.x = bx * math.abs(layer.z)
+    camera.y = by * math.abs(layer.z)
+    camera:set()
     layer:render()
+    camera:unset()
   end
 end
