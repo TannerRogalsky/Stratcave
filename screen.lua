@@ -28,6 +28,10 @@ function Screen:initialize(jsonInTableForm)
   -- finalize some values with some defaults
   self.dimensions = self.dimensions or {width = self.width or g.getWidth(), height = self.height or g.getHeight()}
   self.physics_layer = self.physics_layer or Layer:new({z = 0})
+  self.physics_layer:add_physics_object("rectangle", 0, 0, g.getWidth(), 10)
+  self.physics_layer:add_physics_object("rectangle", g.getWidth(), 0, 10, g.getHeight())
+  self.physics_layer:add_physics_object("rectangle", 0, g.getHeight(), g.getWidth(), 10)
+  self.physics_layer:add_physics_object("rectangle", 0, 0, 10, g.getHeight())
 end
 
 -- we probably only need to update the physics layer but whatever
