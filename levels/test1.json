@@ -53,6 +53,13 @@
               "type": "rectangle",
               "attributes": [600, 0, 20, 500],
               "static": true
+            },
+            {
+              "type": "circle",
+              "attributes": [200, 100, 50],
+              "functions":{
+                "update": "self:apply_gravity(dt); self:move(self.velocity.x * dt, self.velocity.y * dt)"
+              }
             }
           ]
         }, {

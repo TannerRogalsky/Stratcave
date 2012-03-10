@@ -13,7 +13,13 @@ function Layer:initialize(jsonInTableForm)
         local object = self:add_physics_object(json_object.type, unpack(json_object.attributes))
         json_object.type, json_object.attributes = nil, nil
         for key, value in pairs(json_object) do
-          object[key] = value
+          if key == "functions" then
+            for function_name,function_string in pairs(value) do
+              object[function_name] = assert(loadstring("local self,dt = ...; " .. function_string))
+            end
+          else
+            object[key] = value
+          end
         end
 
         if object.static then game.Collider:setPassive(object) end
