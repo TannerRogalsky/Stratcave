@@ -29,6 +29,8 @@ function love.keypressed(key, unicode)
     os.exit(1)
   elseif key == 'up' and game.player.on_ground then
     game.player.physics_body.velocity.y = -400
+  elseif key == "p" then
+    game.player.physics_body:moveTo(300, 200)
   end
 end
 
