@@ -17,6 +17,7 @@ Stateful = require 'lib/stateful'
 json = require('json')
 skiplist = require "lib/skiplist"
 HC = require 'lib/HardonCollider'
+require 'lib/inspect.lua'
 
 require 'base.lua'
 require 'game.lua'
