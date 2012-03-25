@@ -42,12 +42,14 @@ end
 --- Transition between screens
 -- @param x The screen x cooridinate to be transitioned to
 -- @param y The screen y cooridinate to be transitioned to
+-- @return Will return the screen to be transitioned to or nil if the screen with the specified indices does not exist
 function Level:transition_to_screen(x, y)
-  game.current_level.current_screen:exit()
   for _,screen in ipairs(game.current_level.screens) do
     if x == screen.x and y == screen.y then
+      game.current_level.current_screen:exit()
       screen:enter()
-      break
+      return screen
     end
   end
+  return nil
 end
