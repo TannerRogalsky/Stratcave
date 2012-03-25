@@ -38,7 +38,13 @@ function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
     game.player.on_ground = true
   end
 
+  if type(shape_one.on_collide) == "function" then
+    shape_one:on_collide()
+  end
 
+  if type(shape_two.on_collide) == "function" then
+    shape_two:on_collide()
+  end
   -- print("start", shape_one, shape_two, shape_one.velocity.y, unpack(shape_one.velocity))
 end
 
