@@ -33,8 +33,8 @@ function love.keypressed(key, unicode)
   elseif key == "p" then
     game.player.physics_body:moveTo(300, 200)
   elseif key == "n" then
-    game.current_level.current_screen:exit()
-    game.current_level.screens[2]:enter()
+    local x,y = game.current_level.current_screen.x, game.current_level.current_screen.y
+    game.current_level:transition_to_screen(x + 1, y)
   end
 end
 

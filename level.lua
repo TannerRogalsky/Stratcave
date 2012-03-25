@@ -38,3 +38,16 @@ end
 function Level:render()
   self.current_screen:render()
 end
+
+--- Transition between screens
+-- @param x The screen x cooridinate to be transitioned to
+-- @param y The screen y cooridinate to be transitioned to
+function Level:transition_to_screen(x, y)
+  game.current_level.current_screen:exit()
+  for _,screen in ipairs(game.current_level.screens) do
+    if x == screen.x and y == screen.y then
+      screen:enter()
+      break
+    end
+  end
+end
