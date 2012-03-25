@@ -6,6 +6,7 @@ function love.load()
 
   level = Game.load_level("test1")
   game.current_level = level
+  game.current_level.current_screen:enter()
 
   -- ternary hack (player ? new(player) : new({}))
   game.player = game.current_level.player and PlayerCharacter:new(game.current_level.player) or PlayerCharacter:new({})
@@ -31,6 +32,9 @@ function love.keypressed(key, unicode)
     game.player.physics_body.velocity.y = -400
   elseif key == "p" then
     game.player.physics_body:moveTo(300, 200)
+  elseif key == "n" then
+    game.current_level.current_screen:exit()
+    game.current_level.screens[2]:enter()
   end
 end
 

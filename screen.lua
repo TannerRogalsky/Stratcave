@@ -28,10 +28,6 @@ function Screen:initialize(jsonInTableForm)
   -- finalize some values with some defaults
   self.dimensions = self.dimensions or {width = self.width or g.getWidth(), height = self.height or g.getHeight()}
   self.physics_layer = self.physics_layer or Layer:new({z = 0})
-  self.physics_layer:add_physics_object("rectangle", 0, 0, g.getWidth(), 10)
-  self.physics_layer:add_physics_object("rectangle", g.getWidth(), 0, 10, g.getHeight())
-  self.physics_layer:add_physics_object("rectangle", 0, g.getHeight(), g.getWidth(), 10)
-  self.physics_layer:add_physics_object("rectangle", 0, 0, 10, g.getHeight())
 end
 
 -- we probably only need to update the physics layer but whatever
@@ -51,4 +47,46 @@ function Screen:render()
     layer:render()
     camera:unset()
   end
+end
+
+function Screen:enter()
+  game.current_level.current_screen = self
+  local objects = self.physics_layer.objects
+  self.physics_layer.objects = {}
+  for _,json_object in ipairs(objects) do
+    local object = self.physics_layer:add_physics_object(json_object.type, unpack(json_object.attributes))
+    json_object.type, json_object.attributes = nil, nil
+    for key, value in pairs(json_object) do
+      if key == "functions" then
+        for function_name,function_string in pairs(value) do
+          object[function_name] = assert(loadstring("local self,dt = ...; " .. function_string))
+        end
+      else
+        object[key] = value
+      end
+    end
+
+    if object.static then game.Collider:setPassive(object) end
+  end
+
+  local bound = self.physics_layer:add_physics_object("rectangle", 0, 0, g.getWidth(), 10)
+  game.Collider:setPassive(bound)
+  bound.on_collide = function(self) game.player.physics_body:moveTo(300, 200) end
+  bound = self.physics_layer:add_physics_object("rectangle", g.getWidth(), 0, 10, g.getHeight())
+  game.Collider:setPassive(bound)
+  bound.on_collide = function(self) game.player.physics_body:moveTo(300, 200) end
+  bound = self.physics_layer:add_physics_object("rectangle", 0, g.getHeight(), g.getWidth(), 10)
+  game.Collider:setPassive(bound)
+  bound.on_collide = function(self) game.player.physics_body:moveTo(300, 200) end
+  bound = self.physics_layer:add_physics_object("rectangle", 0, 0, 10, g.getHeight())
+  game.Collider:setPassive(bound)
+  bound.on_collide = function(self) game.player.physics_body:moveTo(300, 200) end
+end
+
+function Screen:exit()
+  for _,object in ipairs(self.physics_layer.objects) do
+    game.Collider:remove(object)
+  end
+  self.physics_layer.objects = nil
+  game.current_level.current_screen = nil
 end
