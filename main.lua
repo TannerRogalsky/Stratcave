@@ -6,10 +6,11 @@ function love.load()
 
   level = Game.load_level("test1")
   game.current_level = level
-  game.current_level.current_screen:enter()
 
   -- ternary hack (player ? new(player) : new({}))
   game.player = game.current_level.player and PlayerCharacter:new(game.current_level.player) or PlayerCharacter:new({})
+
+  game.current_level.current_screen:enter()
 end
 
 function love.update(dt)

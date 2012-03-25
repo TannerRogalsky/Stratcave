@@ -68,6 +68,7 @@ function Screen:enter()
 
     if object.static then game.Collider:setPassive(object) end
   end
+  table.insert(self.physics_layer.objects, game.player.physics_body)
 
   local bound = self.physics_layer:add_physics_object("rectangle", 0, 0, g.getWidth(), 10)
   game.Collider:setPassive(bound)
@@ -81,12 +82,17 @@ function Screen:enter()
   bound = self.physics_layer:add_physics_object("rectangle", 0, 0, 10, g.getHeight())
   game.Collider:setPassive(bound)
   bound.on_collide = function(self) game.player.physics_body:moveTo(300, 200) end
+
+  -- TODO we need to get the coords to put the player at when he enters this screen.
+  game.player.physics_body = self.physics_layer:add_physics_object("rectangle", 300, 0, 50, 50)
 end
 
 function Screen:exit()
   for _,object in ipairs(self.physics_layer.objects) do
     game.Collider:remove(object)
   end
+  game.Collider:remove(game.player.physics_body)
+  game.player.physics_body = nil
   self.physics_layer.objects = nil
   game.current_level.current_screen = nil
 end
