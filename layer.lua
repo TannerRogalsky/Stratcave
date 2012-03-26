@@ -12,11 +12,12 @@ function Layer:initialize(jsonInTableForm)
   self.dimensions = self.dimensions or {width = self.width or g.getWidth(), height = self.height or g.getHeight()}
   self.z = self.z or 0
   if self.image then self.image = g.newImage(self.image) end
-  self.objects = self.objects or {}
+  self.objects = self.objects or {} -- this is the json
+  self.physics_objects = {}         -- this will be the Collider objects
 end
 
 function Layer:update(dt)
-  for i,object in ipairs(self.objects) do
+  for i,object in ipairs(self.physics_objects) do
     object:update(dt)
   end
 end
@@ -27,8 +28,8 @@ function Layer:render()
     g.draw(self.image)
   end
 
-  -- for debugging, we probably shouldn't be drawing the actualy physics object on screen
-  for i,object in ipairs(self.objects) do
+  -- for debugging, we probably shouldn't be drawing the actual physics objects on screen
+  for i,object in ipairs(self.physics_objects) do
     g.setColor(0,0,255)
     object:draw("fill")
   end
@@ -59,7 +60,7 @@ function Layer:add_physics_object(objectType, ...)
   object.update = function(self, dt) end
   object.apply_gravity = function(self, dt) self.velocity.y = self.velocity.y + (GRAVITY * dt) end
   object.stringify = function(self) return "Physics obj: ".. self.id .. "; velx: ".. self.velocity.x .. "; vely: " .. self.velocity.y end
-  table.insert(self.objects, object)
+  table.insert(self.physics_objects, object)
   return object
 end
 

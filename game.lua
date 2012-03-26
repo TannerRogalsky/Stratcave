@@ -2,7 +2,6 @@ Game = class('Game', Base)
 
 function Game:initialize()
   Base.initialize(self)
-  self.Collider = HC(100, on_start_collide, on_stop_collide)
 end
 
 function Game:update(dt)
