@@ -51,7 +51,7 @@
             },
             {
               "type": "rectangle",
-              "attributes": [600, 0, 20, 500],
+              "attributes": [600, 200, 200, 300],
               "static": true
             },
             {
@@ -70,6 +70,25 @@
     },
     {
       "x": 1,
+      "y": 0,
+      "layers": [
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [0, 275, 800, 10],
+              "static": true
+            }
+          ]
+        },
+        {
+          "z": -2
+        }
+      ]
+    },
+    {
+      "x": 2,
       "y": 0,
       "layers": [
         {
