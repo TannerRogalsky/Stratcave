@@ -109,12 +109,8 @@ function Screen:enter()
 end
 
 function Screen:exit()
-  -- for _,object in ipairs(self.physics_layer.objects) do
-  --   game.Collider:remove(object)
-  -- end
-  -- game.Collider:remove(game.player.physics_body)
   game.player.physics_body = nil
-  -- self.physics_layer.objects = nil
+  game.current_level.current_screen.physics_layer.physics_objects = {}
   game.current_level.current_screen = nil
   game.Collider = nil
 end
