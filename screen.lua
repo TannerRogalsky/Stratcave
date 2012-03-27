@@ -105,7 +105,7 @@ function Screen:enter()
   end
 
   -- TODO we need to get the coords to put the player at when he enters this screen.
-  game.player.physics_body = self.physics_layer:add_physics_object("rectangle", 300, 0, 50, 50)
+  game.player:init_physics_body()
 end
 
 function Screen:exit()

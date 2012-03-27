@@ -14,6 +14,10 @@ function PlayerCharacter:update(dt)
   end
 
   self.physics_body:apply_gravity(dt)
-  self.physics_body.velocity.y = math.clamp(-400, self.physics_body.velocity.y, 400)
+  self.physics_body.velocity.y = math.clamp(-400, self.physics_body.velocity.y, 600)
   self.physics_body:move(self.physics_body.velocity.x * dt, self.physics_body.velocity.y * dt)
+end
+
+function PlayerCharacter:init_physics_body()
+  self.physics_body = game.current_level.current_screen.physics_layer:add_physics_object("rectangle", 300, 0, 50, 50)
 end
