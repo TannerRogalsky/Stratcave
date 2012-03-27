@@ -59,7 +59,12 @@ function Layer:add_physics_object(objectType, ...)
   object.velocity = {x = 0, y = 0}
   object.update = function(self, dt) end
   object.apply_gravity = function(self, dt) self.velocity.y = self.velocity.y + (GRAVITY * dt) end
-  object.stringify = function(self) return "Physics obj: ".. self.id .. "; velx: ".. self.velocity.x .. "; vely: " .. self.velocity.y end
+
+  -- override any of the metafunctionality of the physics object you want without breaking stuff
+  local mt = getmetatable(object)
+  mt.__tostring = function(self) return "Physics obj: ".. self.id .. "; velx: ".. self.velocity.x .. "; vely: " .. self.velocity.y end
+  setmetatable(object, mt)
+
   table.insert(self.physics_objects, object)
   return object
 end

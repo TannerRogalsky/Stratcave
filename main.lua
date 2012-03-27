@@ -14,7 +14,7 @@ function love.load()
 end
 
 function love.update(dt)
-  print(game.player.physics_body:stringify())
+  print(game.player.physics_body)
   local x,y = game.player.physics_body:center()
   camera:setPosition((x - g.getWidth() / 2) / 32, (y - g.getHeight() / 2) / 32)
   game:update(dt)
