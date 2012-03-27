@@ -53,21 +53,17 @@ function Screen:enter()
   game.Collider = HC(100, on_start_collide, on_stop_collide)
   game.current_level.current_screen = self
   for _,json_object in ipairs(self.physics_layer.objects) do
-    if json_object.attributes then
-      local object = self.physics_layer:add_physics_object(json_object.type, unpack(json_object.attributes))
-      for key, value in pairs(json_object) do
-        if key == "functions" then
-          for function_name,function_string in pairs(value) do
-            object[function_name] = assert(loadstring("local self,dt = ...; " .. function_string))
-          end
-        else
-          object[key] = value
+    local object = self.physics_layer:add_physics_object(json_object.type, unpack(json_object.attributes))
+    for key, value in pairs(json_object) do
+      if key == "functions" then
+        for function_name,function_string in pairs(value) do
+          object[function_name] = assert(loadstring("local self,dt = ...; " .. function_string))
         end
+      else
+        object[key] = value
       end
-      if object.static then game.Collider:setPassive(object) end
-    else
-      print(json_object)
     end
+    if object.static then game.Collider:setPassive(object) end
   end
   table.insert(self.physics_layer.physics_objects, game.player.physics_body)
 
