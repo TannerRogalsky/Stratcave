@@ -52,6 +52,17 @@
             {
               "type": "rectangle",
               "attributes": [600, 200, 200, 300],
+              "rotation": 45,
+              "static": true
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 200, 100],
+              "static": true
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 200, 100],
               "static": true
             },
             {
@@ -79,6 +90,11 @@
               "type": "rectangle",
               "attributes": [0, 275, 800, 10],
               "static": true
+            },
+            {
+              "type": "polygon",
+              "attributes": [100,275, 300,200, 300,275],
+              "static": true
             }
           ]
         },
@@ -97,6 +113,30 @@
             {
               "type": "rectangle",
               "attributes": [0, 275, 600, 10],
+              "static": true
+            }
+          ]
+        },
+        {
+          "z": -2
+        }
+      ]
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "layers": [
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [0, 275, 800, 10],
+              "static": true
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 100, 200, 300],
               "static": true
             }
           ]

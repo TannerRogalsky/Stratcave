@@ -1,6 +1,7 @@
 -- Helper assignments and erata
 g = love.graphics
 GRAVITY = 800
+math.tau = math.pi * 2
 
 -- The pixel grid is actually offset to the center of each pixel. So to get clean pixels drawn use 0.5 + integer increments.
 g.setPoint(2.5, "rough")
