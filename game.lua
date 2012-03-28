@@ -27,14 +27,10 @@ end
 -- i.e. the direction and magnitude shape_one has to be moved so that the collision will be resolved.
 -- Note that if one of the shapes is a point shape, the translation vector will be invalid.
 function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
-  if shape_one.static then
+  if shape_one.static == true and shape_two.static ~= true then
     shape_two:move(mtv_x, mtv_y)
-  elseif shape_two.static then
+  elseif shape_two.static == true and shape_one.static ~= true then
     shape_one:move(mtv_x, mtv_y)
-  end
-
-  if shape_one == game.player.physics_body or shape_two == game.player.physics_body then
-    game.player.on_ground = true
   end
 
   if type(shape_one.on_collide) == "function" then
@@ -44,7 +40,39 @@ function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
   if type(shape_two.on_collide) == "function" then
     shape_two:on_collide()
   end
-  -- print("start", shape_one, shape_two, shape_one.velocity.y, unpack(shape_one.velocity))
+
+  local player, other, collision = nil, nil, nil
+  if shape_one == game.player.physics_body then
+    player, other = shape_one, shape_two
+    collision = {
+      is_down = mtv_y < 0,
+      is_up = mtv_y > 0,
+      is_left = mtv_x > 0,
+      is_right = mtv_x < 0
+    }
+  elseif shape_two == game.player.physics_body then
+    player, other = shape_two, shape_one
+    collision = {
+      is_down = mtv_y > 0,
+      is_up = mtv_y < 0,
+      is_left = mtv_x < 0,
+      is_right = mtv_x > 0
+    }
+  else
+    return
+  end
+
+  -- After this line, we can assume player refers to the player's physics_body
+  -- collision values will use the player as a point of reference
+
+  if other.static ~= true then
+    other:move(mtv_x, mtv_y)
+  end
+
+  if collision.is_down then
+    game.player.on_ground = true
+    game.player.physics_body.velocity.y = 0
+  end
 end
 
 function on_stop_collide(dt, shape_one, shape_two)
