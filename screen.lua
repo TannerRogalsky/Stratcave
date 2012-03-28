@@ -59,6 +59,8 @@ function Screen:enter()
         for function_name,function_string in pairs(value) do
           object[function_name] = assert(loadstring("local self,dt = ...; " .. function_string))
         end
+      elseif key == "rotation" then
+        object:setRotation(math.rad(value))
       else
         object[key] = value
       end
