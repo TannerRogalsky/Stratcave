@@ -69,42 +69,33 @@ function Screen:enter()
   end
   table.insert(self.physics_layer.physics_objects, game.player.physics_body)
 
+  local boundary_collision = function(self, dt, shape_one, shape_two, mtv_x, mtv_y)
+    local x,y = self:center()
+    local delta_x, delta_y = 0, 0
+    if x >= g.getWidth() then delta_x = 1 end
+    if x <= 0 then delta_x = -1 end
+    if y >= g.getHeight() then delta_y = 1 end
+    if y <= 0 then delta_y = -1 end
+
+    local to = game.current_level:transition_to_screen(game.current_level.current_screen.x + delta_x, game.current_level.current_screen.y + delta_y, delta_x, delta_y)
+    if to == nil then
+      -- TODO die
+      game.player.physics_body:moveTo(200, 200)
+    end
+  end
+
   local bound = self.physics_layer:add_physics_object("rectangle", 0, -10, g.getWidth(), 10)
   game.Collider:setPassive(bound)
-  bound.on_collide = function(self)
-    local to = game.current_level:transition_to_screen(game.current_level.current_screen.x, game.current_level.current_screen.y - 1)
-    if to == nil then
-      -- TODO die
-      game.player.physics_body:moveTo(300, 200)
-    end
-  end
+  bound.on_collide = boundary_collision
   bound = self.physics_layer:add_physics_object("rectangle", g.getWidth(), 0, 10, g.getHeight())
   game.Collider:setPassive(bound)
-  bound.on_collide = function(self)
-    local to = game.current_level:transition_to_screen(game.current_level.current_screen.x + 1, game.current_level.current_screen.y)
-    if to == nil then
-      -- TODO die
-      game.player.physics_body:moveTo(300, 200)
-    end
-  end
+  bound.on_collide = boundary_collision
   bound = self.physics_layer:add_physics_object("rectangle", 0, g.getHeight(), g.getWidth(), 10)
   game.Collider:setPassive(bound)
-  bound.on_collide = function(self)
-    local to = game.current_level:transition_to_screen(game.current_level.current_screen.x, game.current_level.current_screen.y + 1)
-    if to == nil then
-      -- TODO die
-      game.player.physics_body:moveTo(300, 200)
-    end
-  end
+  bound.on_collide = boundary_collision
   bound = self.physics_layer:add_physics_object("rectangle", -10, 0, 10, g.getHeight())
   game.Collider:setPassive(bound)
-  bound.on_collide = function(self)
-    local to = game.current_level:transition_to_screen(game.current_level.current_screen.x - 1, game.current_level.current_screen.y)
-    if to == nil then
-      -- TODO die
-      game.player.physics_body:moveTo(300, 200)
-    end
-  end
+  bound.on_collide = boundary_collision
 
   -- TODO we need to get the coords to put the player at when he enters this screen.
   game.player:init_physics_body()
