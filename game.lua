@@ -34,11 +34,11 @@ function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
   end
 
   if type(shape_one.on_collide) == "function" then
-    shape_one:on_collide()
+    shape_one:on_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
   end
 
   if type(shape_two.on_collide) == "function" then
-    shape_two:on_collide()
+    shape_two:on_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
   end
 
   local player, other, collision = nil, nil, nil
