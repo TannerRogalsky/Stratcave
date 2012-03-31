@@ -80,6 +80,11 @@ function Shape:moveTo(x,y)
 	self:move(x - cx, y - cy)
 end
 
+function Shape:moveToWithoutCentroid(x,y)
+	local cx,cy = self:bbox()
+	self:move(x - cx, y - cy)
+end
+
 function Shape:rotation()
 	return self._rotation
 end

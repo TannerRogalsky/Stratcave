@@ -46,32 +46,46 @@
           "objects": [
             {
               "type": "rectangle",
-              "attributes": [0, 475, 600, 10],
+              "attributes": [600, 200, 100, 100],
+              "static": true,
+              "images": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
               "static": true
             },
             {
               "type": "rectangle",
-              "attributes": [600, 200, 200, 300],
-              "rotation": 45,
+              "attributes": [100, 400, 100, 100],
               "static": true
             },
             {
               "type": "rectangle",
-              "attributes": [400, 400, 200, 100],
+              "attributes": [200, 400, 100, 100],
               "static": true
             },
             {
               "type": "rectangle",
-              "attributes": [500, 300, 200, 100],
+              "attributes": [300, 400, 100, 100],
               "static": true
             },
             {
-              "type": "circle",
-              "attributes": [200, 100, 50],
-              "functions":{
-                "update": "self:apply_gravity(dt); self.velocity.y = math.clamp(-400, self.velocity.y, 400); self:move(self.velocity.x * dt, self.velocity.y * dt)"
-              }
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 200, 100, 100],
+              "static": true
             }
+
           ]
         }, {
           "z": 1,
@@ -138,6 +152,13 @@
               "type": "rectangle",
               "attributes": [600, 100, 200, 300],
               "static": true
+            },
+            {
+              "type": "circle",
+              "attributes": [200, 100, 50],
+              "functions":{
+                "update": "self:apply_gravity(dt); self.velocity.y = math.clamp(-400, self.velocity.y, 400); self:move(self.velocity.x * dt, self.velocity.y * dt)"
+              }
             }
           ]
         },

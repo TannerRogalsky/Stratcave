@@ -67,7 +67,6 @@ function Screen:enter()
     end
     if object.static then game.Collider:setPassive(object) end
   end
-  table.insert(self.physics_layer.physics_objects, game.player.physics_body)
 
   local boundary_collision = function(self, dt, shape_one, shape_two, mtv_x, mtv_y)
     local x,y = self:center()
@@ -99,6 +98,7 @@ function Screen:enter()
 
   -- TODO we need to get the coords to put the player at when he enters this screen.
   game.player:init_physics_body()
+  game.hole:init_physics_body()
 end
 
 function Screen:exit()

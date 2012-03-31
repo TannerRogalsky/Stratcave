@@ -18,7 +18,9 @@ end
 
 function Layer:update(dt)
   for i,object in ipairs(self.physics_objects) do
-    object:update(dt)
+    if type(object.update) == "function" then
+      object:update(dt)
+    end
   end
 end
 
@@ -30,8 +32,14 @@ function Layer:render()
 
   -- for debugging, we probably shouldn't be drawing the actual physics objects on screen
   for i,object in ipairs(self.physics_objects) do
-    g.setColor(0,0,255)
-    object:draw("fill")
+    if object.image then
+      g.setColor(255,255,255)
+      local x,y = object:bbox()
+      g.draw(object.image, x, y)
+    else
+      g.setColor(0,0,255)
+      object:draw("fill")
+    end
   end
 end
 
@@ -57,7 +65,6 @@ function Layer:add_physics_object(objectType, ...)
   -- dump some stuff into the physics object that I'll probably need later
   object.id = generateID()
   object.velocity = {x = 0, y = 0}
-  object.update = function(self, dt) end
   object.apply_gravity = function(self, dt) self.velocity.y = self.velocity.y + (GRAVITY * dt) end
 
   -- override any of the metafunctionality of the physics object you want without breaking stuff
