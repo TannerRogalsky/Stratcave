@@ -3,6 +3,10 @@ PlayerCharacter = class('PlayerCharacter', Character)
 function PlayerCharacter:initialize(jsonInTableForm)
   Character.initialize(self, jsonInTableForm)
   self.velocity = {x = 0, y = 0}
+  self.jump_limit = 1
+  self.jumps = 0
+  local image = g.newImage("images/red.png")
+  self.anim = newAnimation(image, 130, 130, 0.1, 0)
 end
 
 function PlayerCharacter:update(dt)
@@ -15,6 +19,7 @@ function PlayerCharacter:update(dt)
   end
 
   self.velocity = {x = self.physics_body.velocity.x, y = self.physics_body.velocity.y}
+  self.anim:update(dt)
 end
 
 function PlayerCharacter:init_physics_body(player_x, player_y)
@@ -26,4 +31,10 @@ function PlayerCharacter:init_physics_body(player_x, player_y)
     self.velocity.y = math.clamp(-400, self.velocity.y, 600)
     self:move(self.velocity.x * dt, self.velocity.y * dt)
   end
+end
+
+function PlayerCharacter:render()
+  g.setColor(255,255,255)
+  local x,y = self.physics_body:bbox()
+  -- self.anim:draw(x,y)
 end

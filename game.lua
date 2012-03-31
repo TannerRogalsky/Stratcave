@@ -2,6 +2,15 @@ Game = class('Game', Base)
 
 function Game:initialize()
   Base.initialize(self)
+  self.hidden_tiles = {}
+  self.hidden_tiles.contains = function(self, element)
+    for index, value in ipairs(self) do
+      if value == element then
+        return index
+      end
+    end
+    return false
+  end
 end
 
 function Game:update(dt)
@@ -11,8 +20,8 @@ function Game:update(dt)
 end
 
 function Game:render()
-  self.player:render()
   self.current_level:render()
+  self.player:render()
 end
 
 function Game:load_levels()
@@ -27,18 +36,18 @@ end
 -- i.e. the direction and magnitude shape_one has to be moved so that the collision will be resolved.
 -- Note that if one of the shapes is a point shape, the translation vector will be invalid.
 function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
-  if shape_one.static == true and shape_two.static ~= true then
-    shape_two:move(mtv_x, mtv_y)
-  elseif shape_two.static == true and shape_one.static ~= true then
-    shape_one:move(mtv_x, mtv_y)
-  end
-
   if type(shape_one.on_collide) == "function" then
     shape_one:on_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
   end
 
   if type(shape_two.on_collide) == "function" then
     shape_two:on_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
+  end
+
+  if shape_one.static == true and shape_two.static ~= true then
+    shape_two:move(mtv_x, mtv_y)
+  elseif shape_two.static == true and shape_one.static ~= true then
+    shape_one:move(mtv_x, mtv_y)
   end
 
   local player, other, collision = nil, nil, nil
@@ -70,16 +79,16 @@ function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
   end
 
   if collision.is_down then
-    game.player.on_ground = true
+    game.player.jumps = 0
     game.player.physics_body:setRotation(other:rotation())
     game.player.physics_body.velocity.y = 0
   end
 end
 
 function on_stop_collide(dt, shape_one, shape_two)
-  if shape_one == game.player.physics_body or shape_two == game.player.physics_body then
-    game.player.on_ground = false
-  end
+  -- if shape_one == game.player.physics_body or shape_two == game.player.physics_body then
+  --   game.player.on_ground = false
+  -- end
   -- print("stop", shape_one, shape_two)
 end
 

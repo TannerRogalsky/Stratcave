@@ -5,7 +5,12 @@ function Screen:initialize(jsonInTableForm)
 
   -- dump the json data into the new object
   for k,v in pairs(jsonInTableForm) do
-    if k == "layers" then
+    if k == "items" then
+      self.items = {}
+      for _,item_json in ipairs(v) do
+        table.insert(self.items, Item:new(item_json))
+      end
+    elseif k == "layers" then
       self.layers = skiplist.new(#v)
       -- for each entry in the screen list
       for _,layerTable in ipairs(v) do
@@ -28,6 +33,7 @@ function Screen:initialize(jsonInTableForm)
   -- finalize some values with some defaults
   self.dimensions = self.dimensions or {width = self.width or g.getWidth(), height = self.height or g.getHeight()}
   self.physics_layer = self.physics_layer or Layer:new({z = 0})
+  self.items = self.items or {}
 end
 
 -- we probably only need to update the physics layer but whatever
@@ -70,6 +76,10 @@ function Screen:enter()
     if object.static then game.Collider:setPassive(object) end
   end
 
+  for _,item in ipairs(self.items) do
+    item:init_physics_body()
+  end
+
   local boundary_collision = function(self, dt, shape_one, shape_two, mtv_x, mtv_y)
     local x,y = self:center()
     local delta_x, delta_y = 0, 0
@@ -108,7 +118,7 @@ function Screen:enter()
 end
 
 function Screen:exit()
-  game.hidden_tile = nil
+  game.hidden_tiles = {}
   game.hole.physics_body = nil
   game.player.physics_body = nil
   game.current_level.current_screen.physics_layer.physics_objects = {}

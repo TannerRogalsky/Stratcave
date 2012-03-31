@@ -4,6 +4,7 @@ function Hole:initialize(x, y)
   Character.initialize(self, {})
   assert(x and y, "needs moar arguments")
   self.x, self.y = x, y
+  self.max_holes = 2
 end
 
 function Hole:update(dt)

@@ -19,6 +19,7 @@ json = require('json')
 skiplist = require "lib/skiplist"
 HC = require 'lib/HardonCollider'
 inspect = require 'lib/inspect.lua'
+require 'lib/AnAL.lua'
 
 require 'base.lua'
 require 'game.lua'
@@ -29,3 +30,4 @@ require 'level.lua'
 require 'screen.lua'
 require 'layer.lua'
 require 'hole.lua'
+require 'item.lua'

@@ -17,7 +17,7 @@ end
 function love.update(dt)
   -- print(game.player.physics_body)
   local x,y = game.player.physics_body:center()
-  camera:setPosition((x - g.getWidth() / 2) / 32, (y - g.getHeight() / 2) / 32)
+  camera:setPosition((x - g.getWidth() / 2) / 16, 0)
   game:update(dt)
 end
 
@@ -30,7 +30,8 @@ end
 function love.keypressed(key, unicode)
   if key == 'q' or key == 'escape' then
     os.exit(1)
-  elseif key == 'up' and game.player.on_ground then
+  elseif key == 'up' and game.player.jumps < game.player.jump_limit then
+    game.player.jumps = game.player.jumps + 1
     game.player.physics_body.velocity.y = -400
   end
 end
@@ -46,14 +47,17 @@ function love.keyreleased(key, unicode)
     game.hole.y = game.hole.y + 100
   elseif key == ' ' then
     for i,v in ipairs(game.current_level.current_screen.physics_layer.physics_objects) do
-      if game.hole.physics_body:contains(v:center()) and game.hole.physics_body ~= v then
-        if game.hidden_tile then
-          game.Collider:setActive(game.hidden_tile)
-          game.hidden_tile.render = nil
+      -- We might also need to check to see if hidden_tiles contains the element already
+      -- Gonna leave that off for now, though
+      if game.hole.physics_body:contains(v:center()) and game.hole.physics_body ~= v then 
+        if #game.hidden_tiles >= game.hole.max_holes then
+          local tile = table.remove(game.hidden_tiles, 1)
+          game.Collider:setSolid(tile)
+          tile.render = nil
         end
-        game.hidden_tile = v
-        game.Collider:setGhost(game.hidden_tile)
-        game.hidden_tile.render = function(self) end
+        table.insert(game.hidden_tiles, v)
+        game.Collider:setGhost(v)
+        v.render = function(self) end
       end
     end
   end

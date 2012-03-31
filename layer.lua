@@ -27,7 +27,7 @@ end
 function Layer:render()
   if self.image then
     g.setColor(255,255,255)
-    g.draw(self.image)
+    g.draw(self.image, -50, -100)
   end
 
   -- for debugging, we probably shouldn't be drawing the actual physics objects on screen
