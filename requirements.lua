@@ -20,6 +20,7 @@ skiplist = require "lib/skiplist"
 HC = require 'lib/HardonCollider'
 inspect = require 'lib/inspect.lua'
 require 'lib/AnAL.lua'
+cron = require 'lib.cron'
 
 require 'base.lua'
 require 'game.lua'
@@ -31,3 +32,6 @@ require 'screen.lua'
 require 'layer.lua'
 require 'hole.lua'
 require 'item.lua'
+
+require 'states.loading'
+require 'states.main'

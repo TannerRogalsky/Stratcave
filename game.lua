@@ -1,27 +1,23 @@
-Game = class('Game', Base)
+Game = class('Game', Base):include(Stateful)
 
 function Game:initialize()
   Base.initialize(self)
   self.hidden_tiles = {}
-  self.hidden_tiles.contains = function(self, element)
-    for index, value in ipairs(self) do
-      if value == element then
-        return index
-      end
-    end
-    return false
-  end
+  -- self.hidden_tiles.contains = function(self, element)
+  --   for index, value in ipairs(self) do
+  --     if value == element then
+  --       return index
+  --     end
+  --   end
+  --   return false
+  -- end
+  self:gotoState('Loading')
 end
 
 function Game:update(dt)
-  self.player:update(dt)
-  self.current_level:update(dt)
-  self.Collider:update(dt)
 end
 
 function Game:render()
-  self.current_level:render()
-  self.player:render()
 end
 
 function Game:load_levels()

@@ -4,21 +4,14 @@ function love.load()
   game = Game:new()
   camera = Camera:new()
 
-  level = Game.load_level("test1")
-  game.current_level = level
-
   -- ternary hack (player ? new(player) : new({}))
   game.player = game.current_level.player and PlayerCharacter:new(game.current_level.player) or PlayerCharacter:new({})
   game.hole = Hole:new(100,100)
-
-  game.current_level.current_screen:enter()
 end
 
 function love.update(dt)
   -- print(game.player.physics_body)
-  local x,y = game.player.physics_body:center()
-  -- camera:setPosition((x - g.getWidth() / 2) / 16, (y - g.getHeight() / 2) / 64)
-  camera:setPosition((x - g.getWidth() / 2) / 16, 0)
+  cron.update(dt)
   game:update(dt)
 end
 
