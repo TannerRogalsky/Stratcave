@@ -20,7 +20,8 @@ end
 function Item:render()
 end
 
-function Item:init_physics_body()
+function Item:init_physics_body(x,y)
+  self.x, self.y = x or self.x or 0, y or self.y or 0
   self.physics_body = game.current_level.current_screen.physics_layer:add_physics_object("rectangle", self.x, self.y, 50, 50)
   game.Collider:setPassive(self.physics_body)
   self.physics_body.parent = self

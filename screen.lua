@@ -5,12 +5,7 @@ function Screen:initialize(jsonInTableForm)
 
   -- dump the json data into the new object
   for k,v in pairs(jsonInTableForm) do
-    if k == "items" then
-      self.items = {}
-      for _,item_json in ipairs(v) do
-        table.insert(self.items, Item:new(item_json))
-      end
-    elseif k == "layers" then
+    if k == "layers" then
       self.layers = skiplist.new(#v)
       -- for each entry in the screen list
       for _,layerTable in ipairs(v) do
@@ -76,9 +71,12 @@ function Screen:enter()
     if object.static then game.Collider:setPassive(object) end
   end
 
-  for _,item in ipairs(self.items) do
-    item:init_physics_body()
-  end
+  local item = Item:new({})
+  local physics_body = self.physics_layer.physics_objects[math.random(#self.physics_layer.physics_objects - 2) + 1]
+  local x,y = physics_body:bbox()
+  if y < 100 then y = 100 end
+  y = math.round(math.random(y - 100) / 100) * 100 + 25
+  item:init_physics_body(x + 25, y)
 
   local boundary_collision = function(self, dt, shape_one, shape_two, mtv_x, mtv_y)
     local x,y = self:center()
