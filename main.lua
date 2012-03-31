@@ -66,6 +66,8 @@ function love.keyreleased(key, unicode)
         v.render = function(self) end
       end
     end
+  elseif key == 'p' then
+    game.player.physics_body:moveTo(300, 200)
   end
   game.hole.physics_body:moveToWithoutCentroid(game.hole.x, game.hole.y)
 end
