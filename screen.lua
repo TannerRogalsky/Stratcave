@@ -85,18 +85,22 @@ function Screen:enter()
     end
   end
 
-  local bound = self.physics_layer:add_physics_object("rectangle", 0, -10, g.getWidth(), 10)
+  local bound = self.physics_layer:add_physics_object("rectangle", 0, -10 - 35, g.getWidth(), 10)
   game.Collider:setPassive(bound)
   bound.on_collide = boundary_collision
-  bound = self.physics_layer:add_physics_object("rectangle", g.getWidth(), 0, 10, g.getHeight())
+  bound.render = function(self) end
+  bound = self.physics_layer:add_physics_object("rectangle", g.getWidth() + 35, 0, 10, g.getHeight())
   game.Collider:setPassive(bound)
   bound.on_collide = boundary_collision
-  bound = self.physics_layer:add_physics_object("rectangle", 0, g.getHeight(), g.getWidth(), 10)
+  bound.render = function(self) end
+  bound = self.physics_layer:add_physics_object("rectangle", 0, g.getHeight() + 35, g.getWidth(), 10)
   game.Collider:setPassive(bound)
   bound.on_collide = boundary_collision
-  bound = self.physics_layer:add_physics_object("rectangle", -10, 0, 10, g.getHeight())
+  bound.render = function(self) end
+  bound = self.physics_layer:add_physics_object("rectangle", -10 - 35, 0, 10, g.getHeight())
   game.Collider:setPassive(bound)
   bound.on_collide = boundary_collision
+  bound.render = function(self) end
 
   -- TODO we need to get the coords to put the player at when he enters this screen.
   game.player:init_physics_body()
@@ -104,6 +108,8 @@ function Screen:enter()
 end
 
 function Screen:exit()
+  game.hidden_tile = nil
+  game.hole.physics_body = nil
   game.player.physics_body = nil
   game.current_level.current_screen.physics_layer.physics_objects = {}
   game.current_level.current_screen = nil

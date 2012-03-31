@@ -23,63 +23,75 @@
           "objects": [
             {
               "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
               "attributes": [0, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [100, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [200, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [300, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [400, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_right_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [500, 300, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_single.png" 
             },
             {
               "type": "rectangle",
               "attributes": [600, 200, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_left_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [700, 200, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_right_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [800, 300, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_single.png" 
             },
             {
               "type": "rectangle",
               "attributes": [900, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
             }
           ]
         }
@@ -94,63 +106,75 @@
           "objects": [
             {
               "type": "rectangle",
-              "attributes": [0, 400, 100, 100],
+              "attributes": [-100, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [100, 400, 100, 100],
+              "attributes": [0, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_single.png" 
             },
             {
               "type": "rectangle",
               "attributes": [200, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_left_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [300, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [400, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_right_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [500, 300, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_single.png" 
             },
             {
               "type": "rectangle",
               "attributes": [600, 200, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_left_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [700, 200, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_right_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [800, 300, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [900, 200, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
             }
           ]
         },
@@ -168,63 +192,75 @@
           "objects": [
             {
               "type": "rectangle",
+              "attributes": [-100, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
               "attributes": [0, 200, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_right_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [100, 300, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_single.png" 
             },
             {
               "type": "rectangle",
               "attributes": [200, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_left_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [300, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [400, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_right_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [500, 300, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_single.png" 
             },
             {
               "type": "rectangle",
               "attributes": [600, 200, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_left_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [700, 200, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_right_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [800, 300, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_single.png" 
             },
             {
               "type": "rectangle",
               "attributes": [900, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
             }
           ]
         },
@@ -242,63 +278,75 @@
           "objects": [
             {
               "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
               "attributes": [0, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_right_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [100, 500, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_single.png" 
             },
             {
               "type": "rectangle",
               "attributes": [200, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_left_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [300, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [400, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_right_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [500, 300, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_single.png" 
             },
             {
               "type": "rectangle",
               "attributes": [600, 200, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_left_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [700, 200, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_right_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [800, 300, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_left_end.png" 
             },
             {
               "type": "rectangle",
               "attributes": [900, 300, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
             }
           ]
         },
@@ -314,6 +362,98 @@
         {
           "z": 0,
           "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_single.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_single.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            }
+          ]
+        },
+        {
+          "z": -2
+        }
+      ]
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "layers": [
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
             {
               "type": "rectangle",
               "attributes": [0, 300, 100, 100],
@@ -373,30 +513,12 @@
               "attributes": [900, 400, 100, 100],
               "static": true,
               "image_path": "platform_a.png" 
-            }
-          ]
-        },
-        {
-          "z": -2
-        }
-      ]
-    },
-    {
-      "x": 0,
-      "y": 1,
-      "layers": [
-        {
-          "z": 0,
-          "objects": [
-            {
-              "type": "rectangle",
-              "attributes": [0, 275, 800, 10],
-              "static": true
             },
             {
               "type": "rectangle",
-              "attributes": [600, 100, 200, 300],
-              "static": true
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
             }
           ]
         },
