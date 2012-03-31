@@ -16,4 +16,6 @@ end
 
 function Hole:init_physics_body()
   self.physics_body = game.current_level.current_screen.physics_layer:add_physics_object("rectangle", self.x, self.y, 100, 100)
+  self.physics_body.render = function(self) end
+  game.Collider:setGhost(self.physics_body)
 end

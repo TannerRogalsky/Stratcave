@@ -61,6 +61,8 @@ function Screen:enter()
         end
       elseif key == "rotation" then
         object:setRotation(math.rad(value))
+      elseif key == "image_path" then
+        object.image = g.newImage("images/".. value)
       else
         object[key] = value
       end

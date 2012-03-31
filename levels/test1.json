@@ -17,79 +17,71 @@
       "layers": [
         {
           "z": -2,
-          "image": "images/bg1.jpg",
-          "images": [
-            {
-              "file": "images/terrain.png",
-              "references": [
-                {
-                  "source_x": 0,
-                  "source_y": 0,
-                  "source_width": 100,
-                  "source_height": 100,
-                  "target_x": 0,
-                  "target_y": 100
-                },
-                {
-                  "source_x": 0,
-                  "source_y": 0,
-                  "source_width": 100,
-                  "source_height": 100,
-                  "target_x": 100,
-                  "target_y": 100
-                } 
-              ]
-            }
-          ]
+          "image": "images/bg1.jpg"
         }, {
           "z": 0,
           "objects": [
             {
               "type": "rectangle",
-              "attributes": [600, 200, 100, 100],
-              "static": true,
-              "images": "platform_a.png" 
-            },
-            {
-              "type": "rectangle",
               "attributes": [0, 400, 100, 100],
-              "static": true
+              "static": true,
+              "image_path": "platform_a.png" 
             },
             {
               "type": "rectangle",
               "attributes": [100, 400, 100, 100],
-              "static": true
+              "static": true,
+              "image_path": "platform_a.png" 
             },
             {
               "type": "rectangle",
               "attributes": [200, 400, 100, 100],
-              "static": true
+              "static": true,
+              "image_path": "platform_a.png" 
             },
             {
               "type": "rectangle",
               "attributes": [300, 400, 100, 100],
-              "static": true
+              "static": true,
+              "image_path": "platform_a.png" 
             },
             {
               "type": "rectangle",
               "attributes": [400, 400, 100, 100],
-              "static": true
+              "static": true,
+              "image_path": "platform_a.png" 
             },
             {
               "type": "rectangle",
               "attributes": [500, 300, 100, 100],
-              "static": true
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
             },
             {
               "type": "rectangle",
               "attributes": [700, 200, 100, 100],
-              "static": true
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
             }
-
           ]
-        }, {
-          "z": 1,
-          "image": "images/bg2.png"
         }
       ]
     },
@@ -102,13 +94,63 @@
           "objects": [
             {
               "type": "rectangle",
-              "attributes": [0, 275, 800, 10],
-              "static": true
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
             },
             {
-              "type": "polygon",
-              "attributes": [100,275, 300,200, 300,275],
-              "static": true
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
             }
           ]
         },
@@ -126,8 +168,211 @@
           "objects": [
             {
               "type": "rectangle",
-              "attributes": [0, 275, 600, 10],
-              "static": true
+              "attributes": [0, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            }
+          ]
+        },
+        {
+          "z": -2
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "layers": [
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            }
+          ]
+        },
+        {
+          "z": -2
+        }
+      ]
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "layers": [
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [0, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_a.png" 
             }
           ]
         },
@@ -152,13 +397,6 @@
               "type": "rectangle",
               "attributes": [600, 100, 200, 300],
               "static": true
-            },
-            {
-              "type": "circle",
-              "attributes": [200, 100, 50],
-              "functions":{
-                "update": "self:apply_gravity(dt); self.velocity.y = math.clamp(-400, self.velocity.y, 400); self:move(self.velocity.x * dt, self.velocity.y * dt)"
-              }
             }
           ]
         },

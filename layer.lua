@@ -32,7 +32,9 @@ function Layer:render()
 
   -- for debugging, we probably shouldn't be drawing the actual physics objects on screen
   for i,object in ipairs(self.physics_objects) do
-    if object.image then
+    if type(object.render) == "function" then
+      object:render()
+    elseif object.image then
       g.setColor(255,255,255)
       local x,y = object:bbox()
       g.draw(object.image, x, y)

@@ -45,6 +45,17 @@ function love.keyreleased(key, unicode)
   elseif key == 's' then
     game.hole.y = game.hole.y + 100
   elseif key == ' ' then
+    for i,v in ipairs(game.current_level.current_screen.physics_layer.physics_objects) do
+      if game.hole.physics_body:contains(v:center()) and game.hole.physics_body ~= v then
+        if game.hidden_tile then
+          game.Collider:setActive(game.hidden_tile)
+          game.hidden_tile.render = nil
+        end
+        game.hidden_tile = v
+        game.Collider:setGhost(game.hidden_tile)
+        game.hidden_tile.render = function(self) end
+      end
+    end
   end
   game.hole.physics_body:moveToWithoutCentroid(game.hole.x, game.hole.y)
 end
