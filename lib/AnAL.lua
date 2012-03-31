@@ -63,6 +63,36 @@ function newAnimation(image, fw, fh, delay, frames)
 	return setmetatable(a, animation)
 end
 
+function newFlippedAnimation(image, fw, fh, delay, frames)
+	local a = {}
+	a.img = image
+	a.frames = {}
+	a.delays = {}
+	a.timer = 0
+	a.position = 1
+	a.fw = fw
+	a.fh = fh
+	a.playing = true
+	a.speed = 1
+	a.mode = 1
+	a.direction = 1
+	local imgw = image:getWidth()
+	local imgh = image:getHeight()
+	if frames == 0 then
+		frames = imgw / fw * imgh / fh
+	end
+	local rowsize = imgw/fw
+	for i = 1, frames do
+		local row = math.floor((i-1)/rowsize)
+		local column = (i-1)%rowsize
+		local frame = love.graphics.newQuad(column*fw, row*fh, fw, fh, imgw, imgh)
+		frame:flip(true, false)
+		table.insert(a.frames, frame)
+		table.insert(a.delays, delay)
+	end
+	return setmetatable(a, animation)
+end
+
 --- Update the animation
 -- @param dt Time that has passed since last call
 function animation:update(dt)

@@ -60,9 +60,9 @@ function Level:transition_to_screen(x, y, delta_x, delta_y)
       local p_height, p_width = x2 - x1, y2 - y1
 
       if delta_x > 0 then
-        px = 0 + p_width
+        px = 0
       elseif delta_x < 0 then
-        px = g.getWidth() - p_width
+        px = g.getWidth()
       elseif delta_y > 0 then
         py = 0 + p_height
       elseif delta_y < 0 then

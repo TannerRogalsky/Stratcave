@@ -23,20 +23,23 @@
       ],
       "layers": [
         {
-          "z": -3,
+          "z": -4,
           "image": "images/layer_1_4.png"
         },
         {
-          "z": -2,
+          "z": -3,
           "image": "images/layer_1_3.png"
         },
         {
-          "z": -1,
+          "z": -2,
           "image": "images/layer_1_2.png"
         },
         {
+          "z": -1,
+          "image": "images/layer_1_1.png"
+        },
+        {
           "z": 0,
-          "image": "images/layer_1_1.png",
           "objects": [
             {
               "type": "rectangle",

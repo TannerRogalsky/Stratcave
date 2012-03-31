@@ -17,6 +17,7 @@ end
 function love.update(dt)
   -- print(game.player.physics_body)
   local x,y = game.player.physics_body:center()
+  -- camera:setPosition((x - g.getWidth() / 2) / 16, (y - g.getHeight() / 2) / 64)
   camera:setPosition((x - g.getWidth() / 2) / 16, 0)
   game:update(dt)
 end
@@ -49,8 +50,13 @@ function love.keyreleased(key, unicode)
     for i,v in ipairs(game.current_level.current_screen.physics_layer.physics_objects) do
       -- We might also need to check to see if hidden_tiles contains the element already
       -- Gonna leave that off for now, though
-      if game.hole.physics_body:contains(v:center()) and game.hole.physics_body ~= v then 
-        if #game.hidden_tiles >= game.hole.max_holes then
+      if game.hole.physics_body:contains(v:center()) and game.hole.physics_body ~= v then
+        if v.parent then -- item
+          game.hole.max_holes = game.hole.max_holes + 1
+          game.Collider:setGhost(v)
+          v.render = function(self) end
+          return
+        elseif #game.hidden_tiles >= game.hole.max_holes then -- tile
           local tile = table.remove(game.hidden_tiles, 1)
           game.Collider:setSolid(tile)
           tile.render = nil
