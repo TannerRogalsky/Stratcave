@@ -12,7 +12,7 @@ function Loading:enteredState()
 
   cron.after(5, function()
     cron.cancel(counterId)
-    self.current_level.current_screen:enter()
+    self.current_level.current_screen:enter(true)
     self:gotoState('MainMenu')
   end)
 

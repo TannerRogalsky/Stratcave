@@ -50,7 +50,7 @@ function Screen:render()
   end
 end
 
-function Screen:enter()
+function Screen:enter(regen_items)
   game.Collider = HC(100, on_start_collide, on_stop_collide)
   game.current_level.current_screen = self
   local image = g.newImage("images/smoke.png")
@@ -75,37 +75,39 @@ function Screen:enter()
     if object.static then game.Collider:setPassive(object) end
   end
 
-  -- power up
-  local item = Item:new({})
-  local physics_body = self.physics_layer.physics_objects[math.random(#self.physics_layer.physics_objects - 2) + 1]
-  local x,y = physics_body:bbox()
-  if y < 100 then y = 100 end
-  y = math.round(math.random(y - 100) / 100) * 100 + 25
-  item:init_physics_body(x + 25, y)
-  item.physics_body.power_up = true
-  item.physics_body.on_collide = function(self, ...) self.parent:on_power_up_collide(...) end
-  item.physics_body.image = g.newImage("images/power_up.png")
+  if regen_items then
+    -- power up
+    local item = Item:new({})
+    local physics_body = self.physics_layer.physics_objects[math.random(#self.physics_layer.physics_objects - 2) + 1]
+    local x,y = physics_body:bbox()
+    if y < 100 then y = 100 end
+    y = math.round(math.random(y - 100) / 100) * 100 + 25
+    item:init_physics_body(x + 25, y)
+    item.physics_body.power_up = true
+    item.physics_body.on_collide = function(self, ...) self.parent:on_power_up_collide(...) end
+    item.physics_body.image = g.newImage("images/power_up.png")
 
-  -- lamp
-  item = Item:new({})
-  physics_body = self.physics_layer.physics_objects[math.random(#self.physics_layer.physics_objects - 2) + 1]
-  x,y = physics_body:bbox()
-  if y < 100 then y = 100 end
-  y = math.round(math.random(y - 100) / 100) * 100 + 25
-  item:init_physics_body(x + 25, y)
-  item.physics_body.lamp = true
-  item.physics_body.on_collide = function(self, ...) self.parent:on_lamp_collide(...) end
-  item.physics_body.update = function(self, dt)
-    self.parent.p:start()
-    self.parent.p:update(dt)
-  end
-  item.physics_body.image = g.newImage("images/lamp.png")
-  item.physics_body.render = function(self)
-    local x,y = self:bbox()
-    g.draw(self.parent.p, x, y)
+    -- lamp
+    item = Item:new({})
+    physics_body = self.physics_layer.physics_objects[math.random(#self.physics_layer.physics_objects - 2) + 1]
+    x,y = physics_body:bbox()
+    if y < 100 then y = 100 end
+    y = math.round(math.random(y - 100) / 100) * 100 + 25
+    item:init_physics_body(x + 25, y)
+    item.physics_body.lamp = true
+    item.physics_body.on_collide = function(self, ...) self.parent:on_lamp_collide(...) end
+    item.physics_body.update = function(self, dt)
+      self.parent.p:start()
+      self.parent.p:update(dt)
+    end
+    item.physics_body.image = g.newImage("images/lamp.png")
+    item.physics_body.render = function(self)
+      local x,y = self:bbox()
+      g.draw(self.parent.p, x, y)
 
-    g.setColor(255,255,255)
-    g.draw(self.image, x, y)
+      g.setColor(255,255,255)
+      g.draw(self.image, x, y)
+    end
   end
 
   local boundary_collision = function(self, dt, shape_one, shape_two, mtv_x, mtv_y)
@@ -146,6 +148,7 @@ function Screen:enter()
 end
 
 function Screen:exit()
+  game.prev_screen = self
   game.hidden_tiles = {}
   game.hole.physics_body = nil
   game.player.physics_body = nil

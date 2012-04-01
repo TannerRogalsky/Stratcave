@@ -52,8 +52,9 @@ function Level:transition_to_screen(x, y, delta_x, delta_y)
   for _,screen in ipairs(game.current_level.screens) do
     if x == screen.x and y == screen.y then
       local px, py = game.player.physics_body:center()
+      local regen_items = game.prev_screen ~= screen or game.prev_screen == nil
       game.current_level.current_screen:exit()
-      screen:enter()
+      screen:enter(regen_items)
 
       -- This stuff should maybe already be in the player character model
       local x1,y1, x2,y2 = game.player.physics_body:bbox()
