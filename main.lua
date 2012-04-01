@@ -27,9 +27,10 @@ function love.mousereleased(x, y, button)
 end
 
 function love.keypressed(key, unicode)
-  if key == 'q' or key == 'escape' then
-    os.exit(1)
-  elseif key == 'up' then
+  -- if key == 'q' or key == 'escape' then
+  --   os.exit(1)
+  -- else
+  if key == 'up' then
     if game.player1 == game.player and game.player.jumps < game.player.jump_limit then
       game.player1.jumps = game.player1.jumps + 1
       game.player1.physics_body.velocity.y = -400

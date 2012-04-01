@@ -20,7 +20,7 @@ function Loading:enteredState()
 
   local level = Game.load_level("test1")
   self.current_level = level
-  local music = love.audio.newSource("GameSongFull.ogg")
+  local music = love.audio.newSource("audio/GameSongFull.ogg")
   love.audio.play(music)
 end
 
