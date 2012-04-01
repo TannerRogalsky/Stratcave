@@ -55,6 +55,10 @@ function Hole:update(dt)
   self.p:start()
   --4b. on each frame, the particle system needs to update its particles's positions after dt miliseconds
   self.p:update(dt)
+  -- if self.x < 0 then self.x = 0 + 100 end
+  -- if self.x > g.getWidth() then self.x = g.getWidth() - 100 end
+  -- if self.y < 0 then self.y = 0 + 100 end
+  -- if self.y > g.getHeight() then self.y = g.getHeight() - 100 end
 end
 
 function Hole:init_physics_body()

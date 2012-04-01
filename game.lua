@@ -13,6 +13,7 @@ function Game:initialize()
   -- end
   self.switches = 0
   self:gotoState('Loading')
+  self.score_board = g.newImage("images/score_board.png")
 end
 
 function Game:update(dt)

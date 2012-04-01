@@ -6,9 +6,6 @@ function Loading:enteredState()
 
   print('Entered Loading')
 
-  level = Game.load_level("test1")
-  self.current_level = level
-
   local counterId = cron.every(0.5, function()
     percent = percent + 10
   end)
@@ -19,6 +16,12 @@ function Loading:enteredState()
     self:gotoState('MainMenu')
   end)
 
+
+
+  local level = Game.load_level("test1")
+  self.current_level = level
+  local music = love.audio.newSource("GameSongFull.ogg")
+  love.audio.play(music)
 end
 
 function Loading:render()

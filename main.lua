@@ -35,14 +35,17 @@ function love.keypressed(key, unicode)
       game.player1.physics_body.velocity.y = -400
     elseif game.player1 == game.hole then
       game.player1.y = game.player1.y - 100
+      if game.player1.y < 0 then game.player1.y = 0 end
     end
   elseif key == 'a' then
     if game.player2 == game.hole then
       game.player2.x = game.player2.x - 100
+      if game.player2.x < 0 then game.player2.x = 0 end
     end
   elseif key == 'd' then
     if game.player2 == game.hole then
       game.hole.x = game.hole.x + 100
+      if game.hole.x > 900 then game.hole.x = 900 end
     end
   elseif key == 'w' then
     if game.player2 == game.player and game.player.jumps < game.player.jump_limit then
@@ -50,22 +53,27 @@ function love.keypressed(key, unicode)
       game.player2.physics_body.velocity.y = -400
     elseif game.player2 == game.hole then
       game.player2.y = game.player2.y - 100
+      if game.player2.y < 0 then game.player2.y = 0 end
     end
   elseif key == 's' then
     if game.player2 == game.hole then
       game.hole.y = game.hole.y + 100
+      if game.hole.y > 500 then game.hole.y = 500 end
     end
   elseif key == 'down' then
     if game.player1 == game.hole then
       game.hole.y = game.hole.y + 100
+      if game.hole.y > 500 then game.hole.y = 500 end
     end
   elseif key == 'left' then
     if game.player1 == game.hole then
       game.hole.x = game.hole.x - 100
+      if game.hole.x < 0 then game.hole.x = 0 end
     end
   elseif key == 'right' then
     if game.player1 == game.hole then
       game.hole.x = game.hole.x + 100
+      if game.hole.x > 900 then game.hole.x = 900 end
     end
   elseif key == ' ' then
     for i,v in ipairs(game.current_level.current_screen.physics_layer.physics_objects) do
@@ -100,9 +108,6 @@ function love.keypressed(key, unicode)
     end
   elseif key == 'p' then
     game.player.physics_body:moveTo(300, 200)
-  elseif key == 'o' then
-    game.player1.score, game.player2.score = game.player2.score, game.player1.score
-    game.player1, game.player2 = game.player2, game.player1
   end
   game.hole.physics_body:moveToWithoutCentroid(game.hole.x, game.hole.y)
 end
@@ -121,8 +126,10 @@ function love.draw()
 
   camera:unset()
 
-  g.setColor(0,255,0)
+  g.setColor(255,255,255)
   -- g.print("FPS: " .. love.timer.getFPS(), 2, 2)
-  g.print("Player 1: " .. game.player1.score, 2, 20)
-  g.print("Player 2: " .. game.player2.score, 2, 40)
+  g.draw(game.score_board, 5,5)
+  g.setColor(0,0,0)
+  g.print("Player 1: " .. game.player1.score, 50, 50)
+  g.print("Player 2: " .. game.player2.score, 50, 70)
 end
