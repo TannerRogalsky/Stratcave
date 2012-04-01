@@ -35,3 +35,4 @@ require 'item.lua'
 
 require 'states.loading'
 require 'states.main'
+require 'states.game_over'

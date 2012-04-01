@@ -11,6 +11,7 @@ function Game:initialize()
   --   end
   --   return false
   -- end
+  self.switches = 0
   self:gotoState('Loading')
 end
 

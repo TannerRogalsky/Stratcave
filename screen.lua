@@ -129,6 +129,9 @@ function Screen:enter()
   -- TODO we need to get the coords to put the player at when he enters this screen.
   game.player:init_physics_body()
   game.hole:init_physics_body()
+
+  game.player.jump_limit = 1
+  game.hole.max_holes = 2
 end
 
 function Screen:exit()
