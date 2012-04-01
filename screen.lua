@@ -92,7 +92,18 @@ function Screen:enter()
   item:init_physics_body(x + 25, y)
   item.physics_body.lamp = true
   item.physics_body.on_collide = function(self, ...) self.parent:on_lamp_collide(...) end
+  item.physics_body.update = function(self, dt)
+    self.parent.p:start()
+    self.parent.p:update(dt)
+  end
   item.physics_body.image = g.newImage("images/lamp.png")
+  item.physics_body.render = function(self)
+    local x,y = self:bbox()
+    g.draw(self.parent.p, x, y)
+
+    g.setColor(255,255,255)
+    g.draw(self.image, x, y)
+  end
 
   local boundary_collision = function(self, dt, shape_one, shape_two, mtv_x, mtv_y)
     local x,y = self:center()
@@ -129,9 +140,6 @@ function Screen:enter()
   -- TODO we need to get the coords to put the player at when he enters this screen.
   game.player:init_physics_body()
   game.hole:init_physics_body()
-
-  game.player.jump_limit = 1
-  game.hole.max_holes = 2
 end
 
 function Screen:exit()

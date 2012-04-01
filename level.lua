@@ -74,6 +74,9 @@ function Level:transition_to_screen(x, y, delta_x, delta_y)
         -- switch players. so hardcoded it's brutal
         game.player1.score, game.player2.score = game.player2.score, game.player1.score
         game.player1, game.player2 = game.player2, game.player1
+
+        game.player.jump_limit = 1
+        game.hole.max_holes = 2
       elseif delta_y < 0 then
         py = g.getHeight() - p_height
       end

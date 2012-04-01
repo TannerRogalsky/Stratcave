@@ -9,6 +9,38 @@ function Item:initialize(jsonInTableForm)
   end
 
   -- finalize some values with some defaults
+  local id = love.image.newImageData(32, 32)
+  --1b. fill that blank image data
+  for x = 0, 31 do
+    for y = 0, 31 do
+      local gradient = 1 - ((x-15)^2+(y-15)^2)/40
+      id:setPixel(x, y, 255, 255, 255, 255*(gradient<0 and 0 or gradient))
+    end
+  end
+
+  --2. create an image from that image data
+  local i = love.graphics.newImage(id)
+  
+  --3a. create a new particle system which uses that image, set the maximum amount of particles (images) that could exist at the same time to 256
+  self.p = love.graphics.newParticleSystem(i, 256)
+  --3b. set various elements of that particle system, please refer the wiki for complete listing
+  self.p:setEmissionRate          (20)
+  self.p:setLifetime              (2)
+  self.p:setParticleLife          (2)
+  self.p:setPosition              (25, 25)
+  self.p:setDirection             (0)
+  self.p:setSpread                (6.28)
+  self.p:setSpeed                 (10, 30)
+  self.p:setGravity               (0)
+  self.p:setRadialAcceleration    (10)
+  self.p:setTangentialAcceleration(0)
+  self.p:setSize                  (1)
+  self.p:setSizeVariation         (0.5)
+  self.p:setRotation              (0)
+  self.p:setSpin                  (0)
+  self.p:setSpinVariation         (0)
+  self.p:setColor                 (255, 255, 0, 255, 255, 255, 0, 50)
+  self.p:stop() --this stop is to prevent any glitch that could happen after the particle system is created
 end
 
 function Item:update(dt)
@@ -30,6 +62,7 @@ end
 
 function Item:on_power_up_collide(...)
   game.player.jump_limit = game.player.jump_limit + 1
+  if game.player.jump_limit > 2 then game.player.jump_limit = 2 end
   self:on_collide(...)
 end
 
