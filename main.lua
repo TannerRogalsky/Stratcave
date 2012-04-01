@@ -71,7 +71,7 @@ function love.keypressed(key, unicode)
     for i,v in ipairs(game.current_level.current_screen.physics_layer.physics_objects) do
       -- We might also need to check to see if hidden_tiles contains the element already
       -- Gonna leave that off for now, though
-      if game.hole.physics_body:contains(v:center()) and game.hole.physics_body ~= v and game.Collider:isSolid(v) then
+      if game.hole.physics_body:contains(v:center()) and game.Collider:isSolid(v) then
         if v.power_up or v.tile then
           if v.parent and v.power_up then -- item
             game.hole.max_holes = game.hole.max_holes + 1
@@ -122,7 +122,7 @@ function love.draw()
   camera:unset()
 
   g.setColor(0,255,0)
-  g.print("FPS: " .. love.timer.getFPS(), 2, 2)
+  -- g.print("FPS: " .. love.timer.getFPS(), 2, 2)
   g.print("Player 1: " .. game.player1.score, 2, 20)
   g.print("Player 2: " .. game.player2.score, 2, 40)
 end

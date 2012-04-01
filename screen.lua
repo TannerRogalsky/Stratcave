@@ -123,11 +123,11 @@ function Screen:enter()
     end
   end
 
-  local bound = self.physics_layer:add_physics_object("rectangle", 0, -10 - 35, g.getWidth(), 10)
-  game.Collider:setPassive(bound)
-  bound.on_collide = boundary_collision
-  bound.render = function(self) end
-  bound = self.physics_layer:add_physics_object("rectangle", g.getWidth() + 35, 0, 10, g.getHeight())
+  -- local bound = self.physics_layer:add_physics_object("rectangle", 0, -10 - 35, g.getWidth(), 10)
+  -- game.Collider:setPassive(bound)
+  -- bound.on_collide = boundary_collision
+  -- bound.render = function(self) end
+  local bound = self.physics_layer:add_physics_object("rectangle", g.getWidth() + 35, 0, 10, g.getHeight())
   game.Collider:setPassive(bound)
   bound.on_collide = boundary_collision
   bound.render = function(self) end

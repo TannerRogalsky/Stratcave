@@ -10,10 +10,10 @@ function Loading:enteredState()
   self.current_level = level
 
   local counterId = cron.every(0.5, function()
-    percent = percent + 20
+    percent = percent + 10
   end)
 
-  cron.after(2.5, function()
+  cron.after(5, function()
     cron.cancel(counterId)
     self.current_level.current_screen:enter()
     self:gotoState('MainMenu')

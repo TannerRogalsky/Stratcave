@@ -466,45 +466,45 @@
             },
             {
               "type": "rectangle",
-              "attributes": [200, 400, 100, 100],
+              "attributes": [200, 200, 100, 100],
               "static": true,
               "image_path": "platform_left_end.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [300, 400, 100, 100],
+              "attributes": [300, 200, 100, 100],
               "static": true,
               "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [400, 400, 100, 100],
+              "attributes": [400, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 200, 100, 100],
               "static": true,
               "image_path": "platform_right_end.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [500, 300, 100, 100],
-              "static": true,
-              "image_path": "platform_single.png" 
-            },
-            {
-              "type": "rectangle",
-              "attributes": [600, 200, 100, 100],
+              "attributes": [600, 300, 100, 100],
               "static": true,
               "image_path": "platform_left_end.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [700, 200, 100, 100],
+              "attributes": [700, 300, 100, 100],
               "static": true,
-              "image_path": "platform_right_end.png" 
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [800, 300, 100, 100],
               "static": true,
-              "image_path": "platform_single.png" 
+              "image_path": "platform_right_end.png" 
             },
             {
               "type": "rectangle",
@@ -530,84 +530,988 @@
       "y": 1,
       "layers": [
         {
+          "z": -4,
+          "image": "images/underground_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "images/underground_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "images/underground_layer_2.png"
+        },
+        {
+          "z": -1,
+          "image": "images/underground_layer_1_1.png"
+        },
+        {
           "z": 0,
           "objects": [
             {
               "type": "rectangle",
-              "attributes": [-100, 300, 100, 100],
+              "attributes": [-100, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_2_middle.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [0, 300, 100, 100],
+              "attributes": [0, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_2_middle.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [100, 300, 100, 100],
+              "attributes": [100, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_2_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [200, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_2_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [300, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_2_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [400, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_2_middle.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [500, 300, 100, 100],
+              "attributes": [500, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_2_middle.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [600, 200, 100, 100],
+              "attributes": [600, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_2_middle.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [700, 200, 100, 100],
+              "attributes": [700, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_2_middle.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [800, 300, 100, 100],
+              "attributes": [800, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_2_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [900, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_2_middle.png" 
             },
             {
               "type": "rectangle",
               "attributes": [1000, 400, 100, 100],
               "static": true,
-              "image_path": "platform_a.png" 
+              "image_path": "platform_2_middle.png" 
             }
           ]
+        }
+      ]
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "layers": [
+        {
+          "z": -4,
+          "image": "images/underground_layer_4.png"
         },
         {
-          "z": -2
+          "z": -3,
+          "image": "images/underground_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "images/underground_layer_2.png"
+        },
+        {
+          "z": -1,
+          "image": "images/underground_layer_1_2.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "layers": [
+        {
+          "z": -4,
+          "image": "images/underground_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "images/underground_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "images/underground_layer_2.png"
+        },
+        {
+          "z": -1,
+          "image": "images/underground_layer_1_3.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "layers": [
+        {
+          "z": -4,
+          "image": "images/underground_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "images/underground_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "images/underground_layer_2.png"
+        },
+        {
+          "z": -1,
+          "image": "images/underground_layer_1_4.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "layers": [
+        {
+          "z": -4,
+          "image": "images/underground_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "images/underground_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "images/underground_layer_2.png"
+        },
+        {
+          "z": -1,
+          "image": "images/underground_layer_1_5.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "layers": [
+        {
+          "z": -4,
+          "image": "images/sky_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "images/sky_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "images/sky_layer_2_1.png"
+        },
+        {
+          "z": -1,
+          "image": "images/sky_layer_1_1.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "layers": [
+        {
+          "z": -4,
+          "image": "images/sky_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "images/sky_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "images/sky_layer_2_2.png"
+        },
+        {
+          "z": -1,
+          "image": "images/sky_layer_1_2.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "layers": [
+        {
+          "z": -4,
+          "image": "images/sky_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "images/sky_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "images/sky_layer_2_3.png"
+        },
+        {
+          "z": -1,
+          "image": "images/sky_layer_1_3.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "layers": [
+        {
+          "z": -4,
+          "image": "images/sky_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "images/sky_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "images/sky_layer_2_4.png"
+        },
+        {
+          "z": -1,
+          "image": "images/sky_layer_1_4.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "layers": [
+        {
+          "z": -4,
+          "image": "images/sky_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "images/sky_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "images/sky_layer_2_5.png"
+        },
+        {
+          "z": -1,
+          "image": "images/sky_layer_1_5.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            }
+          ]
         }
       ]
     }

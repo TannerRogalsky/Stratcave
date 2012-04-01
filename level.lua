@@ -47,7 +47,7 @@ function Level:transition_to_screen(x, y, delta_x, delta_y)
   -- screens should probably be stored in tables with their indices indexed so we don't have to loop to search
   if x == 5 then x = 0 end
   if x == -1 then x = 4 end
-  if y == 2 then y = 0 end
+  if y == 3 then y = 0 end
   if y == -1 then y = 1 end
   for _,screen in ipairs(game.current_level.screens) do
     if x == screen.x and y == screen.y then
