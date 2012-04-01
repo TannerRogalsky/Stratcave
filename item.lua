@@ -25,6 +25,7 @@ function Item:init_physics_body(x,y)
   self.physics_body = game.current_level.current_screen.physics_layer:add_physics_object("rectangle", self.x, self.y, 50, 50)
   game.Collider:setPassive(self.physics_body)
   self.physics_body.parent = self
+  self.physics_body.item = true
   self.physics_body.on_collide = function(self, ...) self.parent:on_collide(...) end
   return self.physics_body
 end

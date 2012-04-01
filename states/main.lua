@@ -7,6 +7,7 @@ end
 function MainMenu:render()
   self.current_level:render()
   self.player:render()
+  self.hole:render()
 end
 
 function MainMenu:update(dt)
@@ -15,6 +16,7 @@ function MainMenu:update(dt)
   camera:setPosition((x - g.getWidth() / 2) / 16, 0)
 
   self.player:update(dt)
+  self.hole:update(dt)
   self.current_level:update(dt)
   self.Collider:update(dt)
 end

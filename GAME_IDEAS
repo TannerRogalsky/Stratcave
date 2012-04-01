@@ -20,10 +20,6 @@ There's a pile of junk and you're trying to make the hero fall into you and then
 
 ########## TODO ##############
 
-- The tile removal needs a lot of work. It's pretty wonky and easy to break. Needs to be more robust and needs to be able to detect what you're over top of: item or tile or player.
+- Scoring. Lamps.
 
-- Items shouldn't really be included in the level json. They should be generated on screen enter.
-
-- Animations.
-
-- Scoring.
+- Limit upgrade power. Maximum upgrade? Consumable?

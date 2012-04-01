@@ -27,11 +27,7 @@ function love.keypressed(key, unicode)
   elseif key == 'up' and game.player.jumps < game.player.jump_limit then
     game.player.jumps = game.player.jumps + 1
     game.player.physics_body.velocity.y = -400
-  end
-end
-
-function love.keyreleased(key, unicode)
-  if key == 'a' then
+  elseif key == 'a' then
     game.hole.x = game.hole.x - 100
   elseif key == 'd' then
     game.hole.x = game.hole.x + 100
@@ -44,19 +40,21 @@ function love.keyreleased(key, unicode)
       -- We might also need to check to see if hidden_tiles contains the element already
       -- Gonna leave that off for now, though
       if game.hole.physics_body:contains(v:center()) and game.hole.physics_body ~= v then
-        if v.parent then -- item
-          game.hole.max_holes = game.hole.max_holes + 1
+        if v.item or v.tile then
+          if v.parent and v.item then -- item
+            game.hole.max_holes = game.hole.max_holes + 1
+            game.Collider:setGhost(v)
+            v.render = function(self) end
+            return
+          elseif #game.hidden_tiles >= game.hole.max_holes and v.tile then -- tile
+            local tile = table.remove(game.hidden_tiles, 1)
+            game.Collider:setSolid(tile)
+            tile.render = nil
+          end
+          table.insert(game.hidden_tiles, v)
           game.Collider:setGhost(v)
           v.render = function(self) end
-          return
-        elseif #game.hidden_tiles >= game.hole.max_holes then -- tile
-          local tile = table.remove(game.hidden_tiles, 1)
-          game.Collider:setSolid(tile)
-          tile.render = nil
         end
-        table.insert(game.hidden_tiles, v)
-        game.Collider:setGhost(v)
-        v.render = function(self) end
       end
     end
   elseif key == 'p' then
@@ -65,13 +63,13 @@ function love.keyreleased(key, unicode)
   game.hole.physics_body:moveToWithoutCentroid(game.hole.x, game.hole.y)
 end
 
+function love.keyreleased(key, unicode)
+end
+
 function love.draw()
   camera:set()
 
   game:render()
-
-  g.setColor(255,255,0)
-  g.rectangle('line', game.hole.x, game.hole.y, 100, 100)
 
   -- leave this in for debugging (draws the collider's hash grid)
   -- g.setColor(255, 0, 0)

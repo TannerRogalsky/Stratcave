@@ -20,14 +20,6 @@ end
 function Game:render()
 end
 
-function Game:load_levels()
-  self.levels = {}
-  local levelNames = love.filesystem.enumerate("levels")
-  for _,name in ipairs(levelNames) do
-    table.insert(levels, Game.load_level(name))
-  end
-end
-
 -- shape_one and shape_two are the colliding shapes. mtv_x and mtv_y define the minimum translation vector,
 -- i.e. the direction and magnitude shape_one has to be moved so that the collision will be resolved.
 -- Note that if one of the shapes is a point shape, the translation vector will be invalid.
@@ -86,6 +78,14 @@ function on_stop_collide(dt, shape_one, shape_two)
   --   game.player.on_ground = false
   -- end
   -- print("stop", shape_one, shape_two)
+end
+
+function Game:load_levels()
+  self.levels = {}
+  local levelNames = love.filesystem.enumerate("levels")
+  for _,name in ipairs(levelNames) do
+    table.insert(levels, Game.load_level(name))
+  end
 end
 
 -- ### Class Methods ###

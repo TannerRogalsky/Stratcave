@@ -67,6 +67,7 @@ function Screen:enter()
       else
         object[key] = value
       end
+      object.tile = true
     end
     if object.static then game.Collider:setPassive(object) end
   end
