@@ -1,22 +1,16 @@
 local Loading = Game:addState('Loading')
 
 local percent = 0
+local loading_screen = g.newImage("images/loading_screen.png")
 
 function Loading:enteredState()
 
   print('Entered Loading')
 
-  local counterId = cron.every(0.5, function()
-    percent = percent + 10
-  end)
-
-  cron.after(5, function()
-    cron.cancel(counterId)
+  cron.after(10, function()
     self.current_level.current_screen:enter(true)
     self:gotoState('MainMenu')
   end)
-
-
 
   local level = Game.load_level("test1")
   self.current_level = level
@@ -25,7 +19,8 @@ function Loading:enteredState()
 end
 
 function Loading:render()
-  g.print("Loading ... " .. percent .. "%", 350, 280)
+  g.setColor(255,255,255)
+  g.draw(loading_screen,-200,0)
 end
 
 return Loading
