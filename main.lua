@@ -7,6 +7,9 @@ function love.load()
   -- ternary hack (player ? new(player) : new({}))
   game.player = game.current_level.player and PlayerCharacter:new(game.current_level.player) or PlayerCharacter:new({})
   game.hole = Hole:new(100,100)
+
+  game.player1 = game.player
+  game.player2 = game.hole
 end
 
 function love.update(dt)
@@ -24,17 +27,44 @@ end
 function love.keypressed(key, unicode)
   if key == 'q' or key == 'escape' then
     os.exit(1)
-  elseif key == 'up' and game.player.jumps < game.player.jump_limit then
-    game.player.jumps = game.player.jumps + 1
-    game.player.physics_body.velocity.y = -400
+  elseif key == 'up' then
+    if game.player1 == game.player and game.player.jumps < game.player.jump_limit then
+      game.player1.jumps = game.player1.jumps + 1
+      game.player1.physics_body.velocity.y = -400
+    elseif game.player1 == game.hole then
+      game.player1.y = game.player1.y - 100
+    end
   elseif key == 'a' then
-    game.hole.x = game.hole.x - 100
+    if game.player2 == game.hole then
+      game.player2.x = game.player2.x - 100
+    end
   elseif key == 'd' then
-    game.hole.x = game.hole.x + 100
+    if game.player2 == game.hole then
+      game.hole.x = game.hole.x + 100
+    end
   elseif key == 'w' then
-    game.hole.y = game.hole.y - 100
+    if game.player2 == game.player and game.player.jumps < game.player.jump_limit then
+      game.player2.jumps = game.player2.jumps + 1
+      game.player2.physics_body.velocity.y = -400
+    elseif game.player2 == game.hole then
+      game.player2.y = game.player2.y - 100
+    end
   elseif key == 's' then
-    game.hole.y = game.hole.y + 100
+    if game.player2 == game.hole then
+      game.hole.y = game.hole.y + 100
+    end
+  elseif key == 'down' then
+    if game.player1 == game.hole then
+      game.hole.y = game.hole.y + 100
+    end
+  elseif key == 'left' then
+    if game.player1 == game.hole then
+      game.hole.x = game.hole.x - 100
+    end
+  elseif key == 'right' then
+    if game.player1 == game.hole then
+      game.hole.x = game.hole.x + 100
+    end
   elseif key == ' ' then
     for i,v in ipairs(game.current_level.current_screen.physics_layer.physics_objects) do
       -- We might also need to check to see if hidden_tiles contains the element already
@@ -59,6 +89,8 @@ function love.keypressed(key, unicode)
     end
   elseif key == 'p' then
     game.player.physics_body:moveTo(300, 200)
+  elseif key == 'o' then
+    game.player1, game.player2 = game.player2, game.player1
   end
   game.hole.physics_body:moveToWithoutCentroid(game.hole.x, game.hole.y)
 end

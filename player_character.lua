@@ -20,41 +20,80 @@ function PlayerCharacter:initialize(jsonInTableForm)
 end
 
 function PlayerCharacter:update(dt)
-  if love.keyboard.isDown('right') then
-    self.physics_body.velocity.x = 200
-    if self.jumps == 0 then
-      self.anim = self.animations.right
-    else
-      self.anim = self.animations.jump_right
-    end
-  elseif love.keyboard.isDown('left') then
-    self.physics_body.velocity.x = -200
-    if self.jumps == 0 then
-      self.anim = self.animations.left
-    else
-      self.anim = self.animations.jump_left
-    end
-  else
-    if self.physics_body.velocity.x > 0 then
+  if self == game.player1 then
+    if love.keyboard.isDown('right') then
+      self.physics_body.velocity.x = 200
       if self.jumps == 0 then
-        self.anim = self.animations.stand_right
+        self.anim = self.animations.right
       else
         self.anim = self.animations.jump_right
       end
-    elseif self.physics_body.velocity.x < 0 then
+    elseif love.keyboard.isDown('left') then
+      self.physics_body.velocity.x = -200
       if self.jumps == 0 then
-        self.anim = self.animations.stand_left
+        self.anim = self.animations.left
       else
         self.anim = self.animations.jump_left
       end
     else
-      -- if self.jumps == 0 then
-      --   self.anim = self.animations.stand_left
-      -- else
-      --   self.anim = self.animations.jump_left
-      -- end
+      if self.physics_body.velocity.x > 0 then
+        if self.jumps == 0 then
+          self.anim = self.animations.stand_right
+        else
+          self.anim = self.animations.jump_right
+        end
+      elseif self.physics_body.velocity.x < 0 then
+        if self.jumps == 0 then
+          self.anim = self.animations.stand_left
+        else
+          self.anim = self.animations.jump_left
+        end
+      else
+        -- if self.jumps == 0 then
+        --   self.anim = self.animations.stand_left
+        -- else
+        --   self.anim = self.animations.jump_left
+        -- end
+      end
+      self.physics_body.velocity.x = 0
     end
-    self.physics_body.velocity.x = 0
+  else
+    if love.keyboard.isDown('d') then
+      self.physics_body.velocity.x = 200
+      if self.jumps == 0 then
+        self.anim = self.animations.right
+      else
+        self.anim = self.animations.jump_right
+      end
+    elseif love.keyboard.isDown('a') then
+      self.physics_body.velocity.x = -200
+      if self.jumps == 0 then
+        self.anim = self.animations.left
+      else
+        self.anim = self.animations.jump_left
+      end
+    else
+      if self.physics_body.velocity.x > 0 then
+        if self.jumps == 0 then
+          self.anim = self.animations.stand_right
+        else
+          self.anim = self.animations.jump_right
+        end
+      elseif self.physics_body.velocity.x < 0 then
+        if self.jumps == 0 then
+          self.anim = self.animations.stand_left
+        else
+          self.anim = self.animations.jump_left
+        end
+      else
+        -- if self.jumps == 0 then
+        --   self.anim = self.animations.stand_left
+        -- else
+        --   self.anim = self.animations.jump_left
+        -- end
+      end
+      self.physics_body.velocity.x = 0
+    end
   end
 
   self.velocity = {x = self.physics_body.velocity.x, y = self.physics_body.velocity.y}
