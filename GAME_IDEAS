@@ -20,10 +20,10 @@ There's a pile of junk and you're trying to make the hero fall into you and then
 
 ########## TODO ##############
 
-- Smoke.
-
 - Limit upgrade power. Maximum upgrade? Consumable?
 
 - Sound.
 
 - Extra levels.
+
+- Put keypress stuff in state to prevent null pointers.

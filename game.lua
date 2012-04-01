@@ -67,7 +67,7 @@ function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
     other:move(mtv_x, mtv_y)
   end
 
-  if collision.is_down then
+  if collision.is_down and not other.item then
     game.player.jumps = 0
     game.player.physics_body:setRotation(other:rotation())
     game.player.physics_body.velocity.y = 0

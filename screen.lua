@@ -53,6 +53,7 @@ end
 function Screen:enter()
   game.Collider = HC(100, on_start_collide, on_stop_collide)
   game.current_level.current_screen = self
+  local image = g.newImage("images/smoke.png")
   for _,json_object in ipairs(self.physics_layer.objects) do
     local object = self.physics_layer:add_physics_object(json_object.type, unpack(json_object.attributes))
     for key, value in pairs(json_object) do
@@ -68,6 +69,8 @@ function Screen:enter()
         object[key] = value
       end
       object.tile = true
+      object.anim = newAnimation(image, 100, 100, 0.1, 0)
+      object.anim:setMode("once")
     end
     if object.static then game.Collider:setPassive(object) end
   end

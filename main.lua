@@ -71,7 +71,7 @@ function love.keypressed(key, unicode)
     for i,v in ipairs(game.current_level.current_screen.physics_layer.physics_objects) do
       -- We might also need to check to see if hidden_tiles contains the element already
       -- Gonna leave that off for now, though
-      if game.hole.physics_body:contains(v:center()) and game.hole.physics_body ~= v then
+      if game.hole.physics_body:contains(v:center()) and game.hole.physics_body ~= v and game.Collider:isSolid(v) then
         if v.power_up or v.tile then
           if v.parent and v.power_up then -- item
             game.hole.max_holes = game.hole.max_holes + 1
@@ -82,10 +82,19 @@ function love.keypressed(key, unicode)
             local tile = table.remove(game.hidden_tiles, 1)
             game.Collider:setSolid(tile)
             tile.render = nil
+            tile.update = nil
           end
           table.insert(game.hidden_tiles, v)
           game.Collider:setGhost(v)
-          v.render = function(self) end
+          v.update = function(self, dt)
+            self.anim:update(dt)
+          end
+          v.render = function(self) 
+            local x,y = self:bbox()
+            self.anim:draw(x,y)
+          end
+          v.anim:reset()
+          v.anim:play()
         end
       end
     end

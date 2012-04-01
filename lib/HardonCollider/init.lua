@@ -277,6 +277,17 @@ function HC:setSolid(shape, ...)
 	return self:setSolid(...)
 end
 
+function HC:isSolid(shape)
+	local id = self._shape_ids[shape]
+	assert(id, "Shape not registered!")
+
+	if self._ghost_shapes[shape] then
+		return false
+	else
+		return true
+	end
+end
+
 -- the module
 HC = common.class("HardonCollider", HC)
 local function new(...)
