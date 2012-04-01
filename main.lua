@@ -10,6 +10,8 @@ function love.load()
 
   game.player1 = game.player
   game.player2 = game.hole
+
+  game.player1.score, game.player2.score = 0,0
 end
 
 function love.update(dt)
@@ -70,8 +72,8 @@ function love.keypressed(key, unicode)
       -- We might also need to check to see if hidden_tiles contains the element already
       -- Gonna leave that off for now, though
       if game.hole.physics_body:contains(v:center()) and game.hole.physics_body ~= v then
-        if v.item or v.tile then
-          if v.parent and v.item then -- item
+        if v.power_up or v.tile then
+          if v.parent and v.power_up then -- item
             game.hole.max_holes = game.hole.max_holes + 1
             game.Collider:setGhost(v)
             v.render = function(self) end
@@ -90,6 +92,7 @@ function love.keypressed(key, unicode)
   elseif key == 'p' then
     game.player.physics_body:moveTo(300, 200)
   elseif key == 'o' then
+    game.player1.score, game.player2.score = game.player2.score, game.player1.score
     game.player1, game.player2 = game.player2, game.player1
   end
   game.hole.physics_body:moveToWithoutCentroid(game.hole.x, game.hole.y)
@@ -107,8 +110,10 @@ function love.draw()
   -- g.setColor(255, 0, 0)
   -- game.Collider._hash:draw('line', true, true)
 
+  camera:unset()
+
   g.setColor(0,255,0)
   g.print("FPS: " .. love.timer.getFPS(), 2, 2)
-
-  camera:unset()
+  g.print("Player 1: " .. game.player1.score, 2, 20)
+  g.print("Player 2: " .. game.player2.score, 2, 40)
 end

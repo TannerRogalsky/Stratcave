@@ -72,12 +72,27 @@ function Screen:enter()
     if object.static then game.Collider:setPassive(object) end
   end
 
+  -- power up
   local item = Item:new({})
   local physics_body = self.physics_layer.physics_objects[math.random(#self.physics_layer.physics_objects - 2) + 1]
   local x,y = physics_body:bbox()
   if y < 100 then y = 100 end
   y = math.round(math.random(y - 100) / 100) * 100 + 25
   item:init_physics_body(x + 25, y)
+  item.physics_body.power_up = true
+  item.physics_body.on_collide = function(self, ...) self.parent:on_power_up_collide(...) end
+  item.physics_body.image = g.newImage("images/power_up.png")
+
+  -- lamp
+  item = Item:new({})
+  physics_body = self.physics_layer.physics_objects[math.random(#self.physics_layer.physics_objects - 2) + 1]
+  x,y = physics_body:bbox()
+  if y < 100 then y = 100 end
+  y = math.round(math.random(y - 100) / 100) * 100 + 25
+  item:init_physics_body(x + 25, y)
+  item.physics_body.lamp = true
+  item.physics_body.on_collide = function(self, ...) self.parent:on_lamp_collide(...) end
+  item.physics_body.image = g.newImage("images/lamp.png")
 
   local boundary_collision = function(self, dt, shape_one, shape_two, mtv_x, mtv_y)
     local x,y = self:center()

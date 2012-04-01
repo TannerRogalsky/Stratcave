@@ -65,6 +65,10 @@ function Level:transition_to_screen(x, y, delta_x, delta_y)
         px = g.getWidth()
       elseif delta_y > 0 then
         py = 0 + p_height
+
+        -- switch players. so fucking hardcoded it's brutal
+        game.player1.score, game.player2.score = game.player2.score, game.player1.score
+        game.player1, game.player2 = game.player2, game.player1
       elseif delta_y < 0 then
         py = g.getHeight() - p_height
       end

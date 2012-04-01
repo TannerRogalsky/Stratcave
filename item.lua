@@ -25,14 +25,20 @@ function Item:init_physics_body(x,y)
   self.physics_body = game.current_level.current_screen.physics_layer:add_physics_object("rectangle", self.x, self.y, 50, 50)
   game.Collider:setPassive(self.physics_body)
   self.physics_body.parent = self
-  self.physics_body.item = true
-  self.physics_body.on_collide = function(self, ...) self.parent:on_collide(...) end
   return self.physics_body
 end
 
-function Item:on_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
-  -- print(self, self.physics_body == shape_one, self.physics_body == shape_two)
+function Item:on_power_up_collide(...)
   game.player.jump_limit = game.player.jump_limit + 1
+  self:on_collide(...)
+end
+
+function Item:on_lamp_collide(...)
+  game.player.score = game.player.score + 100
+  self:on_collide(...)
+end
+
+function Item:on_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
   game.Collider:setGhost(self.physics_body)
   self.physics_body.render = function(self) end
 end
