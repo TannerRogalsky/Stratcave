@@ -1,4 +1,4 @@
-dofile('revelator/requirements.lua')
+love.filesystem.load('requirements.lua')()
 
 function love.load()
   game = Game:new()
