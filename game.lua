@@ -1,4 +1,4 @@
-Game = class('Game', Base)
+Game = class('Game', Base):include(Stateful)
 
 function Game:initialize()
   Base.initialize(self)
