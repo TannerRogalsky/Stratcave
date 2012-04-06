@@ -17,10 +17,10 @@
       "layers": [
         {
           "z": -2,
-          "image": "images/bg1.jpg",
+          "image": "bg1.jpg",
           "images": [
             {
-              "file": "images/terrain.png",
+              "file": "terrain.png",
               "references": [
                 {
                   "source_x": 0,
@@ -75,7 +75,7 @@
           ]
         }, {
           "z": 1,
-          "image": "images/bg2.png"
+          "image": "bg2.png"
         }
       ]
     },

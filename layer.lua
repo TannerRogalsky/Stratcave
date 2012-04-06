@@ -11,7 +11,7 @@ function Layer:initialize(jsonInTableForm)
   -- finalize some values with some defaults
   self.dimensions = self.dimensions or {width = self.width or g.getWidth(), height = self.height or g.getHeight()}
   self.z = self.z or 0
-  if self.image then self.image = g.newImage(self.image) end
+  if self.image then self.image = game.images[self.image] end
   self.objects = self.objects or {} -- this is the json
   self.physics_objects = {}         -- this will be the Collider objects
 end
