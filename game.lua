@@ -2,17 +2,25 @@ Game = class('Game', Base):include(Stateful)
 
 function Game:initialize()
   Base.initialize(self)
+  self:gotoState("Loading")
 end
 
 function Game:update(dt)
-  self.player:update(dt)
-  self.current_level:update(dt)
-  self.Collider:update(dt)
 end
 
 function Game:render()
-  self.player:render()
-  self.current_level:render()
+end
+
+function Game.mousepressed(x, y, button)
+end
+
+function Game.mousereleased(x, y, button)
+end
+
+function Game.keypressed(key, unicode)
+end
+
+function Game.keyreleased(key, unicode)
 end
 
 function Game:load_levels()
