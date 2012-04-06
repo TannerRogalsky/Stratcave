@@ -20,7 +20,7 @@ function Layer:initialize(jsonInTableForm)
 end
 
 function Layer:update(dt)
-  for i,object in ipairs(self.physics_objects) do
+  for _,object in pairs(self.physics_objects) do
     object:update(dt)
   end
 end
@@ -32,7 +32,7 @@ function Layer:render()
   end
 
   -- for debugging, we probably shouldn't be drawing the actual physics objects on screen
-  for i,object in ipairs(self.physics_objects) do
+  for _,object in pairs(self.physics_objects) do
     g.setColor(0,0,255)
     object:draw("fill")
   end
@@ -68,7 +68,7 @@ function Layer:add_physics_object(objectType, ...)
   mt.__tostring = function(self) return "Physics obj: ".. self.id .. "; velx: ".. self.velocity.x .. "; vely: " .. self.velocity.y end
   setmetatable(object, mt)
 
-  table.insert(self.physics_objects, object)
+  self.physics_objects[object.id] = object
   return object
 end
 
