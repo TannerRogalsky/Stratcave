@@ -27,17 +27,17 @@ function Loading:enteredState()
 end
 
 function Loading:render()
+  local percent = 0
+  -- It's necessary to check for the loader because loader.update will trigger the state change
+  -- The state change will kill the loader but we'll still be in this function which expects the loader
+  if self.loader.resourceCount ~= 0 then
+    percent = self.loader.loadedCount / self.loader.resourceCount 
+  end
+  g.print(("Loading .. %d%%"):format(percent*100),100,100)
 end
 
 function Loading:update(dt)
   self.loader.update()
-  local percent = 0
-  -- It's necessary to check for the loader because loader.update will trigger the state change
-  -- The state change will kill the loader but we'll still be in this function which expects the loader
-  if self.loader and self.loader.resourceCount ~= 0 then 
-    percent = self.loader.loadedCount / self.loader.resourceCount 
-  end
-  print(("Loading .. %d%%"):format(percent*100))
 end
 
 function Loading:exitedState()
