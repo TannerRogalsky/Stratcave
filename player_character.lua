@@ -15,6 +15,17 @@ function PlayerCharacter:initialize(jsonInTableForm)
         right = function() self.velocity.x = 200 end,
         left = function() self.velocity.x = -200 end
       }
+    },
+    joystick = {
+      on_press = {
+        function() if self.on_ground then self.velocity.y = -400 end end, -- button A
+        function() end,                                                   -- button B
+        function() end,                                                   -- button X
+        function() end                                                    -- button Y
+      },
+      on_release = {
+      },
+      on_update = function() self.velocity.x = love.joystick.getAxis(0, 0) * 200 end
     }
   }
 
@@ -23,12 +34,16 @@ function PlayerCharacter:initialize(jsonInTableForm)
 end
 
 function PlayerCharacter:update(dt)
-  -- handle input
   self.velocity.x = 0
+
+  -- begin handle input
   for key, action in pairs(self.control_map.keyboard.on_update) do
     if love.keyboard.isDown(key) then action() end
   end
 
+  self.control_map.joystick.on_update()
+
+  -- end handle input
 
   self.velocity.y = self.velocity.y + (GRAVITY * dt)
   self.velocity.y = math.clamp(-400, self.velocity.y, 600)

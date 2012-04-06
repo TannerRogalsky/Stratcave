@@ -26,6 +26,14 @@ function love.keyreleased(key, unicode)
   game.keyreleased(key, unicode)
 end
 
+function love.joystickpressed(joystick, button)
+  game.joystickpressed(joystick, button)
+end
+
+function love.joystickreleased(joystick, button)
+  game.joystickreleased(joystick, button)
+end
+
 function love.draw()
   game:render()
 end
