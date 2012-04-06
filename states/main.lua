@@ -31,16 +31,8 @@ function Main:update(dt)
 end
 
 function Main.keypressed(key, unicode)
-  if key == 'q' or key == 'escape' then
-    os.exit(1)
-  elseif key == 'up' and game.player.on_ground then
-    game.player.physics_body.velocity.y = -400
-  elseif key == "p" then
-    game.player.physics_body:moveTo(300, 200)
-  elseif key == "n" then
-    local x,y = game.current_level.current_screen.x, game.current_level.current_screen.y
-    game.current_level:transition_to_screen(x + 1, y)
-  end
+  local action = game.player.control_map.keyboard.on_press[key]
+  if type(action) == "function" then action() end
 end
 
 function Main:exitedState()

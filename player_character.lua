@@ -2,15 +2,27 @@ PlayerCharacter = class('PlayerCharacter', Character)
 
 function PlayerCharacter:initialize(jsonInTableForm)
   Character.initialize(self, jsonInTableForm)
+
+  self.control_map = {
+    keyboard = {
+      on_press = {
+        up = function() self.physics_body.velocity.y = -400 end
+      },
+      on_release = {
+
+      },
+      on_update = {
+        right = function() self.physics_body.velocity.x = 200 end,
+        left = function() self.physics_body.velocity.x = -200 end
+      }
+    }
+  }
 end
 
 function PlayerCharacter:update(dt)
-  if love.keyboard.isDown('right') then
-    game.player.physics_body.velocity.x = 200
-  elseif love.keyboard.isDown('left') then
-    game.player.physics_body.velocity.x = -200
-  else
-    game.player.physics_body.velocity.x = 0
+  game.player.physics_body.velocity.x = 0
+  for key, action in pairs(self.control_map.keyboard.on_update) do
+    if love.keyboard.isDown(key) then action() end
   end
 
   self.physics_body:apply_gravity(dt)
