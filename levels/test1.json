@@ -14,68 +14,106 @@
     {
       "x": 0,
       "y": 0,
+      "items": [
+        {
+          "x": 100,
+          "y": 300, 
+          "type": "increase"
+        }
+      ],
       "layers": [
         {
+          "z": -4,
+          "image": "layer_1_4.png"
+        },
+        {
+          "z": -3,
+          "image": "layer_1_3.png"
+        },
+        {
           "z": -2,
-          "image": "bg1.jpg",
-          "images": [
-            {
-              "file": "terrain.png",
-              "references": [
-                {
-                  "source_x": 0,
-                  "source_y": 0,
-                  "source_width": 100,
-                  "source_height": 100,
-                  "target_x": 0,
-                  "target_y": 100
-                },
-                {
-                  "source_x": 0,
-                  "source_y": 0,
-                  "source_width": 100,
-                  "source_height": 100,
-                  "target_x": 100,
-                  "target_y": 100
-                } 
-              ]
-            }
-          ]
-        }, {
+          "image": "layer_1_2.png"
+        },
+        {
+          "z": -1,
+          "image": "layer_1_1.png"
+        },
+        {
           "z": 0,
           "objects": [
             {
               "type": "rectangle",
-              "attributes": [0, 475, 600, 10],
-              "static": true
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [600, 200, 200, 300],
-              "rotation": 45,
-              "static": true
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [400, 400, 200, 100],
-              "static": true
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [500, 300, 200, 100],
-              "static": true
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
             },
             {
-              "type": "circle",
-              "attributes": [200, 100, 50],
-              "functions":{
-                "update": "self:apply_gravity(dt); self.velocity.y = math.clamp(-400, self.velocity.y, 400); self:move(self.velocity.x * dt, self.velocity.y * dt)"
-              }
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_single.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_single.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
             }
           ]
-        }, {
-          "z": 1,
-          "image": "bg2.png"
         }
       ]
     },
@@ -84,17 +122,95 @@
       "y": 0,
       "layers": [
         {
+          "z": -4,
+          "image": "layer_2_4.png"
+        },
+        {
+          "z": -3,
+          "image": "layer_2_3.png"
+        },
+        {
+          "z": -2,
+          "image": "layer_2_2.png"
+        },
+        {
+          "z": -1,
+          "image": "layer_2_1.png"
+        },
+        {
           "z": 0,
           "objects": [
             {
               "type": "rectangle",
-              "attributes": [0, 275, 800, 10],
-              "static": true
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
             },
             {
-              "type": "polygon",
-              "attributes": [100,275, 300,200, 300,275],
-              "static": true
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_single.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_single.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
             }
           ]
         },
@@ -108,12 +224,299 @@
       "y": 0,
       "layers": [
         {
+          "z": -4,
+          "image": "layer_3_4.png"
+        },
+        {
+          "z": -3,
+          "image": "layer_3_3.png"
+        },
+        {
+          "z": -2,
+          "image": "layer_3_2.png"
+        },
+        {
+          "z": -1,
+          "image": "layer_3_1.png"
+        },
+        {
           "z": 0,
           "objects": [
             {
               "type": "rectangle",
-              "attributes": [0, 275, 600, 10],
-              "static": true
+              "attributes": [-100, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_single.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_single.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_single.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            }
+          ]
+        },
+        {
+          "z": -2
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "layers": [
+        {
+          "z": -4,
+          "image": "layer_4_4.png"
+        },
+        {
+          "z": -3,
+          "image": "layer_4_3.png"
+        },
+        {
+          "z": -2,
+          "image": "layer_4_2.png"
+        },
+        {
+          "z": -1,
+          "image": "layer_4_1.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_single.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_single.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            }
+          ]
+        },
+        {
+          "z": -2
+        }
+      ]
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "layers": [
+        {
+          "z": -4,
+          "image": "layer_5_4.png"
+        },
+        {
+          "z": -3,
+          "image": "layer_5_3.png"
+        },
+        {
+          "z": -2,
+          "image": "layer_5_2.png"
+        },
+        {
+          "z": -1,
+          "image": "layer_5_1.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_right_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_left_end.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_middle.png" 
             }
           ]
         },
@@ -127,22 +530,988 @@
       "y": 1,
       "layers": [
         {
+          "z": -4,
+          "image": "underground_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "underground_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "underground_layer_2.png"
+        },
+        {
+          "z": -1,
+          "image": "underground_layer_1_1.png"
+        },
+        {
           "z": 0,
           "objects": [
             {
               "type": "rectangle",
-              "attributes": [0, 275, 800, 10],
-              "static": true
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
             },
             {
               "type": "rectangle",
-              "attributes": [600, 100, 200, 300],
-              "static": true
+              "attributes": [0, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_solo.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_2_solo.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
             }
           ]
+        }
+      ]
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "layers": [
+        {
+          "z": -4,
+          "image": "underground_layer_4.png"
         },
         {
-          "z": -2
+          "z": -3,
+          "image": "underground_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "underground_layer_2.png"
+        },
+        {
+          "z": -1,
+          "image": "underground_layer_1_2.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "layers": [
+        {
+          "z": -4,
+          "image": "underground_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "underground_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "underground_layer_2.png"
+        },
+        {
+          "z": -1,
+          "image": "underground_layer_1_3.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_2_solo.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_2_solo.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_solo.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "layers": [
+        {
+          "z": -4,
+          "image": "underground_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "underground_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "underground_layer_2.png"
+        },
+        {
+          "z": -1,
+          "image": "underground_layer_1_4.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "layers": [
+        {
+          "z": -4,
+          "image": "underground_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "underground_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "underground_layer_2.png"
+        },
+        {
+          "z": -1,
+          "image": "underground_layer_1_5.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_solo.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_2_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_2_left.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "layers": [
+        {
+          "z": -4,
+          "image": "sky_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "sky_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "sky_layer_2_1.png"
+        },
+        {
+          "z": -1,
+          "image": "sky_layer_1_1.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_solo.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_3_solo.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "layers": [
+        {
+          "z": -4,
+          "image": "sky_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "sky_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "sky_layer_2_2.png"
+        },
+        {
+          "z": -1,
+          "image": "sky_layer_1_2.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "layers": [
+        {
+          "z": -4,
+          "image": "sky_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "sky_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "sky_layer_2_3.png"
+        },
+        {
+          "z": -1,
+          "image": "sky_layer_1_3.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_3_solo.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_3_solo.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_solo.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "layers": [
+        {
+          "z": -4,
+          "image": "sky_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "sky_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "sky_layer_2_4.png"
+        },
+        {
+          "z": -1,
+          "image": "sky_layer_1_4.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 300, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "layers": [
+        {
+          "z": -4,
+          "image": "sky_layer_4.png"
+        },
+        {
+          "z": -3,
+          "image": "sky_layer_3.png"
+        },
+        {
+          "z": -2,
+          "image": "sky_layer_2_5.png"
+        },
+        {
+          "z": -1,
+          "image": "sky_layer_1_5.png"
+        },
+        {
+          "z": 0,
+          "objects": [
+            {
+              "type": "rectangle",
+              "attributes": [-100, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [0, 200, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [100, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_solo.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [200, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [300, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [400, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [500, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [600, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [700, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [800, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_middle.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [900, 500, 100, 100],
+              "static": true,
+              "image_path": "platform_3_right.png" 
+            },
+            {
+              "type": "rectangle",
+              "attributes": [1000, 400, 100, 100],
+              "static": true,
+              "image_path": "platform_3_left.png" 
+            }
+          ]
         }
       ]
     }
