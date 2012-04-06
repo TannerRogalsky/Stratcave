@@ -79,7 +79,7 @@ function Screen:enter()
     local to = game.current_level:transition_to_screen(game.current_level.current_screen.x + delta_x, game.current_level.current_screen.y + delta_y, delta_x, delta_y)
     if to == nil then
       -- TODO die
-      game.player.physics_body:moveTo(200, 200)
+      game.player:moveTo(200, 200)
     end
   end
 
@@ -101,7 +101,7 @@ function Screen:enter()
 end
 
 function Screen:exit()
-  game.player.physics_body = nil
+  game.player:clean_up_physics_body()
   game.current_level.current_screen.physics_layer.physics_objects = {}
   game.current_level.current_screen = nil
   game.Collider = nil

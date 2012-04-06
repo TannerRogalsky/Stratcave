@@ -33,8 +33,7 @@ function Layer:render()
 
   -- for debugging, we probably shouldn't be drawing the actual physics objects on screen
   for _,object in pairs(self.physics_objects) do
-    g.setColor(0,0,255)
-    object:draw("fill")
+    object:render()
   end
 end
 
@@ -59,9 +58,8 @@ function Layer:add_physics_object(objectType, ...)
 
   -- dump some stuff into the physics object that I'll probably need later
   object.id = generateID()
-  object.velocity = {x = 0, y = 0}
   object.update = function(self, dt) end
-  object.apply_gravity = function(self, dt) self.velocity.y = self.velocity.y + (GRAVITY * dt) end
+  object.render = function(self) g.setColor(0,0,255); object:draw("fill") end
 
   -- override any of the metafunctionality of the physics object you want without breaking stuff
   local mt = getmetatable(object)

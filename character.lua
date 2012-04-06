@@ -12,9 +12,6 @@ function Character:initialize(jsonInTableForm)
 end
 
 function Character:update(dt)
-  self.physics_body:apply_gravity(dt)
-  self.physics_body.velocity.y = math.clamp(-200, self.physics_body.velocity.y, 200)
-  self.physics_body:move(self.physics_body.velocity.x * dt, self.physics_body.velocity.y * dt)
 end
 
 function Character:render()

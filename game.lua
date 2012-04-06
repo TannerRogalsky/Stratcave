@@ -42,7 +42,7 @@ function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
   end
 
   local player, other, collision = nil, nil, nil
-  if shape_one == game.player.physics_body then
+  if shape_one.parent == game.player then
     player, other = shape_one, shape_two
     collision = {
       is_down = mtv_y < 0,
@@ -50,7 +50,7 @@ function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
       is_left = mtv_x > 0,
       is_right = mtv_x < 0
     }
-  elseif shape_two == game.player.physics_body then
+  elseif shape_two.parent == game.player then
     player, other = shape_two, shape_one
     collision = {
       is_down = mtv_y > 0,
@@ -71,13 +71,12 @@ function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
 
   if collision.is_down then
     game.player.on_ground = true
-    game.player.physics_body:setRotation(other:rotation())
-    game.player.physics_body.velocity.y = 0
+    game.player.velocity.y = 0
   end
 end
 
 function on_stop_collide(dt, shape_one, shape_two)
-  if shape_one == game.player.physics_body or shape_two == game.player.physics_body then
+  if shape_one.parent == game.player or shape_two.parent == game.player then
     game.player.on_ground = false
   end
   -- print("stop", shape_one, shape_two)
