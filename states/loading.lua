@@ -3,6 +3,7 @@ local Loading = Game:addState('Loading')
 function Loading:enteredState()
   self.loader = require 'lib/love-loader'
   self.images = {}
+  self.json = {}
 
   for index, image in ipairs(love.filesystem.enumerate('images')) do
     if image:match('(.*).png$') ~= nil or image:match('(.*).gif$') ~= nil or image:match('(.*).jpg$') ~= nil then
@@ -10,8 +11,10 @@ function Loading:enteredState()
     end
   end
 
+  self.loader.newJson(self.json, 'test1', 'levels/test1.json')
+
   self.loader.start(function()
-    local level = Game.load_level("test1")
+    local level = Level:new(self.json['test1'])
     game.current_level = level
 
     -- ternary hack (player ? new(player) : new({}))
