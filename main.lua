@@ -2,6 +2,7 @@ love.filesystem.load('requirements.lua')()
 
 function love.load()
   game = Game:new()
+  local Camera = require 'lib/camera.lua'
   camera = Camera:new()
 
   level = Game.load_level("test1")

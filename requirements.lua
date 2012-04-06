@@ -19,7 +19,6 @@ json = require('json')
 skiplist = require "lib/skiplist"
 HC = require 'lib/HardonCollider'
 inspect = require 'lib/inspect.lua'
-require 'lib/camera.lua'
 
 -- Game classes
 require 'base.lua'

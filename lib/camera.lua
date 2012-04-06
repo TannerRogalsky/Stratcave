@@ -1,4 +1,4 @@
-Camera = class("Camera", Base)
+local Camera = class("Camera", Base)
 
 function Camera:initialize()
   Base.initialize(self)
@@ -48,3 +48,5 @@ end
 function Camera:mousePosition()
   return love.mouse.getX() * self.scaleX + self.x, love.mouse.getY() * self.scaleY + self.y
 end
+
+return Camera
