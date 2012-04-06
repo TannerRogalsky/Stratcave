@@ -1,7 +1,7 @@
 local Loading = Game:addState('Loading')
 
 function Loading:enteredState()
-  self.loader = require 'lib.love-loader'
+  self.loader = require 'lib/love-loader'
   self.images = {}
 
   for index, image in ipairs(love.filesystem.enumerate('images')) do
