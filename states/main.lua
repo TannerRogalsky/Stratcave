@@ -21,6 +21,10 @@ function Main:render()
 end
 
 function Main:update(dt)
+  -- print(game.player.physics_body)
+  local x,y = game.player.physics_body:center()
+  camera:setPosition((x - g.getWidth() / 2) / 32, (y - g.getHeight() / 2) / 32)
+
   self.player:update(dt)
   self.current_level:update(dt)
   self.Collider:update(dt)

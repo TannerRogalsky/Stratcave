@@ -10,7 +10,17 @@ function Loading:enteredState()
     end
   end
 
-  self.loader.start(function() self:gotoState("Main") end)
+  self.loader.start(function()
+    local level = Game.load_level("test1")
+    game.current_level = level
+
+    -- ternary hack (player ? new(player) : new({}))
+    game.player = game.current_level.player and PlayerCharacter:new(game.current_level.player) or PlayerCharacter:new({})
+
+    game.current_level.current_screen:enter()
+
+    self:gotoState("Main")
+  end)
 end
 
 function Loading:render()
