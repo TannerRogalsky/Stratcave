@@ -14,10 +14,10 @@ function Main:render()
   g.setColor(255, 0, 0)
   game.Collider._hash:draw('line', true, true)
 
+  camera:unset()
+
   g.setColor(0,255,0)
   g.print("FPS: " .. love.timer.getFPS(), 2, 2)
-
-  camera:unset()
 end
 
 function Main:update(dt)
