@@ -15,7 +15,6 @@ function generateID() globalID = globalID + 1 return globalID end
 -- Put any game-wide requirements in here
 require 'lib/middleclass'
 Stateful = require 'lib/stateful'
-json = require('json')
 skiplist = require "lib/skiplist"
 HC = require 'lib/HardonCollider'
 inspect = require 'lib/inspect.lua'

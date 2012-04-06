@@ -47,7 +47,7 @@ local resourceKinds = {
     resourceKey = "jsonData",
     constructor = love.filesystem.read,
     postProcess = function(data)
-      -- local json = require('json')
+      local json = require('json')
       return json.decode(data)
     end
   }
