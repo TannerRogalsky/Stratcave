@@ -41,6 +41,15 @@ local resourceKinds = {
     requestKey  = "imageDataPath",
     resourceKey = "rawImageData",
     constructor = love.image.newImageData
+  },
+  json = {
+    requestKey  = "jsonPath",
+    resourceKey = "jsonData",
+    constructor = love.filesystem.read,
+    postProcess = function(data)
+      -- local json = require('json')
+      return json.decode(data)
+    end
   }
 }
 
@@ -91,6 +100,10 @@ else
   end
 
   local function newResource(kind, holder, key, requestParam)
+    assert(type(kind) == "string")
+    assert(type(holder) == "table")
+    assert(type(key) == "string")
+    assert(type(requestParam) == "string")
     pending[#pending + 1] = {
       kind = kind, holder = holder, key = key, requestParam = requestParam
     }
@@ -128,6 +141,10 @@ else
 
 
   -- public interface starts here
+
+  function loader.newJson(holder, key, path)
+    newResource('json', holder, key, path)
+  end
 
   function loader.newImage(holder, key, path)
     newResource('image', holder, key, path)
