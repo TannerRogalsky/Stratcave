@@ -41,7 +41,9 @@ function PlayerCharacter:update(dt)
     if love.keyboard.isDown(key) then action() end
   end
 
-  self.control_map.joystick.on_update()
+  if love.joystick.isOpen(0) then
+    self.control_map.joystick.on_update()
+  end
 
   -- end handle input
 
