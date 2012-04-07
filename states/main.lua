@@ -34,14 +34,13 @@ function Main.keypressed(key, unicode)
   if type(action) == "function" then action() end
 end
 
--- it's necessary to add one to the button pressed because the button indices aren't 1-indexed
 function Main.joystickpressed(joystick, button)
-  local action = game.player.control_map.joystick.on_press[button + 1]
+  local action = game.player.control_map.joystick.on_press[button]
   if type(action) == "function" then action() end
 end
 
 function Main.joystickreleased(joystick, button)
-  local action = game.player.control_map.joystick.on_release[button + 1]
+  local action = game.player.control_map.joystick.on_release[button]
   if type(action) == "function" then action() end
 end
 

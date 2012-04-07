@@ -18,10 +18,10 @@ function PlayerCharacter:initialize(jsonInTableForm)
     },
     joystick = {
       on_press = {
-        function() if self.on_ground then self.velocity.y = -400 end end, -- button A
-        function() end,                                                   -- button B
-        function() end,                                                   -- button X
-        function() end                                                    -- button Y
+        [0] = function() if self.on_ground then self.velocity.y = -400 end end, -- button A
+        [1] = function() end,                                                   -- button B
+        [2] = function() end,                                                   -- button X
+        [3] = function() end                                                    -- button Y
       },
       on_release = {
       },
