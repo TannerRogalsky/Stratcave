@@ -2,8 +2,6 @@ love.filesystem.load('requirements.lua')()
 
 function love.load()
   game = Game:new()
-  local Camera = require 'lib/camera'
-  camera = Camera:new()
 end
 
 function love.update(dt)

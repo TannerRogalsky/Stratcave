@@ -2,6 +2,10 @@ Game = class('Game', Base):include(Stateful)
 
 function Game:initialize()
   Base.initialize(self)
+
+  local Camera = require 'lib/camera'
+  camera = Camera:new()
+
   self:gotoState("Loading")
 end
 
