@@ -89,7 +89,7 @@ function love.draw()
   love.graphics.setColor(255,255,255,255)
   love.graphics.draw(bg, 0, 0)
 
-  local p_radius = 30
+  local p_radius = 10
   love.graphics.setColor(255,0,0)
   love.graphics.circle("fill", pos.x, pos.y, p_radius)
 

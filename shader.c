@@ -2,8 +2,8 @@
 extern vec2[NBALLS] balls;
 extern vec2 delta_to_mouse;
 
-float circle(vec2 x){
-  x /= 40.0; // the size of the glow
+float circle(vec2 x, float size){
+  x /= size; // the size of the glow
   // numerator controls the size of the radii
   // plus portion of the denominator doesn't seem to do anything
   return 1.0 / dot(x, x);
@@ -18,7 +18,7 @@ float flashlight(vec2 O, vec2 P){
   const float ang_falloff = 0.5f;
   const float far_attenuation = 13.0f;
   const float far_apex_power = 10.0f;
-  const float near_plane = 10.5f;
+  const float near_plane = 1.5f;
   const float near_gradient = 0.9f;
 
   vec2 D = normalize(delta_to_mouse);
@@ -54,10 +54,11 @@ vec4 effect(vec4 color, Image tex, vec2 tc, vec2 pc){
   // you can reverse the gradient direction by changing p to 0 and the for loop to increment
   float p = 1.0;
   for (int i = 1; i < NBALLS; ++i){
-    p -= circle(pc - balls[i]);
+    p -= circle(pc - balls[i], 40.0f);
   }
 
   p -= flashlight(balls[0], pc);
+  p -= circle(pc - balls[0], 10.0f);
   // putting a ceiling on the next line makes discrete levels
   // leaving it off makes a smooth gradient
   p = p * 6.0; // size again
