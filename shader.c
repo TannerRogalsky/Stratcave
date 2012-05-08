@@ -2,10 +2,9 @@
 extern vec2[NBALLS] balls;
 extern vec2 delta_to_mouse;
 
-float circle(vec2 x, float size){
-  x /= size; // the size of the glow
-  // numerator controls the size of the radii
-  // plus portion of the denominator doesn't seem to do anything
+float circle(vec2 x, float radius){
+  x /= radius;
+
   return 1.0 / dot(x, x);
 }
 
