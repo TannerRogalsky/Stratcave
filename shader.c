@@ -1,6 +1,7 @@
-#define NBALLS %d
-extern vec2[NBALLS] balls;
+#define MAXBALLS %d
+extern vec2[MAXBALLS] balls;
 extern vec2 delta_to_mouse;
+extern float num_balls;
 
 float circle(vec2 x, float radius){
   x /= radius;
@@ -59,7 +60,7 @@ float flashlight(vec2 O, vec2 P){
 vec4 effect(vec4 color, Image tex, vec2 tc, vec2 pc){
   // you can reverse the gradient direction by changing p to 0 and the for loop to increment
   float p = 1.0;
-  for (int i = 1; i < NBALLS; ++i){
+  for (int i = 1; i < num_balls; ++i){
     p -= circle(pc - balls[i], 40.0f);
   }
 

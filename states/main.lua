@@ -1,11 +1,14 @@
 local Main = Game:addState('Main')
 
 function Main:enteredState()
+  local MAX_BALLS = 100
+
   balls = {{400,300}, {400,300}, {400,300}, {400,300}}
-  raw = love.filesystem.read("shader.c"):format(#balls)
+  raw = love.filesystem.read("shader.c"):format(MAX_BALLS)
   effect = love.graphics.newPixelEffect(raw)
   bg = love.graphics.newImage("images/game_over.png")
 
+  effect:send('num_balls', #balls)
   effect:send('balls', unpack(balls))
 
   pos = {x = 100, y = 100}
