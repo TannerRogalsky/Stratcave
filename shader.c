@@ -21,6 +21,13 @@ float flashlight(vec2 O, vec2 P){
   const float near_gradient = 0.9f;
 
   vec2 D = normalize(delta_to_mouse);
+
+  // proof of concept: full light spread on mouseover player
+  // vec2 dtm = delta_to_mouse;
+  // if((abs(dtm[0]) < 10) && (abs(dtm[1]) < 10)){
+  //   dtm = vec2(0,0);
+  // }
+  // vec2 D = normalize(dtm);
     
   vec2 I = P - O;
   float dist = length(I);
