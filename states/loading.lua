@@ -14,13 +14,8 @@ function Loading:enteredState()
   self.loader.newJson(self.preloaded_json, 'test1', 'levels/test1.json')
 
   self.loader.start(function()
-    local level = Level:new(self.preloaded_json['test1'])
-    game.current_level = level
-
-    -- ternary hack (player ? new(player) : new({}))
-    game.player = game.current_level.player and PlayerCharacter:new(game.current_level.player) or PlayerCharacter:new({})
-
-    game.current_level.current_screen:enter()
+    -- loader finished callback
+    -- initialize game stuff here
 
     self:gotoState("Main")
   end)
