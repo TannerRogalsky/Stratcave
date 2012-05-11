@@ -11,7 +11,7 @@ function Loading:enteredState()
     end
   end
 
-  self.loader.newJson(self.preloaded_json, 'test1', 'levels/test1.json')
+  -- self.loader.newJson(self.preloaded_json, 'test1', 'levels/test1.json')
 
   self.loader.start(function()
     -- loader finished callback
