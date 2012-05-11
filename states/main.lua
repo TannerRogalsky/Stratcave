@@ -3,48 +3,40 @@ local Main = Game:addState('Main')
 function Main:enteredState()
   local MAX_BALLS = 100
 
-  balls = {{400,300}, {400,300}, {400,300}, {400,300}}
-  raw = love.filesystem.read("shader.c"):format(MAX_BALLS)
-  effect = love.graphics.newPixelEffect(raw)
-  bg = love.graphics.newImage("images/game_over.png")
+  balls = {{100,100}, {400,300}, {400,300}, {400,300}}
+  self.player = PlayerCharacter:new({pos = balls[1]})
 
-  effect:send('num_balls', #balls)
-  effect:send('balls', unpack(balls))
+  local raw = love.filesystem.read("shader.c"):format(MAX_BALLS)
+  self.overlay = love.graphics.newPixelEffect(raw)
+  self.bg = love.graphics.newImage("images/game_over.png")
 
-  pos = {x = 100, y = 100}
+  self.overlay:send('num_balls', #balls)
+  self.overlay:send('balls', unpack(balls))
 
-  dx = love.mouse.getX() - pos.x
-  dy = pos.y - love.mouse.getY()
-  effect:send('delta_to_mouse', {dx, dy})
-
-  pos.incr = function(self, k, v) self[k] = self[k] + v end 
-  keyboard = {
-    w = function() pos:incr("y", -5) end,
-    s = function() pos:incr("y", 5) end,
-    a = function() pos:incr("x", -5) end,
-    d = function() pos:incr("x", 5) end
-  }
+  local dx = love.mouse.getX() - self.player.pos.x
+  local dy = self.player.pos.y - love.mouse.getY()
+  self.overlay:send('delta_to_mouse', {dx, dy})
 end
 
 function Main:render()
   camera:set()
 
   love.graphics.setColor(255,255,255,255)
-  love.graphics.draw(bg, 0, 0)
+  love.graphics.draw(self.bg, 0, 0)
 
   local p_radius = 10
   love.graphics.setColor(255,0,0)
-  love.graphics.circle("fill", pos.x, pos.y, p_radius)
+  love.graphics.circle("fill", self.player.pos.x, self.player.pos.y, p_radius)
 
   love.graphics.setColor(0,0,0,255)
   local x, y = love.mouse.getX(), love.mouse.getY()
-  local angle = math.atan2(y - pos.y, x - pos.x)
-  x = pos.x + p_radius * math.cos(angle)
-  y = pos.y + p_radius * math.sin(angle)
-  love.graphics.line(pos.x, pos.y, x, y)
+  local angle = math.atan2(y - self.player.pos.y, x - self.player.pos.x)
+  x = self.player.pos.x + p_radius * math.cos(angle)
+  y = self.player.pos.y + p_radius * math.sin(angle)
+  love.graphics.line(self.player.pos.x, self.player.pos.y, x, y)
 
   love.graphics.setColor(255,255,255,255)
-  love.graphics.setPixelEffect(effect)
+  love.graphics.setPixelEffect(self.overlay)
   love.graphics.rectangle('fill', 0,0,love.graphics.getWidth(), love.graphics.getHeight())
   love.graphics.setPixelEffect()
 
@@ -54,31 +46,31 @@ function Main:render()
   love.graphics.print(love.timer.getFPS(), 2, 2)
 end
 
-t = 0
 function Main:update(dt)
-  t = t + dt
+  local t = love.timer.getMicroTime( )
 
-  for k,v in pairs(keyboard) do
+  for k,v in pairs(self.player.control_map.keyboard.on_update) do
     if love.keyboard.isDown(k) then v() end
   end
 
-  balls[1] = {pos.x, love.graphics.getHeight() - pos.y}
+  balls[1] = {self.player.pos.x, love.graphics.getHeight() - self.player.pos.y}
   balls[2] = {math.sin(2*t) * 120 + love.graphics.getWidth()/2, math.cos(t) * 120 + love.graphics.getHeight()/2}
   balls[3] = {math.sin(t) * 120 + love.graphics.getWidth()/2, math.cos(2*t) * 120 + love.graphics.getHeight()/2}
   balls[4] = {
     math.sin(t) * (110 + math.sin(.01*t) * 110)  + love.graphics.getWidth()/2,
     math.cos(t) * (110 + math.sin(.01*t) * 110)  + love.graphics.getHeight()/2,
   }
-  dx = love.mouse.getX() - pos.x
-  dy = pos.y - love.mouse.getY()
-  effect:send('delta_to_mouse', {dx, dy})
 
-  effect:send('balls', unpack(balls))
+  local dx = love.mouse.getX() - self.player.pos.x
+  local dy = self.player.pos.y - love.mouse.getY()
+  self.overlay:send('delta_to_mouse', {dx, dy})
+
+  self.overlay:send('balls', unpack(balls))
 end
 
 function Main.keypressed(key, unicode)
-  -- local action = game.player.control_map.keyboard.on_press[key]
-  -- if type(action) == "function" then action() end
+  local action = game.player.control_map.keyboard.on_press[key]
+  if type(action) == "function" then action() end
 end
 
 function Main.joystickpressed(joystick, button)
