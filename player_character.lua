@@ -3,9 +3,8 @@ PlayerCharacter = class('PlayerCharacter', Character)
 function PlayerCharacter:initialize(jsonInTableForm)
   Character.initialize(self, jsonInTableForm)
 
-  self.pos = {}
-  self.pos.x, self.pos.y = jsonInTableForm.pos[1], jsonInTableForm.pos[2]
-  self.pos.incr = function(self, k, v) self[k] = self[k] + v end
+  self.pos = jsonInTableForm.pos or {x = 100, y = 100}
+  self.speed = 3
 
   self.control_map = {
     keyboard = {
@@ -16,10 +15,10 @@ function PlayerCharacter:initialize(jsonInTableForm)
 
       },
       on_update = {
-        w = function() self.pos:incr("y", -5) end,
-        s = function() self.pos:incr("y", 5) end,
-        a = function() self.pos:incr("x", -5) end,
-        d = function() self.pos:incr("x", 5) end
+        w = function() self:move(0, -self.speed) end,
+        s = function() self:move(0, self.speed) end,
+        a = function() self:move(-self.speed, 0) end,
+        d = function() self:move(self.speed, 0) end
       }
     },
     joystick = {
@@ -34,6 +33,9 @@ function PlayerCharacter:initialize(jsonInTableForm)
       on_update = function() self.velocity.x = love.joystick.getAxis(0, 0) * 200 end
     }
   }
+
+  self._physics_body = game.collider:addCircle(self.pos.x, self.pos.y, 10)
+  self._physics_body.parent = self
 end
 
 function PlayerCharacter:update(dt)
@@ -50,18 +52,15 @@ function PlayerCharacter:update(dt)
 
 end
 
-function PlayerCharacter:center()
-  return self._physics_body:center()
-end
+function PlayerCharacter:render()
+  local p_radius = 10
+  love.graphics.setColor(255,0,0)
+  love.graphics.circle("fill", self.pos.x, self.pos.y, p_radius)
 
-function PlayerCharacter:clean_up_physics_body()
-  self._physics_body = nil
-end
-
-function PlayerCharacter:moveTo(x,y)
-  self._physics_body:moveTo(x,y)
-end
-
-function PlayerCharacter:bbox()
-  return self._physics_body:bbox()
+  love.graphics.setColor(0,0,0,255)
+  local x, y = love.mouse.getX(), love.mouse.getY()
+  local angle = math.atan2(y - self.pos.y, x - self.pos.x)
+  x = self.pos.x + p_radius * math.cos(angle)
+  y = self.pos.y + p_radius * math.sin(angle)
+  love.graphics.line(self.pos.x, self.pos.y, x, y)
 end
