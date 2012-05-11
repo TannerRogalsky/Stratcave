@@ -3,15 +3,37 @@ local Main = Game:addState('Main')
 function Main:enteredState()
   local MAX_BALLS = 100
 
-  balls = {{100,100}, {400,300}, {400,300}, {400,300}}
-  self.player = PlayerCharacter:new({pos = balls[1]})
+  self.collider = HC(50, self.on_start_collide, self.on_stop_collide)
+  self.player = PlayerCharacter:new({pos = {x = 100, y = 100}})
+
+  self.enemies = {}
+  local enemy = Enemy:new({x = 400, y = 300})
+  self.enemies[enemy.id] = enemy
+  enemy.update = function(self, dt, t)
+    self:moveTo(math.sin(2*t) * 120 + love.graphics.getWidth()/2, math.cos(t) * 120 + love.graphics.getHeight()/2)
+  end
+
+  enemy = Enemy:new({x = 400, y = 300})
+  self.enemies[enemy.id] = enemy
+  enemy.update = function(self, dt, t)
+    self:moveTo(math.sin(t) * 120 + love.graphics.getWidth()/2, math.cos(2*t) * 120 + love.graphics.getHeight()/2)
+  end
+
+  enemy = Enemy:new({x = 400, y = 300})
+  self.enemies[enemy.id] = enemy
+  enemy.update = function(self, dt, t)
+    self:moveTo(math.sin(t) * (110 + math.sin(.01*t) * 110)  + love.graphics.getWidth()/2,
+      math.cos(t) * (110 + math.sin(.01*t) * 110)  + love.graphics.getHeight()/2)
+  end
+
 
   local raw = love.filesystem.read("shader.c"):format(MAX_BALLS)
   self.overlay = love.graphics.newPixelEffect(raw)
   self.bg = love.graphics.newImage("images/game_over.png")
 
-  self.overlay:send('num_balls', #balls)
-  self.overlay:send('balls', unpack(balls))
+  local positions = self:pack_game_objects()
+  self.overlay:send('num_balls', #positions)
+  self.overlay:send('balls', unpack(positions))
 
   local dx = love.mouse.getX() - self.player.pos.x
   local dy = self.player.pos.y - love.mouse.getY()
@@ -24,16 +46,11 @@ function Main:render()
   love.graphics.setColor(255,255,255,255)
   love.graphics.draw(self.bg, 0, 0)
 
-  local p_radius = 10
-  love.graphics.setColor(255,0,0)
-  love.graphics.circle("fill", self.player.pos.x, self.player.pos.y, p_radius)
+  game.player:render()
 
-  love.graphics.setColor(0,0,0,255)
-  local x, y = love.mouse.getX(), love.mouse.getY()
-  local angle = math.atan2(y - self.player.pos.y, x - self.player.pos.x)
-  x = self.player.pos.x + p_radius * math.cos(angle)
-  y = self.player.pos.y + p_radius * math.sin(angle)
-  love.graphics.line(self.player.pos.x, self.player.pos.y, x, y)
+  for id,enemy in pairs(self.enemies) do
+    enemy:render()
+  end
 
   love.graphics.setColor(255,255,255,255)
   love.graphics.setPixelEffect(self.overlay)
@@ -48,24 +65,22 @@ end
 
 function Main:update(dt)
   local t = love.timer.getMicroTime( )
+  self.collider:update(dt)
 
   for k,v in pairs(self.player.control_map.keyboard.on_update) do
     if love.keyboard.isDown(k) then v() end
   end
 
-  balls[1] = {self.player.pos.x, love.graphics.getHeight() - self.player.pos.y}
-  balls[2] = {math.sin(2*t) * 120 + love.graphics.getWidth()/2, math.cos(t) * 120 + love.graphics.getHeight()/2}
-  balls[3] = {math.sin(t) * 120 + love.graphics.getWidth()/2, math.cos(2*t) * 120 + love.graphics.getHeight()/2}
-  balls[4] = {
-    math.sin(t) * (110 + math.sin(.01*t) * 110)  + love.graphics.getWidth()/2,
-    math.cos(t) * (110 + math.sin(.01*t) * 110)  + love.graphics.getHeight()/2,
-  }
+  self.player:update(dt)
+  for id,enemy in pairs(self.enemies) do
+    enemy:update(dt, t)
+  end
 
   local dx = love.mouse.getX() - self.player.pos.x
   local dy = self.player.pos.y - love.mouse.getY()
   self.overlay:send('delta_to_mouse', {dx, dy})
 
-  self.overlay:send('balls', unpack(balls))
+  self.overlay:send('balls', unpack(self:pack_game_objects()))
 end
 
 function Main.keypressed(key, unicode)
@@ -84,6 +99,23 @@ function Main.joystickreleased(joystick, button)
 end
 
 function Main:exitedState()
+end
+
+function Main.on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
+  print(tostring(shape_one.parent) .. " is colliding with " .. tostring(shape_two.parent))
+end
+
+function Main.on_stop_collide(dt, shape_one, shape_two)
+  print(tostring(shape_one.parent) .. " stopped colliding with " .. tostring(shape_two.parent))
+end
+
+function Main:pack_game_objects()
+  local result = {}
+  table.insert(result, {self.player.pos.x, love.graphics.getHeight() - self.player.pos.y})
+  for id,enemy in pairs(self.enemies) do
+    table.insert(result, {enemy.pos.x, love.graphics.getHeight() - enemy.pos.y})
+  end
+  return result
 end
 
 return Main
