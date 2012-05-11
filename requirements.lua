@@ -26,6 +26,7 @@ require 'player_character'
 require 'level'
 require 'screen'
 require 'layer'
+require 'enemy'
 
 -- Game states
 require 'states.loading'
