@@ -33,61 +33,61 @@ end
 function Game.joystickreleased(joystick, button)
 end
 
--- shape_one and shape_two are the colliding shapes. mtv_x and mtv_y define the minimum translation vector,
--- i.e. the direction and magnitude shape_one has to be moved so that the collision will be resolved.
--- Note that if one of the shapes is a point shape, the translation vector will be invalid.
-function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
-  if shape_one.static == true and shape_two.static ~= true then
-    shape_two:move(mtv_x, mtv_y)
-  elseif shape_two.static == true and shape_one.static ~= true then
-    shape_one:move(mtv_x, mtv_y)
-  end
+-- -- shape_one and shape_two are the colliding shapes. mtv_x and mtv_y define the minimum translation vector,
+-- -- i.e. the direction and magnitude shape_one has to be moved so that the collision will be resolved.
+-- -- Note that if one of the shapes is a point shape, the translation vector will be invalid.
+-- function on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
+--   if shape_one.static == true and shape_two.static ~= true then
+--     shape_two:move(mtv_x, mtv_y)
+--   elseif shape_two.static == true and shape_one.static ~= true then
+--     shape_one:move(mtv_x, mtv_y)
+--   end
 
-  if type(shape_one.on_collide) == "function" then
-    shape_one:on_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
-  end
+--   if type(shape_one.on_collide) == "function" then
+--     shape_one:on_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
+--   end
 
-  if type(shape_two.on_collide) == "function" then
-    shape_two:on_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
-  end
+--   if type(shape_two.on_collide) == "function" then
+--     shape_two:on_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
+--   end
 
-  local player, other, collision = nil, nil, nil
-  if shape_one.parent == game.player then
-    player, other = shape_one, shape_two
-    collision = {
-      is_down = mtv_y < 0,
-      is_up = mtv_y > 0,
-      is_left = mtv_x > 0,
-      is_right = mtv_x < 0
-    }
-  elseif shape_two.parent == game.player then
-    player, other = shape_two, shape_one
-    collision = {
-      is_down = mtv_y > 0,
-      is_up = mtv_y < 0,
-      is_left = mtv_x < 0,
-      is_right = mtv_x > 0
-    }
-  else
-    return
-  end
+--   local player, other, collision = nil, nil, nil
+--   if shape_one.parent == game.player then
+--     player, other = shape_one, shape_two
+--     collision = {
+--       is_down = mtv_y < 0,
+--       is_up = mtv_y > 0,
+--       is_left = mtv_x > 0,
+--       is_right = mtv_x < 0
+--     }
+--   elseif shape_two.parent == game.player then
+--     player, other = shape_two, shape_one
+--     collision = {
+--       is_down = mtv_y > 0,
+--       is_up = mtv_y < 0,
+--       is_left = mtv_x < 0,
+--       is_right = mtv_x > 0
+--     }
+--   else
+--     return
+--   end
 
-  -- After this line, we can assume player refers to the player's physics_body
-  -- collision values will use the player as a point of reference
+--   -- After this line, we can assume player refers to the player's physics_body
+--   -- collision values will use the player as a point of reference
 
-  if other.static ~= true then
-    other:move(mtv_x, mtv_y)
-  end
+--   if other.static ~= true then
+--     other:move(mtv_x, mtv_y)
+--   end
 
-  if collision.is_down then
-    game.player.on_ground = true
-    game.player.velocity.y = 0
-  end
-end
+--   if collision.is_down then
+--     game.player.on_ground = true
+--     game.player.velocity.y = 0
+--   end
+-- end
 
-function on_stop_collide(dt, shape_one, shape_two)
-  if shape_one.parent == game.player or shape_two.parent == game.player then
-    game.player.on_ground = false
-  end
-  -- print("stop", shape_one, shape_two)
-end
+-- function on_stop_collide(dt, shape_one, shape_two)
+--   if shape_one.parent == game.player or shape_two.parent == game.player then
+--     game.player.on_ground = false
+--   end
+--   -- print("stop", shape_one, shape_two)
+-- end
