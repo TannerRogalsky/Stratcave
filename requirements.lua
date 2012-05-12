@@ -24,12 +24,12 @@ require 'game'
 require 'character'
 require 'player_character'
 require 'level'
-require 'screen'
-require 'layer'
 require 'enemy'
+require 'bullet'
 
 -- Game states
 require 'states.loading'
 require 'states.main'
 require 'states.menu'
+require 'states.game_over'
 

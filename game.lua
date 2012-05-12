@@ -33,6 +33,15 @@ end
 function Game.joystickreleased(joystick, button)
 end
 
+function Game:pack_game_objects()
+  local result = {}
+  table.insert(result, {self.player.pos.x, love.graphics.getHeight() - self.player.pos.y})
+  for id,enemy in pairs(self.enemies) do
+    table.insert(result, {enemy.pos.x, love.graphics.getHeight() - enemy.pos.y})
+  end
+  return result
+end
+
 -- -- shape_one and shape_two are the colliding shapes. mtv_x and mtv_y define the minimum translation vector,
 -- -- i.e. the direction and magnitude shape_one has to be moved so that the collision will be resolved.
 -- -- Note that if one of the shapes is a point shape, the translation vector will be invalid.

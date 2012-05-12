@@ -4,7 +4,7 @@ function PlayerCharacter:initialize(jsonInTableForm)
   Character.initialize(self, jsonInTableForm)
 
   self.pos = jsonInTableForm.pos or {x = 100, y = 100}
-  self.speed = 3
+  self.speed = 2
 
   self.control_map = {
     keyboard = {
@@ -36,6 +36,11 @@ function PlayerCharacter:initialize(jsonInTableForm)
 
   self._physics_body = game.collider:addCircle(self.pos.x, self.pos.y, 10)
   self._physics_body.parent = self
+  game.collider:addToGroup("player_and_bullets", self._physics_body)
+
+  self.angle = 0
+  self.firing = false
+  self.time_of_last_fire = 0
 end
 
 function PlayerCharacter:update(dt)
@@ -48,8 +53,15 @@ function PlayerCharacter:update(dt)
     self.control_map.joystick.on_update()
   end
 
+  local x, y = love.mouse.getX(), love.mouse.getY()
+  self.angle = math.atan2(y - self.pos.y, x - self.pos.x)
+
   -- end handle input
 
+  local t = love.timer.getMicroTime()
+  if self.firing and t - self.time_of_last_fire > 0.1 then
+    self:fire(t)
+  end
 end
 
 function PlayerCharacter:render()
@@ -58,9 +70,16 @@ function PlayerCharacter:render()
   love.graphics.circle("fill", self.pos.x, self.pos.y, p_radius)
 
   love.graphics.setColor(0,0,0,255)
-  local x, y = love.mouse.getX(), love.mouse.getY()
-  local angle = math.atan2(y - self.pos.y, x - self.pos.x)
-  x = self.pos.x + p_radius * math.cos(angle)
-  y = self.pos.y + p_radius * math.sin(angle)
+  local x = self.pos.x + p_radius * math.cos(self.angle)
+  local y = self.pos.y + p_radius * math.sin(self.angle)
   love.graphics.line(self.pos.x, self.pos.y, x, y)
+end
+
+function PlayerCharacter:fire(current_time)
+  self.time_of_last_fire = current_time
+
+  local x = self.pos.x + 10 * math.cos(self.angle)
+  local y = self.pos.y + 10 * math.sin(self.angle)
+  local bullet = Bullet:new({x = x, y = y}, self.angle)
+  game.bullets[bullet.id] = bullet
 end
