@@ -4,7 +4,7 @@ function Main:enteredState()
   local MAX_BALLS = 50
   local num_enemies = 10
   overlay = true
-  spawn_rate = 3
+  spawn_rate = 10000
 
   self.collider = HC(50, self.on_start_collide, self.on_stop_collide)
 
@@ -20,9 +20,9 @@ function Main:enteredState()
   self.time_since_last_spawn = 0
   self.over = false
 
-  local raw = love.filesystem.read("shader.c"):format(MAX_BALLS)
+  local raw = love.filesystem.read("shaders/overlay.c"):format(MAX_BALLS)
   self.overlay = love.graphics.newPixelEffect(raw)
-  self.bg = love.graphics.newImage("images/game_over.png")
+  self.bg = love.graphics.newImage("images/sky_layer_4.png")
 
   local positions, radii, deltas = self:pack_game_objects()
   self.overlay:send('num_balls', self.num_torches + self.num_shooters)
@@ -30,6 +30,9 @@ function Main:enteredState()
   self.overlay:send('balls', unpack(positions))
   self.overlay:send('radii', unpack(radii))
   self.overlay:send('delta_to_target', unpack(deltas))
+
+  raw = love.filesystem.read("shaders/topbar.c"):format(g.getHeight(), 50)
+  self.topbar = g.newPixelEffect(raw)
 end
 
 function Main:render()
@@ -56,6 +59,11 @@ function Main:render()
   end
 
   camera:unset()
+
+  g.setPixelEffect(self.topbar)
+  g.setColor(68, 153, 238)
+  g.rectangle("fill", 0, 0, g.getWidth(), 50)
+  g.setPixelEffect()
 
   love.graphics.setColor(0,255,0,255)
   love.graphics.print(love.timer.getFPS(), 2, 2)

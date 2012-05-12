@@ -40,6 +40,8 @@ function PlayerCharacter:initialize(jsonInTableForm)
   self._physics_body.parent = self
   game.collider:addToGroup("player_and_bullets", self._physics_body)
 
+  self.image = g.newImage("images/player.png")
+
   self.angle = 0
   self.firing = false
   self.time_of_last_fire = 0
@@ -76,12 +78,15 @@ end
 
 function PlayerCharacter:render()
   local p_radius = 10
-  love.graphics.setColor(255,0,0)
-  love.graphics.circle("fill", self.pos.x, self.pos.y, p_radius)
+  -- love.graphics.setColor(255,0,0)
+  -- love.graphics.circle("fill", self.pos.x, self.pos.y, p_radius)
+  g.setColor(255,255,255)
+  local x,y = self:bbox()
+  g.draw(self.image, x, y)
 
   love.graphics.setColor(0,0,0,255)
-  local x = self.pos.x + p_radius * math.cos(self.angle)
-  local y = self.pos.y + p_radius * math.sin(self.angle)
+  x = self.pos.x + p_radius * math.cos(self.angle)
+  y = self.pos.y + p_radius * math.sin(self.angle)
   love.graphics.line(self.pos.x, self.pos.y, x, y)
 end
 
