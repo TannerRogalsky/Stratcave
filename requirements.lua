@@ -28,6 +28,7 @@ require 'enemy'
 require 'bullet'
 require 'shooter'
 require 'gun'
+require 'torch'
 
 -- Game states
 require 'states.loading'

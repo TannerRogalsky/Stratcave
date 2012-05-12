@@ -1,7 +1,9 @@
 #define MAXBALLS %d
 extern vec2[MAXBALLS] balls;
-extern vec2 delta_to_mouse;
+extern float[MAXBALLS] radii;
+extern vec2[MAXBALLS] delta_to_target;
 extern float num_balls;
+extern float num_flashlights;
 
 float circle(vec2 x, float radius){
   x /= radius;
@@ -11,7 +13,7 @@ float circle(vec2 x, float radius){
 
 // Suppose the torch lies at O (the apex of the cone) and the point being rendered is at P.
 // Let D be a unit-vector in the direction the torch is shining.
-float flashlight(vec2 O, vec2 P){
+float flashlight(vec2 O, vec2 P, vec2 delta_to_target){
   // Constants and parameters
   const float PI = 3.141592f;
   const float fov = 3.141592f / 4;
@@ -21,10 +23,10 @@ float flashlight(vec2 O, vec2 P){
   const float near_plane = 1.5f;
   const float near_gradient = 0.9f;
 
-  vec2 D = normalize(delta_to_mouse);
+  vec2 D = normalize(delta_to_target);
 
   // proof of concept: full light spread on mouseover player
-  // vec2 dtm = delta_to_mouse;
+  // vec2 dtm = delta_to_target;
   // if((abs(dtm[0]) < 10) && (abs(dtm[1]) < 10)){
   //   dtm = vec2(0,0);
   // }
@@ -60,12 +62,15 @@ float flashlight(vec2 O, vec2 P){
 vec4 effect(vec4 color, Image tex, vec2 tc, vec2 pc){
   // you can reverse the gradient direction by changing p to 0 and the for loop to increment
   float p = 1.0;
-  for (int i = 1; i < num_balls; ++i){
-    p -= circle(pc - balls[i], 40.0f);
+  for (int i = 0; i < num_balls; ++i){
+    p -= circle(pc - balls[i], radii[i]);
   }
 
-  p -= flashlight(balls[0], pc);
-  p -= circle(pc - balls[0], 10.0f);
+  for (int i = 0; i < num_flashlights; ++i)
+  {
+    p -= flashlight(balls[i], pc, delta_to_target[i]);
+  }
+
   // putting a ceiling on the next line makes discrete levels
   // leaving it off makes a smooth gradient
   p = p * 6.0; // size again

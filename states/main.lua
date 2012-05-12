@@ -3,14 +3,17 @@ local Main = Game:addState('Main')
 function Main:enteredState()
   local MAX_BALLS = 50
   local num_enemies = 10
-  overlay = false
-  spawn_rate = 1
+  overlay = true
+  spawn_rate = 3
 
   self.collider = HC(50, self.on_start_collide, self.on_stop_collide)
 
   self.player = PlayerCharacter:new({pos = {x = g.getWidth() / 2, y = g.getHeight() / 2}})
   self.enemies = {}
+  self.num_shooters = 0
   self.bullets = {}
+  self.torches = {}
+  self.num_torches = 0
 
   self:create_bounds()
 
@@ -21,13 +24,12 @@ function Main:enteredState()
   self.overlay = love.graphics.newPixelEffect(raw)
   self.bg = love.graphics.newImage("images/game_over.png")
 
-  local positions = self:pack_game_objects()
-  self.overlay:send('num_balls', #positions)
+  local positions, radii, deltas = self:pack_game_objects()
+  self.overlay:send('num_balls', self.num_torches + self.num_shooters)
+  self.overlay:send('num_flashlights', self.num_shooters)
   self.overlay:send('balls', unpack(positions))
-
-  local dx = love.mouse.getX() - self.player.pos.x
-  local dy = self.player.pos.y - love.mouse.getY()
-  self.overlay:send('delta_to_mouse', {dx, dy})
+  self.overlay:send('radii', unpack(radii))
+  self.overlay:send('delta_to_target', unpack(deltas))
 end
 
 function Main:render()
@@ -80,19 +82,24 @@ function Main:update(dt)
     bullet:update(dt)
   end
 
+  for id,torch in pairs(self.torches) do
+    torch:update(dt)
+  end
+
   local t = love.timer.getMicroTime()
   self:spawn_baddy(t)
 
-  local dx = love.mouse.getX() - self.player.pos.x
-  local dy = self.player.pos.y - love.mouse.getY()
-  self.overlay:send('delta_to_mouse', {dx, dy})
-
-  local positions = self:pack_game_objects()
-  self.overlay:send('num_balls', #positions)
+  local positions, radii, deltas = self:pack_game_objects()
+  -- print(self.num_torches + self.num_shooters, self.num_shooters)
+  self.overlay:send('num_balls', self.num_torches + self.num_shooters)
+  self.overlay:send('num_flashlights', self.num_shooters)
   self.overlay:send('balls', unpack(positions))
+  self.overlay:send('radii', unpack(radii))
+  self.overlay:send('delta_to_target', unpack(deltas))
 end
 
 function Main.keypressed(key, unicode)
+  if key == " " then key = "space" end
   local action = game.player.control_map.keyboard.on_press[key]
   if type(action) == "function" then action() end
 end
@@ -138,7 +145,7 @@ function Main:spawn_baddy(current_time)
     end
 
     local enemy_type
-    if math.random(1,10) == 10 then
+    if math.random(1,10) >= 8 then
       enemy_type = Shooter
     else
       enemy_type = Enemy
@@ -250,12 +257,31 @@ end
 
 
 function Main:pack_game_objects()
-  local result = {}
-  table.insert(result, {self.player.pos.x, love.graphics.getHeight() - self.player.pos.y})
+  local positions = {}
+  local radii = {}
+  local deltas = {}
+  table.insert(positions, {self.player.pos.x, love.graphics.getHeight() - self.player.pos.y})
+  table.insert(radii, 10)
+  table.insert(deltas, self.player.delta_to_mouse)
+  self.num_shooters = 1
   for id,enemy in pairs(self.enemies) do
-    table.insert(result, {enemy.pos.x, love.graphics.getHeight() - enemy.pos.y})
+    if instanceOf(Shooter, enemy) then
+      table.insert(positions, {enemy.pos.x, love.graphics.getHeight() - enemy.pos.y})
+      table.insert(radii, 10)
+      table.insert(deltas, enemy.delta_to_player)
+      self.num_shooters = self.num_shooters + 1
+    end
   end
-  return result
+
+  self.num_torches = 0
+  for id,torch in pairs(self.torches) do
+    table.insert(positions, {torch.pos.x, love.graphics.getHeight() - torch.pos.y})
+    table.insert(radii, torch.radius)
+    self.num_torches = self.num_torches + 1
+  end
+
+  -- print(inspect(deltas))
+  return positions, radii, deltas
 end
 
 return Main

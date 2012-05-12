@@ -9,7 +9,7 @@ function PlayerCharacter:initialize(jsonInTableForm)
   self.control_map = {
     keyboard = {
       on_press = {
-        up = function() end
+        space = function() self:drop_torch() end
       },
       on_release = {
 
@@ -45,6 +45,8 @@ function PlayerCharacter:initialize(jsonInTableForm)
   self.time_of_last_fire = 0
   self.gun = Gun:new("machine_gun", 0.1, 20)
   -- self.gun = Gun:new("sniper", 1, 0)
+
+  self.delta_to_mouse = {0,0}
 end
 
 function PlayerCharacter:update(dt)
@@ -66,6 +68,10 @@ function PlayerCharacter:update(dt)
   if self.firing and t - self.time_of_last_fire > self.gun.rate_of_fire then
     self:fire(t)
   end
+
+  local dx = love.mouse.getX() - self.pos.x
+  local dy = self.pos.y - love.mouse.getY()
+  self.delta_to_mouse = {dx, dy}
 end
 
 function PlayerCharacter:render()
@@ -89,4 +95,10 @@ function PlayerCharacter:fire(current_time)
   local bullet = Bullet:new({x = x, y = y}, angle_of_attack)
   game.bullets[bullet.id] = bullet
   game.collider:addToGroup("player_and_bullets", bullet._physics_body)
+end
+
+function PlayerCharacter:drop_torch()
+  local pos = {x = self.pos.x, y = self.pos.y}
+  local torch = Torch:new(pos, 60)
+  game.torches[torch.id] = torch
 end
