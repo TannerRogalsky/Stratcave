@@ -2,10 +2,10 @@ local Main = Game:addState('Main')
 
 function Main:enteredState()
   local MAX_BALLS = 50
-  local num_enemies = 10
   overlay = true
-  spawn_rate = 3
-  max_torches = 5
+  spawn_rate = spawn_rate or 3
+  max_torches = max_torches or 5
+  crawler_ratio = crawler_ratio or 8
   screenshots_enabled = false
 
   self.collider = HC(50, self.on_start_collide, self.on_stop_collide)
@@ -75,7 +75,7 @@ function Main:render()
   g.setColor(0,0,0)
   g.print("Score: " .. self.player.score, 2, 4)
   g.print("Time: " .. math.round(self.round_time, 1), 250, 4)
-  g.print("Torches available: " .. 5 - self.num_torches, 400, 4)
+  g.print("Torches available: " .. max_torches - self.num_torches, 400, 4)
 end
 
 function Main:update(dt)
@@ -165,7 +165,7 @@ function Main:spawn_baddy(current_time)
     end
 
     local enemy_type
-    if math.random(1,10) >= 8 then
+    if math.random(1,10) >= crawler_ratio then
       enemy_type = Shooter
     else
       enemy_type = Enemy

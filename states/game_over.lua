@@ -20,7 +20,7 @@ function GameOver:exitedState()
 end
 
 function GameOver.mousepressed(x, y, button)
-  game:gotoState("Main")
+  game:gotoState("Menu")
 end
 
 return GameOver
