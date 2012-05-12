@@ -30,7 +30,9 @@ function PlayerCharacter:initialize(jsonInTableForm)
       },
       on_release = {
       },
-      on_update = function() self.velocity.x = love.joystick.getAxis(0, 0) * 200 end
+      on_update = function()
+        self:move(love.joystick.getAxis(0, 0) * 10, love.joystick.getAxis(0,1) * 10)
+      end
     }
   }
 

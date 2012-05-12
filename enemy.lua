@@ -14,9 +14,9 @@ end
 
 function Enemy:update(dt)
   local x, y = game.player.pos.x, game.player.pos.y
-  local angle = math.atan2(y - self.pos.y, x - self.pos.x)
-  x = self.pos.x + self.speed * math.cos(angle)
-  y = self.pos.y + self.speed * math.sin(angle)
+  self.angle = math.atan2(y - self.pos.y, x - self.pos.x)
+  x = self.pos.x + self.speed * math.cos(self.angle)
+  y = self.pos.y + self.speed * math.sin(self.angle)
   self:moveTo(x,y)
 end
 
