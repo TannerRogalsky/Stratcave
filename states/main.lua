@@ -4,7 +4,9 @@ function Main:enteredState()
   local MAX_BALLS = 50
   local num_enemies = 10
   overlay = true
-  spawn_rate = 10000
+  spawn_rate = 3
+  max_torches = 5
+  screenshots_enabled = false
 
   self.collider = HC(50, self.on_start_collide, self.on_stop_collide)
 
@@ -19,6 +21,9 @@ function Main:enteredState()
 
   self.time_since_last_spawn = 0
   self.over = false
+  self.round_time = 0
+
+  screenshots = {}
 
   local raw = love.filesystem.read("shaders/overlay.c"):format(MAX_BALLS)
   self.overlay = love.graphics.newPixelEffect(raw)
@@ -31,7 +36,7 @@ function Main:enteredState()
   self.overlay:send('radii', unpack(radii))
   self.overlay:send('delta_to_target', unpack(deltas))
 
-  raw = love.filesystem.read("shaders/topbar.c"):format(g.getHeight(), 50)
+  raw = love.filesystem.read("shaders/topbar.c"):format(g.getHeight(), g.getWidth(), 30, 200)
   self.topbar = g.newPixelEffect(raw)
 end
 
@@ -62,14 +67,19 @@ function Main:render()
 
   g.setPixelEffect(self.topbar)
   g.setColor(68, 153, 238)
-  g.rectangle("fill", 0, 0, g.getWidth(), 50)
+  g.rectangle("fill", 0, 0, g.getWidth(), 70)
   g.setPixelEffect()
 
-  love.graphics.setColor(0,255,0,255)
-  love.graphics.print(love.timer.getFPS(), 2, 2)
+  -- love.graphics.setColor(0,255,0,255)
+  -- love.graphics.print(love.timer.getFPS(), 2, 2)
+  g.setColor(0,0,0)
+  g.print("Score: " .. self.player.score, 2, 4)
+  g.print("Time: " .. math.round(self.round_time, 1), 250, 4)
+  g.print("Torches available: " .. 5 - self.num_torches, 400, 4)
 end
 
 function Main:update(dt)
+  self.round_time = self.round_time + dt
   self.collider:update(dt)
   if game.over == true then
     return
@@ -137,6 +147,8 @@ end
 function Main:spawn_baddy(current_time)
   if current_time - self.time_since_last_spawn > spawn_rate then
 
+    if screenshots_enabled then table.insert(screenshots, g.newScreenshot()) end
+
     local x, y = math.random(0, g.getWidth()), math.random(0, g.getHeight())
     if math.random(0,1) == 0 then
       if x > g.getWidth() / 2 then
@@ -169,7 +181,7 @@ end
 function Main.on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
   -- print(tostring(shape_one.parent) .. " is colliding with " .. tostring(shape_two.parent))
 
-  if shape_one.bound and instanceOf(Enemy, shape_two.parent) or shape_two.bound and instanceOf(Enemy, shape_one.parent) then
+  if shape_one.bound and instanceOf(Enemy, shape_two.parent) or shape_two.bound and instanceOf(Enemy, shape_one.parent) or game.over then
     return
   end
 
@@ -183,11 +195,21 @@ function Main.on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
     game.collider:remove(shape_one, shape_two)
     game.enemies[shape_two.parent.id] = nil
     game.bullets[shape_one.parent.id] = nil
+    if instanceOf(Shooter, shape_two.parent) then
+      game.player.score = game.player.score + 3
+    else
+      game.player.score = game.player.score + 1
+    end
     return
   elseif instanceOf(Bullet, shape_two.parent) and instanceOf(Enemy, shape_one.parent) then
     game.collider:remove(shape_one, shape_two)
     game.enemies[shape_one.parent.id] = nil
     game.bullets[shape_two.parent.id] = nil
+    if instanceOf(Shooter, shape_one.parent) then
+      game.player.score = game.player.score + 3
+    else
+      game.player.score = game.player.score + 1
+    end
     return
   end
 
@@ -240,6 +262,10 @@ function Main:exitedState()
   self.collider:clear()
   self.collider = nil
 
+  stats = {
+    score = self.player.score,
+    round_time = self.round_time
+  }
   self.player = nil
   self.enemies = nil
   self.bullets = nil
