@@ -26,6 +26,8 @@ require 'player_character'
 require 'level'
 require 'enemy'
 require 'bullet'
+require 'shooter'
+require 'gun'
 
 -- Game states
 require 'states.loading'

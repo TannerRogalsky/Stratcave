@@ -8,7 +8,6 @@ function Bullet:initialize(origin, angle)
 
   self._physics_body = game.collider:addPoint(self.pos.x, self.pos.y)
   self._physics_body.parent = self
-  game.collider:addToGroup("player_and_bullets", self._physics_body)
 
   self.angle = angle
   self.speed = 10
@@ -24,8 +23,6 @@ function Bullet:initialize(origin, angle)
 
   --2. create an image from that image data
   local i = g.newImage(id)
-
-  print(self.angle)
 
   --3a. create a new particle system which uses that image, set the maximum amount of particles (images) that could exist at the same time to 256
   self.p = g.newParticleSystem(i, 256)

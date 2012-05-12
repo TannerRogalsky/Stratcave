@@ -3,6 +3,8 @@ local Main = Game:addState('Main')
 function Main:enteredState()
   local MAX_BALLS = 50
   local num_enemies = 10
+  overlay = false
+  spawn_rate = 1
 
   self.collider = HC(50, self.on_start_collide, self.on_stop_collide)
 
@@ -44,10 +46,12 @@ function Main:render()
     bullet:render()
   end
 
-  love.graphics.setColor(255,255,255,255)
-  love.graphics.setPixelEffect(self.overlay)
-  love.graphics.rectangle('fill', 0,0,love.graphics.getWidth(), love.graphics.getHeight())
-  love.graphics.setPixelEffect()
+  if overlay then
+    love.graphics.setColor(255,255,255,255)
+    love.graphics.setPixelEffect(self.overlay)
+    love.graphics.rectangle('fill', 0,0,love.graphics.getWidth(), love.graphics.getHeight())
+    love.graphics.setPixelEffect()
+  end
 
   camera:unset()
 
@@ -116,7 +120,7 @@ function Main.mousereleased(x, y, button)
 end
 
 function Main:spawn_baddy(current_time)
-  if current_time - self.time_since_last_spawn > 1 then
+  if current_time - self.time_since_last_spawn > spawn_rate then
 
     local x, y = math.random(0, g.getWidth()), math.random(0, g.getHeight())
     if math.random(0,1) == 0 then
@@ -133,7 +137,14 @@ function Main:spawn_baddy(current_time)
       end
     end
 
-    local enemy = Enemy:new({x = x, y = y})
+    local enemy_type
+    if math.random(1,10) == 10 then
+      enemy_type = Shooter
+    else
+      enemy_type = Enemy
+    end
+
+    local enemy = enemy_type:new({x = x, y = y})
     self.enemies[enemy.id] = enemy
 
     self.time_since_last_spawn = current_time
@@ -147,7 +158,7 @@ function Main.on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
     return
   end
 
-  if shape_one.parent == game.player and instanceOf(Enemy, shape_two.parent) or shape_two.parent == game.player and instanceOf(Enemy, shape_one.parent) then
+  if shape_one.parent == game.player and shape_two.bound ~= true or shape_two.parent == game.player and shape_one.bound ~= true then
     game:gotoState("GameOver")
     game.over = true
     return

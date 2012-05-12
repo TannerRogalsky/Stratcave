@@ -43,6 +43,8 @@ function PlayerCharacter:initialize(jsonInTableForm)
   self.angle = 0
   self.firing = false
   self.time_of_last_fire = 0
+  self.gun = Gun:new("machine_gun", 0.1, 20)
+  -- self.gun = Gun:new("sniper", 1, 0)
 end
 
 function PlayerCharacter:update(dt)
@@ -61,7 +63,7 @@ function PlayerCharacter:update(dt)
   -- end handle input
 
   local t = love.timer.getMicroTime()
-  if self.firing and t - self.time_of_last_fire > 0.1 then
+  if self.firing and t - self.time_of_last_fire > self.gun.rate_of_fire then
     self:fire(t)
   end
 end
@@ -80,8 +82,11 @@ end
 function PlayerCharacter:fire(current_time)
   self.time_of_last_fire = current_time
 
-  local x = self.pos.x + 10 * math.cos(self.angle)
-  local y = self.pos.y + 10 * math.sin(self.angle)
-  local bullet = Bullet:new({x = x, y = y}, self.angle)
+  local spread = math.random(-self.gun.spread, self.gun.spread)
+  local angle_of_attack = self.angle + math.rad(spread)
+  local x = self.pos.x + 10 * math.cos(angle_of_attack)
+  local y = self.pos.y + 10 * math.sin(angle_of_attack)
+  local bullet = Bullet:new({x = x, y = y}, angle_of_attack)
   game.bullets[bullet.id] = bullet
+  game.collider:addToGroup("player_and_bullets", bullet._physics_body)
 end
