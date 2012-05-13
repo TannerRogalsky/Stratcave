@@ -17,6 +17,7 @@ Stateful = require 'lib/stateful'
 skiplist = require "lib/skiplist"
 HC = require 'lib/HardonCollider'
 inspect = require 'lib/inspect'
+cron = require 'lib/cron'
 
 -- Game classes
 require 'base'
@@ -29,6 +30,7 @@ require 'bullet'
 require 'shooter'
 require 'gun'
 require 'torch'
+require 'boss'
 
 -- Game states
 require 'states.loading'

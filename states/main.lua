@@ -25,6 +25,12 @@ function Main:enteredState()
 
   screenshots = {}
 
+  cron.every(60, function()
+    local x,y = self:get_enemy_spawn_position()
+    local enemy = Boss:new({x = x, y = y}, 40)
+    self.enemies[enemy.id] = enemy
+  end)
+
   local raw = love.filesystem.read("shaders/overlay.c"):format(MAX_BALLS)
   self.overlay = love.graphics.newPixelEffect(raw)
   self.bg = love.graphics.newImage("images/sky_layer_4.png")
@@ -79,6 +85,7 @@ function Main:render()
 end
 
 function Main:update(dt)
+  cron.update(dt)
   self.round_time = self.round_time + dt
   self.collider:update(dt)
   if game.over == true then
@@ -149,20 +156,7 @@ function Main:spawn_baddy(current_time)
 
     if screenshots_enabled then table.insert(screenshots, g.newScreenshot()) end
 
-    local x, y = math.random(0, g.getWidth()), math.random(0, g.getHeight())
-    if math.random(0,1) == 0 then
-      if x > g.getWidth() / 2 then
-        x = g.getWidth() + 90
-      else
-        x = 0 - 90
-      end
-    else
-      if y > g.getHeight() / 2 then
-        y = g.getHeight() + 90
-      else
-        y = 0 - 90
-      end
-    end
+    local x,y = self:get_enemy_spawn_position()
 
     local enemy_type
     if math.random(1,10) >= crawler_ratio then
@@ -269,6 +263,7 @@ function Main:exitedState()
   self.player = nil
   self.enemies = nil
   self.bullets = nil
+  cron.reset()
 end
 
 function Main:create_bounds()
@@ -316,6 +311,24 @@ function Main:pack_game_objects()
 
   -- print(inspect(deltas))
   return positions, radii, deltas
+end
+
+function Main.get_enemy_spawn_position()
+  local x, y = math.random(0, g.getWidth()), math.random(0, g.getHeight())
+  if math.random(0,1) == 0 then
+    if x > g.getWidth() / 2 then
+      x = g.getWidth() + 90
+    else
+      x = 0 - 90
+    end
+  else
+    if y > g.getHeight() / 2 then
+      y = g.getHeight() + 90
+    else
+      y = 0 - 90
+    end
+  end
+  return x, y
 end
 
 return Main
