@@ -42,7 +42,9 @@ function Bullet:initialize(origin, angle)
   self.p:setRotation              (0)
   self.p:setSpin                  (0)
   self.p:setSpinVariation         (0)
-  self.p:setColors                (100, 100, 255, 255, 0, 170, 255, 50)
+  self.p:setColors                (255, 0, 0, 255,
+                                  255, 0, 255, 255 / 2,
+                                  0, 0, 155, 0)
   self.p:stop() --this stop is to prevent any glitch that could happen after the particle system is created
 end
 
