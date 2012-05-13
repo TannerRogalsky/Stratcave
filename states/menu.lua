@@ -50,6 +50,8 @@ function Menu:enteredState()
   self.ui_font = g.newFont(16)
   g.setFont(self.ui_font)
 
+  self.time = 0
+
   local raw = love.filesystem.read("shaders/menu.c"):format(g.getWidth(), g.getHeight())
   self.bg = love.graphics.newPixelEffect(raw)
 end
@@ -74,7 +76,9 @@ function Menu:render()
 end
 
 function Menu:update(dt)
-  self.collider:update()
+  self.collider:update(dt)
+  self.time = self.time + dt
+  self.bg:send('time', self.time)
 end
 
 function Menu.mousepressed(x, y, button)
