@@ -7,6 +7,7 @@ function Boss:initialize(pos, radius)
   self.radius = radius
   self.speed = 0.5
   self.time_of_last_fire = 0
+  self.health = 10
 
   self.delta_to_player = {0,0}
 

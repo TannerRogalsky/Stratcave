@@ -203,9 +203,24 @@ function Main.on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
   end
   
   if instanceOf(Bullet, shape_one.parent) and instanceOf(Enemy, shape_two.parent) then
-    game.collider:remove(shape_one, shape_two)
-    game.enemies[shape_two.parent.id] = nil
-    game.bullets[shape_one.parent.id] = nil
+    -- collision resolution
+    if instanceOf(Boss, shape_two.parent) then
+      shape_two.parent.health = shape_two.parent.health - 1
+      local dead = shape_two.parent.health <= 0
+      if dead then
+        game.collider:remove(shape_one, shape_two)
+        game.enemies[shape_two.parent.id] = nil
+        game.bullets[shape_one.parent.id] = nil
+      else
+        game.collider:remove(shape_one)
+        game.bullets[shape_one.parent.id] = nil
+      end
+    else
+      game.collider:remove(shape_one, shape_two)
+      game.enemies[shape_two.parent.id] = nil
+      game.bullets[shape_one.parent.id] = nil
+    end
+    -- scoring calc
     if instanceOf(Shooter, shape_two.parent) then
       game.player.score = game.player.score + 3
     else
@@ -213,9 +228,24 @@ function Main.on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
     end
     return
   elseif instanceOf(Bullet, shape_two.parent) and instanceOf(Enemy, shape_one.parent) then
-    game.collider:remove(shape_one, shape_two)
-    game.enemies[shape_one.parent.id] = nil
-    game.bullets[shape_two.parent.id] = nil
+    -- collision resolution
+    if instanceOf(Boss, shape_one.parent) then
+      shape_one.parent.health = shape_one.parent.health - 1
+      local dead = shape_one.parent.health <= 0
+      if dead then
+        game.collider:remove(shape_one, shape_two)
+        game.enemies[shape_one.parent.id] = nil
+        game.bullets[shape_two.parent.id] = nil
+      else
+        game.collider:remove(shape_two)
+        game.bullets[shape_two.parent.id] = nil
+      end
+    else
+      game.collider:remove(shape_one, shape_two)
+      game.enemies[shape_one.parent.id] = nil
+      game.bullets[shape_two.parent.id] = nil
+    end
+    -- scoring calc
     if instanceOf(Shooter, shape_one.parent) then
       game.player.score = game.player.score + 3
     else
