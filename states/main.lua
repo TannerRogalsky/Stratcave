@@ -293,6 +293,7 @@ function Main:pack_game_objects()
   local positions = {}
   local radii = {}
   local deltas = {}
+  local bosses = {}
   table.insert(positions, {self.player.pos.x, love.graphics.getHeight() - self.player.pos.y})
   table.insert(radii, self.player.radius)
   table.insert(deltas, self.player.delta_to_mouse)
@@ -303,10 +304,20 @@ function Main:pack_game_objects()
       table.insert(radii, enemy.radius)
       table.insert(deltas, enemy.delta_to_player)
       self.num_shooters = self.num_shooters + 1
+    elseif instanceOf(Boss, enemy) then
+      table.insert(bosses, enemy)
     end
   end
 
+
   self.num_torches = 0
+  for index,boss in ipairs(bosses) do
+    table.insert(positions, {boss.pos.x, love.graphics.getHeight() - boss.pos.y})
+    table.insert(radii, boss.radius + 10)
+    table.insert(deltas, boss.delta_to_player)
+    self.num_torches = self.num_torches + 1
+  end
+
   for id,torch in pairs(self.torches) do
     table.insert(positions, {torch.pos.x, love.graphics.getHeight() - torch.pos.y})
     table.insert(radii, torch.radius)

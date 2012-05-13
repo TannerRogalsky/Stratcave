@@ -49,6 +49,11 @@ end
 function Menu:render()
   g.setColor(255,255,255)
   g.print("GENERIC SCHMUP", 100, 100)
+  g.print("Controls:", 200, 125)
+  g.print("WASD", 200, 150)
+  g.print("SPACE to drop a torch", 200, 175)
+  g.print("MOUSE to aim", 200, 200)
+  g.print("LEFT CLICK to shoot (hold it down for happiness)", 200, 225)
 
   for i,box in ipairs(self.ui) do
     box:render()
