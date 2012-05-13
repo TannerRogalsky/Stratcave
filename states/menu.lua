@@ -12,7 +12,7 @@ function Menu:enteredState()
   end
   box.onclick = function()
     spawn_rate = 4
-    max_torches = 6
+    max_torches = 8
     crawler_ratio = 8
   end
   table.insert(self.ui, box)

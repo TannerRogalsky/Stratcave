@@ -27,21 +27,20 @@ function Shooter:update(dt)
 end
 
 function Shooter:render()
-  local p_radius = 10
   love.graphics.setColor(255,255,0)
-  love.graphics.circle("fill", self.pos.x, self.pos.y, p_radius)
+  love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)
 
   love.graphics.setColor(0,0,0,255)
-  x = self.pos.x + p_radius * math.cos(self.angle)
-  y = self.pos.y + p_radius * math.sin(self.angle)
+  x = self.pos.x + self.radius * math.cos(self.angle)
+  y = self.pos.y + self.radius * math.sin(self.angle)
   love.graphics.line(self.pos.x, self.pos.y, x, y)
 end
 
 function Shooter:fire(current_time)
   self.time_of_last_fire = current_time
 
-  local x = self.pos.x + 10 * math.cos(self.angle)
-  local y = self.pos.y + 10 * math.sin(self.angle)
+  local x = self.pos.x + self.radius * math.cos(self.angle)
+  local y = self.pos.y + self.radius * math.sin(self.angle)
   local bullet = Bullet:new({x = x, y = y}, self.angle)
   game.bullets[bullet.id] = bullet
 end
