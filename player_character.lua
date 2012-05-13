@@ -35,13 +35,13 @@ function PlayerCharacter:initialize(jsonInTableForm)
       end
     }
   }
-  self.radius = 10
+  self.radius = 20
 
   self._physics_body = game.collider:addCircle(self.pos.x, self.pos.y, self.radius)
   self._physics_body.parent = self
   game.collider:addToGroup("player_and_bullets", self._physics_body)
 
-  self.image = g.newImage("images/player_40px.png")
+  self.image = g.newImage("images/player_v2.png")
 
   self.angle = 0
   self.firing = false
@@ -80,16 +80,16 @@ function PlayerCharacter:update(dt)
 end
 
 function PlayerCharacter:render()
-  love.graphics.setColor(255,0,0)
-  love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)
-  -- g.setColor(255,255,255)
-  -- local x,y = self:bbox()
-  -- g.draw(self.image, x, y)
+  -- love.graphics.setColor(255,0,0, 255/2)
+  -- love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)
+  g.setColor(255,255,255)
+  local x,y = self:bbox()
+  g.draw(self.image, x + 20, y + 20, self.angle + math.rad(15), 1, 1, 103, 103)
 
-  love.graphics.setColor(0,0,0,255)
-  x = self.pos.x + self.radius * math.cos(self.angle)
-  y = self.pos.y + self.radius * math.sin(self.angle)
-  love.graphics.line(self.pos.x, self.pos.y, x, y)
+  -- love.graphics.setColor(0,0,0,255)
+  -- x = self.pos.x + self.radius * math.cos(self.angle)
+  -- y = self.pos.y + self.radius * math.sin(self.angle)
+  -- love.graphics.line(self.pos.x, self.pos.y, x, y)
 end
 
 function PlayerCharacter:fire(current_time)
