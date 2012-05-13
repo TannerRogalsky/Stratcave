@@ -63,7 +63,7 @@ function Menu:render()
   love.graphics.setPixelEffect()
 
   g.setColor(255,255,255)
-  g.print("GENERIC SCHMUP", 100, 100)
+  g.print("[GRIDPHREAK]", 100, 100)
   g.print("Controls:", 200, 125)
   g.print("WASD to move around", 200, 150)
   g.print("SPACE to drop a torch", 200, 175)
