@@ -26,7 +26,13 @@ function Main:enteredState()
 
   screenshots = {}
 
-  cron.every(60, function()
+  local boss_spawn_rate
+  if difficulty == "insane" then
+    boss_spawn_rate = 10
+  else
+    boss_spawn_rate = 60
+  end
+  cron.every(boss_spawn_rate, function()
     local x,y = self:get_enemy_spawn_position()
     local enemy = Boss:new({x = x, y = y}, 40)
     self.enemies[enemy.id] = enemy

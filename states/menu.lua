@@ -14,6 +14,7 @@ function Menu:enteredState()
     spawn_rate = 4
     max_torches = 8
     crawler_ratio = 8
+    difficulty = "easy"
   end
   table.insert(self.ui, box)
 
@@ -28,6 +29,7 @@ function Menu:enteredState()
     spawn_rate = 2
     max_torches = 5
     crawler_ratio = 7
+    difficulty = "hard"
   end
   table.insert(self.ui, box)
 
@@ -42,6 +44,7 @@ function Menu:enteredState()
     spawn_rate = 0.8
     max_torches = 4
     crawler_ratio = 5
+    difficulty = "insane"
   end
   table.insert(self.ui, box)
 
