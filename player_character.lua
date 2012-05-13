@@ -35,12 +35,13 @@ function PlayerCharacter:initialize(jsonInTableForm)
       end
     }
   }
+  self.radius = 10
 
-  self._physics_body = game.collider:addCircle(self.pos.x, self.pos.y, 10)
+  self._physics_body = game.collider:addCircle(self.pos.x, self.pos.y, self.radius)
   self._physics_body.parent = self
   game.collider:addToGroup("player_and_bullets", self._physics_body)
 
-  self.image = g.newImage("images/player.png")
+  self.image = g.newImage("images/player_40px.png")
 
   self.angle = 0
   self.firing = false
@@ -79,16 +80,15 @@ function PlayerCharacter:update(dt)
 end
 
 function PlayerCharacter:render()
-  local p_radius = 10
   love.graphics.setColor(255,0,0)
-  love.graphics.circle("fill", self.pos.x, self.pos.y, p_radius)
+  love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)
   -- g.setColor(255,255,255)
   -- local x,y = self:bbox()
   -- g.draw(self.image, x, y)
 
   love.graphics.setColor(0,0,0,255)
-  x = self.pos.x + p_radius * math.cos(self.angle)
-  y = self.pos.y + p_radius * math.sin(self.angle)
+  x = self.pos.x + self.radius * math.cos(self.angle)
+  y = self.pos.y + self.radius * math.sin(self.angle)
   love.graphics.line(self.pos.x, self.pos.y, x, y)
 end
 
@@ -97,8 +97,8 @@ function PlayerCharacter:fire(current_time)
 
   local spread = math.random(-self.gun.spread, self.gun.spread)
   local angle_of_attack = self.angle + math.rad(spread)
-  local x = self.pos.x + 10 * math.cos(angle_of_attack)
-  local y = self.pos.y + 10 * math.sin(angle_of_attack)
+  local x = self.pos.x + self.radius * math.cos(angle_of_attack)
+  local y = self.pos.y + self.radius * math.sin(angle_of_attack)
   local bullet = Bullet:new({x = x, y = y}, angle_of_attack)
   game.bullets[bullet.id] = bullet
   game.collider:addToGroup("player_and_bullets", bullet._physics_body)

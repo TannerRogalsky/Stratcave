@@ -3,6 +3,7 @@ local Main = Game:addState('Main')
 function Main:enteredState()
   local MAX_BALLS = 50
   overlay = true
+  god_mode = true
   spawn_rate = spawn_rate or 3
   max_torches = max_torches or 5
   crawler_ratio = crawler_ratio or 8
@@ -179,12 +180,14 @@ function Main.on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
     return
   end
 
-  if shape_one.parent == game.player and shape_two.bound ~= true or shape_two.parent == game.player and shape_one.bound ~= true then
-    game:gotoState("GameOver")
-    game.over = true
-    return
+  if god_mode ~= true then
+    if shape_one.parent == game.player and shape_two.bound ~= true or shape_two.parent == game.player and shape_one.bound ~= true then
+      game:gotoState("GameOver")
+      game.over = true
+      return
+    end
   end
-
+  
   if instanceOf(Bullet, shape_one.parent) and instanceOf(Enemy, shape_two.parent) then
     game.collider:remove(shape_one, shape_two)
     game.enemies[shape_two.parent.id] = nil
@@ -206,6 +209,7 @@ function Main.on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
     end
     return
   end
+  
 
   if shape_two.bound then
     if instanceOf(PlayerCharacter, shape_one.parent) then
@@ -290,13 +294,13 @@ function Main:pack_game_objects()
   local radii = {}
   local deltas = {}
   table.insert(positions, {self.player.pos.x, love.graphics.getHeight() - self.player.pos.y})
-  table.insert(radii, 10)
+  table.insert(radii, self.player.radius)
   table.insert(deltas, self.player.delta_to_mouse)
   self.num_shooters = 1
   for id,enemy in pairs(self.enemies) do
     if instanceOf(Shooter, enemy) then
       table.insert(positions, {enemy.pos.x, love.graphics.getHeight() - enemy.pos.y})
-      table.insert(radii, 10)
+      table.insert(radii, enemy.radius)
       table.insert(deltas, enemy.delta_to_player)
       self.num_shooters = self.num_shooters + 1
     end
