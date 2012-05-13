@@ -72,10 +72,20 @@ function Main:render()
 
   camera:unset()
 
+  if game.over then
+    g.setColor(0,0,0,255/2)
+    g.rectangle('fill', 0,0,love.graphics.getWidth(), love.graphics.getHeight())
+  end
+
   g.setPixelEffect(self.topbar)
   g.setColor(68, 153, 238)
   g.rectangle("fill", 0, 0, g.getWidth(), 70)
   g.setPixelEffect()
+
+  if game.over then
+    g.setColor(0,0,0,255)
+    g.print("You done went and got yourself killed. Click to continue.", g.getWidth() / 3 * 2, 4)
+  end
 
   -- love.graphics.setColor(0,255,0,255)
   -- love.graphics.print(love.timer.getFPS(), 2, 2)
@@ -86,12 +96,13 @@ function Main:render()
 end
 
 function Main:update(dt)
-  cron.update(dt)
-  self.round_time = self.round_time + dt
-  self.collider:update(dt)
   if game.over == true then
     return
   end
+
+  cron.update(dt)
+  self.round_time = self.round_time + dt
+  self.collider:update(dt)
 
   for k,v in pairs(self.player.control_map.keyboard.on_update) do
     if love.keyboard.isDown(k) then v() end
@@ -142,7 +153,11 @@ end
 
 function Main.mousepressed(x, y, button)
   if button == "l" then
-    game.player.firing = true
+    if game.over then
+      game:gotoState("GameOver")
+    else
+      game.player.firing = true
+    end
   end
 end
 
@@ -182,7 +197,6 @@ function Main.on_start_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
 
   if god_mode ~= true then
     if shape_one.parent == game.player and shape_two.bound ~= true or shape_two.parent == game.player and shape_one.bound ~= true then
-      game:gotoState("GameOver")
       game.over = true
       return
     end

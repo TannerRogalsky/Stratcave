@@ -8,7 +8,7 @@ end
 
 function GameOver:render()
   g.setColor(255,255,255)
-  g.print("GAME OVER. Click to try again.", 100, 100)
+  g.print("GAME OVER. Click to return to the game menu.", 100, 100)
   g.print("Score: " .. stats.score, 100, 200)
   g.print("Survived for " .. math.round(stats.round_time, 1) .. " seconds.", 100, 300)
 end
