@@ -38,6 +38,10 @@ function Main:enteredState()
     self.enemies[enemy.id] = enemy
   end)
 
+  if screenshots_enabled then
+    cron.every(1, take_screenshot)
+  end
+
   local raw = love.filesystem.read("shaders/overlay.c"):format(MAX_BALLS)
   self.overlay = love.graphics.newPixelEffect(raw)
   self.bg = love.graphics.newImage("images/bg2.png")
@@ -51,6 +55,10 @@ function Main:enteredState()
 
   raw = love.filesystem.read("shaders/topbar.c"):format(g.getHeight(), g.getWidth(), 30, 200)
   self.topbar = g.newPixelEffect(raw)
+end
+
+function take_screenshot()
+  table.insert(screenshots, g.newScreenshot())
 end
 
 function Main:render()
@@ -182,8 +190,6 @@ end
 
 function Main:spawn_baddy(current_time)
   if current_time - self.time_since_last_spawn > spawn_rate then
-
-    if screenshots_enabled then table.insert(screenshots, g.newScreenshot()) end
 
     local x,y = self:get_enemy_spawn_position()
 
