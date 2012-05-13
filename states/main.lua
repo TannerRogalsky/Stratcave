@@ -34,7 +34,7 @@ function Main:enteredState()
 
   local raw = love.filesystem.read("shaders/overlay.c"):format(MAX_BALLS)
   self.overlay = love.graphics.newPixelEffect(raw)
-  self.bg = love.graphics.newImage("images/sky_layer_4.png")
+  self.bg = love.graphics.newImage("images/bg2.png")
 
   local positions, radii, deltas = self:pack_game_objects()
   self.overlay:send('num_balls', self.num_torches + self.num_shooters)
@@ -317,7 +317,7 @@ function Main:exitedState()
 end
 
 function Main:create_bounds()
-  local bound = self.collider:addRectangle(-50, -50, g.getWidth() + 100, 50)
+  local bound = self.collider:addRectangle(-50, -20, g.getWidth() + 100, 50)
   bound.bound = true
   self.collider:setPassive(bound)
   bound.on_collide = boundary_collision

@@ -69,6 +69,9 @@ function Menu:render()
   g.print("SPACE to drop a torch", 200, 175)
   g.print("MOUSE to aim", 200, 200)
   g.print("LEFT CLICK to shoot (hold it down for happiness)", 200, 225)
+  g.print("Graphics by Derian McCrea and Tanner Rogalsky", 100, 300)
+  g.print("Code and concept by Tanner Rogalsky", 100, 325)
+  g.print("Click a difficulty to begin!", 485, 600)
 
   for i,box in ipairs(self.ui) do
     box:render()
