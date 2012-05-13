@@ -46,7 +46,7 @@ function PlayerCharacter:initialize(jsonInTableForm)
   self.angle = 0
   self.firing = false
   self.time_of_last_fire = 0
-  self.gun = Gun:new("machine_gun", 0.1, 20)
+  self.gun = Gun:new("machine_gun", 0.1, 10)
   -- self.gun = Gun:new("sniper", 1, 0)
 
   self.score = 0
