@@ -26,15 +26,15 @@ function Shooter:update(dt)
   self.delta_to_player = {dx, dy}
 end
 
-function Shooter:render()
-  love.graphics.setColor(255,255,0)
-  love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)
+-- function Shooter:render()
+--   love.graphics.setColor(255,255,0)
+--   love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)
 
-  love.graphics.setColor(0,0,0,255)
-  x = self.pos.x + self.radius * math.cos(self.angle)
-  y = self.pos.y + self.radius * math.sin(self.angle)
-  love.graphics.line(self.pos.x, self.pos.y, x, y)
-end
+--   love.graphics.setColor(0,0,0,255)
+--   x = self.pos.x + self.radius * math.cos(self.angle)
+--   y = self.pos.y + self.radius * math.sin(self.angle)
+--   love.graphics.line(self.pos.x, self.pos.y, x, y)
+-- end
 
 function Shooter:fire(current_time)
   self.time_of_last_fire = current_time

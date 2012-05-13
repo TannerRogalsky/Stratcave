@@ -56,6 +56,11 @@ function Main:render()
   game.player:render()
 
   for id,enemy in pairs(self.enemies) do
+    if instanceOf(Shooter, enemy) then
+      love.graphics.setColor(255,255,0)
+    else
+      love.graphics.setColor(0,255,0)
+    end
     enemy:render()
   end
 
