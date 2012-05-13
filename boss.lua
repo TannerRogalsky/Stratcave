@@ -9,6 +9,8 @@ function Boss:initialize(pos, radius)
   self.time_of_last_fire = 0
   self.health = 10
 
+  self.image = g.newImage('images/boss.png')
+
   self.delta_to_player = {0,0}
 
   game.collider:addToGroup("boss_and_boss_bullets", self._physics_body)
@@ -51,19 +53,22 @@ function Boss:update(dt)
 end
 
 function Boss:render()
-  love.graphics.setColor(255,255,0)
-  love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)
+  -- love.graphics.setColor(255,255,0,255/2)
+  -- love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)
+  g.setColor(255,255,255,255)
+  local x,y = self:bbox()
+  g.draw(self.image, x + 40, y + 40, self.angle, 1,1, 160, 160)
 
-  love.graphics.setColor(0,0,0,255)
-  x = self.pos.x + self.radius * math.cos(self.angle)
-  y = self.pos.y + self.radius * math.sin(self.angle)
-  love.graphics.line(self.pos.x, self.pos.y, x, y)
+  -- love.graphics.setColor(0,0,0,255)
+  -- x = self.pos.x + self.radius * math.cos(self.angle)
+  -- y = self.pos.y + self.radius * math.sin(self.angle)
+  -- love.graphics.line(self.pos.x, self.pos.y, x, y)
 
-  x = self.pos.x + self.radius * math.cos(self.angle - 90)
-  y = self.pos.y + self.radius * math.sin(self.angle - 90)
-  love.graphics.line(self.pos.x, self.pos.y, x, y)
+  -- x = self.pos.x + self.radius * math.cos(self.angle - 90)
+  -- y = self.pos.y + self.radius * math.sin(self.angle - 90)
+  -- love.graphics.line(self.pos.x, self.pos.y, x, y)
 
-  x = self.pos.x + self.radius * math.cos(self.angle + 90)
-  y = self.pos.y + self.radius * math.sin(self.angle + 90)
-  love.graphics.line(self.pos.x, self.pos.y, x, y)
+  -- x = self.pos.x + self.radius * math.cos(self.angle + 90)
+  -- y = self.pos.y + self.radius * math.sin(self.angle + 90)
+  -- love.graphics.line(self.pos.x, self.pos.y, x, y)
 end
