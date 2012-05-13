@@ -84,7 +84,9 @@ function Main:render()
 
   if game.over then
     g.setColor(0,0,0,255)
-    g.print("You done went and got yourself killed. Click to continue.", g.getWidth() / 3 * 2, 4)
+    local text = "You done went and got yourself killed. Click to continue."
+    local offset = self.ui_font:getWidth(text)
+    g.print(text, g.getWidth() - offset - 10, 4)
   end
 
   -- love.graphics.setColor(0,255,0,255)

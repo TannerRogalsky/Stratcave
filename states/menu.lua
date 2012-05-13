@@ -44,13 +44,26 @@ function Menu:enteredState()
     crawler_ratio = 5
   end
   table.insert(self.ui, box)
+
+
+
+  self.ui_font = g.newFont(16)
+  g.setFont(self.ui_font)
+
+  local raw = love.filesystem.read("shaders/menu.c"):format(g.getWidth(), g.getHeight())
+  self.bg = love.graphics.newPixelEffect(raw)
 end
 
 function Menu:render()
+  love.graphics.setColor(0,0,0,255)
+  love.graphics.setPixelEffect(self.bg)
+  love.graphics.rectangle('fill', 0,0,love.graphics.getWidth(), love.graphics.getHeight())
+  love.graphics.setPixelEffect()
+
   g.setColor(255,255,255)
   g.print("GENERIC SCHMUP", 100, 100)
   g.print("Controls:", 200, 125)
-  g.print("WASD", 200, 150)
+  g.print("WASD to move around", 200, 150)
   g.print("SPACE to drop a torch", 200, 175)
   g.print("MOUSE to aim", 200, 200)
   g.print("LEFT CLICK to shoot (hold it down for happiness)", 200, 225)
