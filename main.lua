@@ -1,130 +1,68 @@
-require "keyboard"
-require "circlesynth"
-require "sequencer"
+require 'moan'
+luafft = require "luafft"
 
-Button = {}
-Button.__index = Button
-function Button.new(text, x,y, w,h, onclick)
-	local b = {
-		text = text,
-		x=x, y=y,
-		w=w, h=h,
-		onclick = onclick,
-	}
+horizontal_scale = love.graphics.getWidth() / 44100
 
-	setmetatable(b, Button)
-	return b
-end
-function Button:draw()
-	if not self.textpos then
-		local font = love.graphics.getFont()
-		self.textpos = {x = self.x + (self.w - font:getWidth(self.text))/2,
-		y = self.y - 2}
-	end
-	love.graphics.setColor(180,180,180,180)
-	love.graphics.rectangle('fill', self.x,self.y,self.w,self.h)
-	love.graphics.setLine(2)
-	love.graphics.setColor(0,0,0,180)
-	love.graphics.rectangle('line', self.x,self.y,self.w,self.h)
-	love.graphics.print(self.text, self.textpos.x, self.textpos.y)
-end
-function Button:over_button(x,y)
-	return x > self.x and x < self.x + self.w and y > self.y and y < self.y + self.h
-end
-
-local function hsv_to_rgb(h,s,v)
-	local H = h/60
-	local Hi = math.floor(H)
-	local f = H - Hi
-	local p,q,t = v * (1 - s), v * (1 - s*f), v * (1 - s*(1-f))
-
-	if     Hi == 5 then
-		return v * 255, p * 255, q * 255
-	elseif Hi == 4 then
-		return t * 255, p * 255, v * 255
-	elseif Hi == 3 then
-		return p * 255, q * 255, v * 255
-	elseif Hi == 2 then
-		return p * 255, v * 255, t * 255
-	elseif Hi == 1 then
-		return q * 255, v * 255, p * 255
-	else -- 0 or 6
-		return v * 255, t * 255, p * 255
-	end
-end
-local h = 0
-local demo = {
-	draw = function()
-		love.graphics.setColor(40,40,40,40)
-		for x = 0,800,60 do
-			for y = 0,600,20 do
-				love.graphics.print("Moan", x, y)
-			end
-		end
-	end,
-	update = function(dt)
-		h = (h + dt * 50) % 360
-		love.graphics.setBackgroundColor(hsv_to_rgb(h,.1,.7))
-	end,
-	help = function()
-		return "Click a button.\nKeyboard needs some time on first start. Be patient."
-	end
-}
-
-local show_help = false
-local buttons = {
-	Button.new("keyboard",   10, 20, 120, 20, function() demo = keyboard demo.load() end),
-	Button.new("circles",   140, 20, 120, 20, function() demo = circlesynth demo.load() end),
-	Button.new("sequencer", 270, 20, 120, 20, function() demo = sequencer demo.load() end),
-	Button.new("?",         400, 20, 20, 20, function() show_help = not show_help end),
-}
 function love.load()
-	love.graphics.setFont(18)
-end
+  -- Moan.newSample(Moan.osc.sin(Moan.pitch(pitch, octave), amp))
+  sample_rate = 1000
+  sin_sample = Moan.newSample(Moan.osc.sin(Moan.pitch("a", 0), 0.3, sample_rate))
+  sin_source = love.audio.newSource(sin_sample)
 
-function love.draw()
-	demo.draw()
-	for _,b in ipairs(buttons) do
-		b:draw()
-	end
+  complex_nums = {}
+  transforms = {}
 
-	if show_help then
-		love.graphics.setColor(255,255,255,180)
-		love.graphics.rectangle('fill', 40, 100, 720, 400)
-		love.graphics.setColor(0,0,0,255)
-		love.graphics.rectangle('line', 40, 100, 720, 400)
-		love.graphics.printf("HELP:", 50, 110, 700, 'left')
-		love.graphics.printf(demo.help(), 50, 150, 700, 'left')
-	end
+  for i=0,1023 do
+    table.insert(complex_nums, complex.new(sin_sample:getSample(i), 0))
+  end
+  transforms = fft(complex_nums, false)
+  for i,v in ipairs(transforms) do
+    print(i,v)
+  end
+
+  active = false
+  coords = {}
 end
 
 function love.update(dt)
-	demo.update(dt)
+  if active == false then return end
+
+  prev_sample_index = sample_index or 0
+  sample_index = sin_source:tell("samples")
+
+  if sample_index > 0 then
+    local ltranforms = {}
+    for i=prev_sample_index,sample_index,44100 / sample_rate do
+      local complex = complex.new(sin_sample:getSample(i), 0)
+      table.insert(coords, ltranforms)
+      table.insert(coords, complex)
+      -- print(i, complex, sin_sample:getSample(i))
+    end
+    ltranforms = fft(ltranforms, false)
+    table.insert(transforms, ltranforms)
+    for i,v in ipairs(ltranforms) do
+      print(i,v)
+    end
+    -- print(sample_index, complex)
+  end
 end
 
-function love.keypressed(key)
-	if demo.keypressed then
-		demo.keypressed(key)
-	end
+function love.draw()
+  love.graphics.setColor(0,255,0)
+  love.graphics.print(love.timer.getFPS(), 0, 0)
+  love.graphics.setColor(255,255,255)
+  for i,v in ipairs(coords) do
+    if i > 1 then
+      love.graphics.line(i * (44100 / sample_rate) * horizontal_scale,love.graphics.getHeight() / 2 + coords[i][1] * 100,
+                        (i-1) * (44100 / sample_rate) * horizontal_scale,love.graphics.getHeight() / 2 + coords[i - 1][1] * 100)
+    end
+  end
+  -- love.graphics.line(0,love.graphics.getHeight()/2, sample_index*horizontal_scale,love.graphics.getHeight()/2)
 end
 
-function love.keyreleased(key)
-	if demo.keyreleased then
-		demo.keyreleased(key)
-	end
-end
-
-function love.mousereleased(x,y,btn)
-	if btn == 'l' then
-		for _,b in ipairs(buttons) do
-			if b:over_button(x,y) then
-				b:onclick()
-				return
-			end
-		end
-	end
-
-	if demo.mousereleased then
-		demo.mousereleased(x,y,btn)
-	end
-end
+-- function love.keypressed(key)
+--   if active == false then
+--     active = true
+--     love.audio.play(sin_source)
+--   end
+-- end

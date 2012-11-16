@@ -100,10 +100,11 @@ end
 
 local function createSample(osc, pitch, amp, octave)
 	local len = .5
-	return Moan.newSample(Moan.compress(Moan.envelope(
-		osc(Moan.pitch(pitch, octave), amp),
-		Moan.osc.triangle(8),
-		Moan.env.adsr(len/10, 3*len/10, 5*len/10, len/10, amp*1.2, amp))), len)
+	return Moan.newSample(Moan.osc.sin(Moan.pitch(pitch, octave), amp))
+	-- return Moan.newSample(Moan.compress(Moan.envelope(
+	-- 	osc(Moan.pitch(pitch, octave), amp),
+	-- 	Moan.osc.triangle(8),
+	-- 	Moan.env.adsr(len/10, 3*len/10, 5*len/10, len/10, amp*1.2, amp))), len)
 end
 
 local pitchtable = {'b','a#','a','g#','g','f#','f','e','d#','d','c#','c'}
