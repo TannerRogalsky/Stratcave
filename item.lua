@@ -20,7 +20,7 @@ function Item:initialize(jsonInTableForm)
 
   --2. create an image from that image data
   local i = love.graphics.newImage(id)
-  
+
   --3a. create a new particle system which uses that image, set the maximum amount of particles (images) that could exist at the same time to 256
   self.p = love.graphics.newParticleSystem(i, 256)
   --3b. set various elements of that particle system, please refer the wiki for complete listing
@@ -34,12 +34,12 @@ function Item:initialize(jsonInTableForm)
   self.p:setGravity               (0)
   self.p:setRadialAcceleration    (10)
   self.p:setTangentialAcceleration(0)
-  self.p:setSize                  (1)
+  self.p:setSizes                  (1)
   self.p:setSizeVariation         (0.5)
   self.p:setRotation              (0)
   self.p:setSpin                  (0)
   self.p:setSpinVariation         (0)
-  self.p:setColor                 (255, 255, 0, 255, 255, 255, 0, 50)
+  self.p:setColors                 (255, 255, 0, 255, 255, 255, 0, 50)
   self.p:stop() --this stop is to prevent any glitch that could happen after the particle system is created
 end
 
